@@ -30,7 +30,7 @@ class Auth extends CI_Controller
       );
 
       if ($this->form_validation->run() == false) {
-         $data['title'] = "Reminder | Login ";
+         $data['title'] = "Lelang | Login ";
          $this->load->view('auth/header', $data);
          $this->load->view('auth/login');
          $this->load->view('auth/footer');
