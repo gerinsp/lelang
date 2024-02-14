@@ -1,5 +1,5 @@
 <footer class="main-footer">
-   <strong>Copyright &copy; 2023 <a href="<?= base_url('dashboard') ?>">BaseProject</a>.</strong>
+   <strong>Copyright &copy; 2024 <a href="<?= base_url('dashboard') ?>">Lelang</a>.</strong>
    All rights reserved.
    <div class="float-right d-none d-sm-inline-block">
       <b>Version</b> 1.0.0

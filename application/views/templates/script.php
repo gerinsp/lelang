@@ -47,6 +47,9 @@
 
 
 <script>
+   $(document).ready(function() {
+      $('.tablelist').DataTable({});
+   });
    $(function() {
       // Summernote
       $('#summernote').summernote()
