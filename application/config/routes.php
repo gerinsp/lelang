@@ -56,6 +56,12 @@ $route['login']      = 'auth/index';
 $route['blocked']    = 'auth/blocked';
 
 
+
+//Routes Kategori
+$route['listkategori']                         = 'kategori/listkategori';
+$route['tambahdatakategori']                   = 'kategori/createkategori';
+$route['editdatakategori/(:any)']              = 'kategori/editkategori/$1';
+
 //Routes Profile
 $route['profile']                              = 'profile/profile';
 $route['editprofile']                          = 'profile/edit';
