@@ -62,6 +62,11 @@ $route['listkategori']                         = 'kategori/listkategori';
 $route['tambahdatakategori']                   = 'kategori/createkategori';
 $route['editdatakategori/(:any)']              = 'kategori/editkategori/$1';
 
+//Routes Sales
+$route['listsales']                            = 'sales/listsales';
+$route['tambahdatasales']                      = 'sales/createsales';
+$route['editdatasales/(:any)']                 = 'sales/editsales/$1';
+
 //Routes Profile
 $route['profile']                              = 'profile/profile';
 $route['editprofile']                          = 'profile/edit';
