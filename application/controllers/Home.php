@@ -8,7 +8,6 @@ class Home extends CI_Controller
       parent::__construct();
       $this->load->model('Models', 'm');
    }
-
    function index()
    {
       $table = 'user';
@@ -17,63 +16,71 @@ class Home extends CI_Controller
       );
 
       $data['user'] = $this->m->Get_Where($where, $table);
-      $data['title'] = 'Reminder';
+      $data['title'] = 'Home | Lelang';
 
 
-      $this->load->view('pages/home/home', $data);
-      $this->load->view('templates/script', $data);
+      $this->load->view('templates/user/navbar', $data);
+      $this->load->view('pages/user/home', $data);
+      $this->load->view('templates/user/footer', $data);
    }
-
-   function saverekappasien()
+   function detail_product()
    {
-      date_default_timezone_set('Asia/Jakarta');
-      $now = date('Y-m-d H:i:s');
+       $table = 'user';
+       $where = array(
+           'id_user'      =>   $this->session->userdata('id_user')
+       );
 
-      $this->db->select('*');
-      $this->db->from('pasien');
-      $this->db->where('nik', $this->input->post('nik'));
-      $cekpasien = $this->db->get();
+       $data['user'] = $this->m->Get_Where($where, $table);
+       $data['title'] = 'Home | Lelang';
 
-      $getpasien = $cekpasien->result();
-      if ($cekpasien->num_rows() > 0) {
-         foreach ($getpasien as $datapasien) {
-            $idpasien = $datapasien->id_pasien;
-         }
-         $this->db->select('*');
-         $this->db->from('rekappasien');
-         $this->db->where('id_pasien', $idpasien);
-         $this->db->where('DATE(create_date)', date('y-m-d'));
-         $cekrekappasien = $this->db->get();
 
-         if ($cekrekappasien->num_rows() > 0) {
-            $response = array(
-               'message' => "Anda sudah lapor hari ini",
-               'icon' => "warning" // Gantilah ini dengan ikon yang sesuai
-            );
+       $this->load->view('templates/user/navbar', $data);
+       $this->load->view('pages/user/detail-product', $data);
+       $this->load->view('templates/user/footer', $data);
+   }
+   function product()
+   {
+       $table = 'user';
+       $where = array(
+           'id_user'      =>   $this->session->userdata('id_user')
+       );
 
-            echo json_encode($response);
-         } else {
-            $data = array(
-               'id_pasien'         =>   $idpasien,
-               'statuslapor'       =>   1,
-               'statusmakan'       =>   $this->input->post('statusmakan'),
-               'create_date'       =>   $now,
-            );
-            $this->m->Save($data, 'rekappasien');
-            $response = array(
-               'message' => "Sudah berhasil lapor hari ini",
-               'icon' => "success" // Gantilah ini dengan ikon yang sesuai
-            );
+       $data['user'] = $this->m->Get_Where($where, $table);
+       $data['title'] = 'Product | Lelang';
 
-            echo json_encode($response);
-         }
-      } else {
-         $response = array(
-            'message' => "NIK belum terdaftar",
-            'icon' => "danger" // Gantilah ini dengan ikon yang sesuai
-         );
 
-         echo json_encode($response);
-      }
+       $this->load->view('templates/user/navbar', $data);
+       $this->load->view('pages/user/product', $data);
+       $this->load->view('templates/user/footer', $data);
+   }
+   function profile()
+   {
+       $table = 'user';
+       $where = array(
+           'id_user'      =>   $this->session->userdata('id_user')
+       );
+
+       $data['user'] = $this->m->Get_Where($where, $table);
+       $data['title'] = 'Profile | Lelang';
+
+
+       $this->load->view('templates/user/navbar', $data);
+       $this->load->view('pages/user/profile', $data);
+       $this->load->view('templates/user/footer', $data);
+   }
+   function info()
+   {
+       $table = 'user';
+       $where = array(
+           'id_user'      =>   $this->session->userdata('id_user')
+       );
+
+       $data['user'] = $this->m->Get_Where($where, $table);
+       $data['title'] = 'Info | Lelang';
+
+
+       $this->load->view('templates/user/navbar', $data);
+       $this->load->view('pages/user/info', $data);
+       $this->load->view('templates/user/footer', $data);
    }
 }
