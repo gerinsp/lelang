@@ -21,7 +21,7 @@ class Dashboard extends CI_Controller
 
       // $select = $this->db->select('*, count(kode_barang) as jumlahbarang');
       // $data['read']=$this->m->Get_All('barang',$select);
-      $data['title'] = 'Reminder | Dashboard';
+      $data['title'] = 'Lelang | Dashboard';
       // echo "Selamat Datang" . $data->nama;
 
 
