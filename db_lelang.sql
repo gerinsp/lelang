@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 14 Feb 2024 pada 09.07
+-- Waktu pembuatan: 28 Feb 2024 pada 16.16
 -- Versi server: 10.4.24-MariaDB
 -- Versi PHP: 7.4.29
 
@@ -46,13 +46,22 @@ CREATE TABLE `tbl_customer` (
 
 CREATE TABLE `tbl_kategori` (
   `id_kategori` int(11) NOT NULL,
-  `nama_kategori` int(11) NOT NULL,
+  `nama_kategori` varchar(250) NOT NULL,
   `status_show` int(11) NOT NULL,
+  `icon_kategori` varchar(250) DEFAULT NULL,
   `create_date` datetime NOT NULL,
   `create_by` int(11) NOT NULL,
   `update_date` datetime NOT NULL,
   `update_by` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `tbl_kategori`
+--
+
+INSERT INTO `tbl_kategori` (`id_kategori`, `nama_kategori`, `status_show`, `icon_kategori`, `create_date`, `create_by`, `update_date`, `update_by`) VALUES
+(3, 'Sample Kategori', 1, 'Artboard 11.png', '2024-02-25 21:05:56', 1, '0000-00-00 00:00:00', 0),
+(4, 'Kategori Contoh', 1, 'Artboard 13.png', '2024-02-25 21:06:07', 1, '0000-00-00 00:00:00', 0);
 
 -- --------------------------------------------------------
 
@@ -123,8 +132,15 @@ CREATE TABLE `tbl_sales` (
   `nama_sales` varchar(250) NOT NULL,
   `jenis_kelamin` varchar(500) NOT NULL,
   `alamat` varchar(500) NOT NULL,
-  `no_hp` int(11) NOT NULL
+  `no_hp` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `tbl_sales`
+--
+
+INSERT INTO `tbl_sales` (`id_sales`, `nama_sales`, `jenis_kelamin`, `alamat`, `no_hp`) VALUES
+(3, 'Sample data sales', 'Laki-Laki', 'Bandung', '085759803544');
 
 -- --------------------------------------------------------
 
@@ -210,7 +226,7 @@ ALTER TABLE `tbl_customer`
 -- AUTO_INCREMENT untuk tabel `tbl_kategori`
 --
 ALTER TABLE `tbl_kategori`
-  MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_pengajuanharga`
@@ -222,7 +238,7 @@ ALTER TABLE `tbl_pengajuanharga`
 -- AUTO_INCREMENT untuk tabel `tbl_produk`
 --
 ALTER TABLE `tbl_produk`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_role`
@@ -234,7 +250,7 @@ ALTER TABLE `tbl_role`
 -- AUTO_INCREMENT untuk tabel `tbl_sales`
 --
 ALTER TABLE `tbl_sales`
-  MODIFY `id_sales` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_sales` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_user`
