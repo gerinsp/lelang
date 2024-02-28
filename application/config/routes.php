@@ -63,6 +63,17 @@ $route['struktur-perusahaan']                  = 'home/struktur_perusahaan';
 $route['info']                                 = 'home/info';
 
 
+//Routes Produk
+$route['listproduk']                           = 'produk/listproduk';
+$route['tambahdataproduk']                     = 'produk/createproduk';
+$route['editdataproduk/(:any)']                = 'produk/editproduk/$1';
+
+//Routes Customer
+$route['listcustomer']                         = 'customer/listcustomer';
+$route['tambahdatacustomer']                   = 'customer/createcustomer';
+$route['editdatacustomer/(:any)']              = 'customer/editcustomer/$1';
+
+
 //Routes Kategori
 $route['listkategori']                         = 'kategori/listkategori';
 $route['tambahdatakategori']                   = 'kategori/createkategori';
