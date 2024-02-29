@@ -81,7 +81,6 @@ $route['listcustomer']                         = 'customer/listcustomer';
 $route['tambahdatacustomer']                   = 'customer/createcustomer';
 $route['editdatacustomer/(:any)']              = 'customer/editcustomer/$1';
 
-
 //Routes Kategori
 $route['listkategori']                         = 'kategori/listkategori';
 $route['tambahdatakategori']                   = 'kategori/createkategori';
