@@ -46,7 +46,7 @@
                                  <th style=" padding: 0.75rem;vertical-align: top;border-top: 1px solid #e3e6f0;">Jenis Kelamin</th>
                                  <th style=" padding: 0.75rem;vertical-align: top;border-top: 1px solid #e3e6f0;">Alamat</th>
                                  <th style=" padding: 0.75rem;vertical-align: top;border-top: 1px solid #e3e6f0;">No Handphone</th>
-                                 <th style=" padding: 0.75rem;vertical-align: top;border-top: 1px solid #e3e6f0;">No Nama Sales</th>
+                                 <!-- <th style=" padding: 0.75rem;vertical-align: top;border-top: 1px solid #e3e6f0;">No Nama Sales</th> -->
                                  <th style=" padding: 0.75rem;vertical-align: top;border-top: 1px solid #e3e6f0;">Aksi</th>
                               </tr>
                            </thead>
@@ -61,10 +61,9 @@
                                     <td style="vertical-align: top;border-top: 1px solid #e3e6f0;"><?php echo $data->jenis_kelamin ?></td>
                                     <td style="vertical-align: top;border-top: 1px solid #e3e6f0;"><?php echo $data->alamat ?></td>
                                     <td style="vertical-align: top;border-top: 1px solid #e3e6f0;"><?php echo $data->no_hp ?></td>
-                                    <td style="vertical-align: top;border-top: 1px solid #e3e6f0;"><?php echo $data->nama_customer ?></td>
+                                    <!-- <td style="vertical-align: top;border-top: 1px solid #e3e6f0;"><?php echo $data->nama_customer ?></td> -->
                                     <td style="vertical-align: top;border-top: 1px solid #e3e6f0;" width="30%">
-                                       <a href="<?= base_url('editdatacustomer/' . $data->id_customer); ?>" class="btn btn-sm btn-success" style="background: transparent; border-color: #858796;color:black;text-decoration: none;" role="button" title="Ubah"><i class="fas fa-fw fa-1pencil-alt"></i> <?php echo $this->lang->line('change'); ?> </a>
-                                       <a href="#" data-toggle="modal" style="background: transparent; border-color: #858796;color:black;text-decoration: none;" data-target="#deleteModal" data-id="<?= $data->id_customer; ?>" class="btn btn-sm btnOpenDeleteModal btn-danger mr-1" title="Hapus" onclick="openDeleteModal(this, 'customer/deletecustomer')" class="btn btn-sm btn-danger" role="button" title="Hapus"> <i class="fas fa-fw fa-trash"></i> <?php echo $this->lang->line('delete'); ?> </a>
+                                       <a href="<?= base_url('editdatacustomer/' . $data->id_customer); ?>" class="btn btn-sm btn-success" style="background: transparent; border-color: #858796;color:black;text-decoration: none;" role="button" title="Ubah"><i class="fas fa-fw fa-pencil-alt"></i> <?php echo $this->lang->line('change'); ?> </a>
                                     </td>
                                  </tr>
                               <?php
