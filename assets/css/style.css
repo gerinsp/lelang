@@ -163,14 +163,33 @@
 .arrow-category {
     display: none;
 }
-.hover-pointer:hover {
+.hover-pointer:hover{
     cursor: pointer;
+}
+.hover-pointer:hover .fill-svg {
+    cursor: pointer;
+    stroke: #fcb813;
 }
 .mx-20 {
     margin-left: 5px;
     margin-right: 5px;
 }
+.my-20 {
+    margin-bottom: 50px;
+}
+.flex-center {
+    display: flex;
+    justify-content: center;
+}
 @media (min-width: 768px) {
+    .flex-center {
+        display: flex;
+        justify-content: flex-start;
+    }
+    .my-20 {
+        margin-top: 50px;
+        margin-bottom: 50px;
+    }
     .mx-20 {
         margin-left: 150px;
         margin-right: 150px;

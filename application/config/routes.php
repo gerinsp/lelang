@@ -62,6 +62,14 @@ $route['profile-perusahaan']                   = 'home/profile';
 $route['struktur-perusahaan']                  = 'home/struktur_perusahaan';
 $route['info']                                 = 'home/info';
 
+$route['pengajuan']                            = 'admin/pengajuan_harga';
+$route['status-pengajuan-terima/(:any)']       = 'admin/pengajuan_terima/$1';
+$route['status-pengajuan-tolak/(:any)']        = 'admin/pengajuan_tolak/$1';
+
+$route['akunsales']                            = 'admin/akun_sales';
+$route['buat-akun']                            = 'admin/buat_akun';
+$route['reset-password/(:any)']                = 'admin/reset_password/$1';
+
 
 //Routes Produk
 $route['listproduk']                           = 'produk/listproduk';

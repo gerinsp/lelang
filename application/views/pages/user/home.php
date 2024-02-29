@@ -46,8 +46,8 @@
         <div class="flex items-center justify-between">
             <h1 class="text-blue-960 font-bold text-category">Kategori Objek Lelang</h1>
             <div class="arrow-category">
-                <svg class="hover-pointer" onclick="scrollToLeft()" xmlns="http://www.w3.org/2000/svg" width="2rem" height="2rem" viewBox="0 0 24 24"><path fill="none" stroke="#256fd0" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m5 12l6-6m-6 6l6 6m-6-6h14"/></svg>
-                <svg class="hover-pointer" onclick="scrollToRight()" xmlns="http://www.w3.org/2000/svg" width="2rem" height="2rem" viewBox="0 0 24 24"><path fill="none" stroke="#256fd0" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 12l-6-6m6 6l-6 6m6-6H5"/></svg>
+                <svg class="hover-pointer" onclick="scrollToLeft()" xmlns="http://www.w3.org/2000/svg" width="2rem" height="2rem" viewBox="0 0 24 24"><path class="fill-svg" fill="none" stroke="#256fd0" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m5 12l6-6m-6 6l6 6m-6-6h14"/></svg>
+                <svg class="hover-pointer" onclick="scrollToRight()" xmlns="http://www.w3.org/2000/svg" width="2rem" height="2rem" viewBox="0 0 24 24"><path class="fill-svg" fill="none" stroke="#256fd0" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 12l-6-6m6 6l-6 6m6-6H5"/></svg>
             </div>
         </div>
         <div id="scrollableElement" class="flex gap-4 md:gap-6 my-4 px-3 scrollbar-hide" style="overflow-x: scroll;">
