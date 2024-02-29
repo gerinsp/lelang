@@ -59,7 +59,8 @@ class Auth extends CI_Controller
                   'id_user' => $user->id_user,
                   'username' => $user->username,
                   'role_id' => $user->role_id,
-                  'nama' => $user->nama
+                  'nama' => $user->nama,
+                  'sales_id' => $user->sales_id
                ];
 
                if (isset($_POST['rememberMe'])) {
