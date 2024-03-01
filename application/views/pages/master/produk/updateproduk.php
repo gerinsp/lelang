@@ -78,16 +78,124 @@
                         </div>
                      </div>
                   </div>
-                  <!-- <div class="row">
-                     <div class="col-md-3">
-                        <div class="form-group">
-                           <label class="bmd-label-floating">Gambar</label>
-                           <input type="file" name="image" id="image" class="form-control" style="height: 45px;" placeholder="" aria-describedby="helpId">
-                        </div>
-                     </div>
-                  </div> -->
+                   <div class="row">
+                       <div class="col-md-4">
+                           <div class="row">
+                               <div class="col-md-12">
+                                   <div class="form-group">
+                                       <label class="bmd-label-floating">Gambar 1</label>
+                                       <img src="<?= base_url('assets/file/iconproduk/'.$data->gambar1) ?>"  id="preview1" style="display: block; max-width: 200px;" />
+                                       <input onchange="previewImage(this, '1')"  accept="image/jpeg, image/jpg, image/png" type="file" name="gambar1" id="gambar1" class="form-control" style="height: 45px;" placeholder="" aria-describedby="helpId">
+                                   </div>
+                               </div>
+                           </div>
+                           <div class="row">
+                               <div class="col-md-12">
+                                   <div class="form-group">
+                                       <label class="bmd-label-floating">Gambar 2</label>
+                                       <img src="<?= base_url('assets/file/iconproduk/'.$data->gambar2) ?>"  id="preview2" style="display: block; max-width: 200px;" />
+                                       <input onchange="previewImage(this, '2')"  accept="image/jpeg, image/jpg, image/png" type="file" name="gambar2" id="gambar2" class="form-control" style="height: 45px;" placeholder="" aria-describedby="helpId">
+                                   </div>
+                               </div>
+                           </div>
+                           <div class="row">
+                               <div class="col-md-12">
+                                   <div class="form-group">
+                                       <label class="bmd-label-floating">Gambar 3</label>
+                                       <img src="<?= base_url('assets/file/iconproduk/'.$data->gambar3) ?>"  id="preview3" style="display: block; max-width: 200px;" />
+                                       <input onchange="previewImage(this, '3')"  accept="image/jpeg, image/jpg, image/png" type="file" name="gambar3" id="gambar3" class="form-control" style="height: 45px;" placeholder="" aria-describedby="helpId">
+                                   </div>
+                               </div>
+                           </div>
+                           <div class="row">
+                               <div class="col-md-12">
+                                   <div class="form-group">
+                                       <label class="bmd-label-floating">Gambar 4</label>
+                                       <img src="<?= base_url('assets/file/iconproduk/'.$data->gambar4) ?>"  id="preview4" style="display: block; max-width: 200px;" />
+                                       <input onchange="previewImage(this, '4')"  accept="image/jpeg, image/jpg, image/png" type="file" name="gambar4" id="gambar4" class="form-control" style="height: 45px;" placeholder="" aria-describedby="helpId">
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+                       <div class="col-md-4">
+                           <div class="row">
+                               <div class="col-md-12">
+                                   <div class="form-group">
+                                       <label class="bmd-label-floating">Gambar 5</label>
+                                       <img src="<?= base_url('assets/file/iconproduk/'.$data->gambar5) ?>"  id="preview5" style="display: block; max-width: 200px;" />
+                                       <input onchange="previewImage(this, '5')"  accept="image/jpeg, image/jpg, image/png" type="file" name="gambar5" id="gambar5" class="form-control" style="height: 45px;" placeholder="" aria-describedby="helpId">
+                                   </div>
+                               </div>
+                           </div>
+                           <div class="row">
+                               <div class="col-md-12">
+                                   <div class="form-group">
+                                       <label class="bmd-label-floating">Gambar 6</label>
+                                       <img src="<?= base_url('assets/file/iconproduk/'.$data->gambar6) ?>"  id="preview6" style="display: block; max-width: 200px;" />
+                                       <input onchange="previewImage(this, '6')"  accept="image/jpeg, image/jpg, image/png" type="file" name="gambar6" id="gambar6" class="form-control" style="height: 45px;" placeholder="" aria-describedby="helpId">
+                                   </div>
+                               </div>
+                           </div>
+                           <div class="row">
+                               <div class="col-md-12">
+                                   <div class="form-group">
+                                       <label class="bmd-label-floating">Gambar 7</label>
+                                       <img src="<?= base_url('assets/file/iconproduk/'.$data->gambar7) ?>"  id="preview7" style="display: block; max-width: 200px;" />
+                                       <input onchange="previewImage(this, '7')"  accept="image/jpeg, image/jpg, image/png" type="file" name="gambar7" id="gambar7" class="form-control" style="height: 45px;" placeholder="" aria-describedby="helpId">
+                                   </div>
+                               </div>
+                           </div>
+                           <div class="row">
+                               <div class="col-md-12">
+                                   <div class="form-group">
+                                       <label class="bmd-label-floating">Gambar 8</label>
+                                       <img src="<?= base_url('assets/file/iconproduk/'.$data->gambar8) ?>"  id="preview8" style="display: block; max-width: 200px;" />
+                                       <input onchange="previewImage(this, '8')"  accept="image/jpeg, image/jpg, image/png" type="file" name="gambar8" id="gambar8" class="form-control" style="height: 45px;" placeholder="" aria-describedby="helpId">
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+                       <div class="col-md-4">
+                           <div class="row">
+                               <div class="col-md-12">
+                                   <div class="form-group">
+                                       <label class="bmd-label-floating">Gambar 9</label>
+                                       <img src="<?= base_url('assets/file/iconproduk/'.$data->gambar9) ?>"  id="preview9" style="display: block; max-width: 200px;" />
+                                       <input onchange="previewImage(this, '9')"  accept="image/jpeg, image/jpg, image/png" type="file" name="gambar9" id="gambar9" class="form-control" style="height: 45px;" placeholder="" aria-describedby="helpId">
+                                   </div>
+                               </div>
+                           </div>
+                           <div class="row">
+                               <div class="col-md-12">
+                                   <div class="form-group">
+                                       <label class="bmd-label-floating">Gambar 10</label>
+                                       <img  src="<?= base_url('assets/file/iconproduk/'.$data->gambar10) ?>" id="preview10" style="display: block; max-width: 200px;" />
+                                       <input onchange="previewImage(this, '10')" accept="image/jpeg, image/jpg, image/png" type="file" name="gambar10" id="gambar10" class="form-control" style="height: 45px;" placeholder="" aria-describedby="helpId">
+                                   </div>
+                               </div>
+                           </div>
+                           <div class="row">
+                               <div class="col-md-12">
+                                   <div class="form-group">
+                                       <label class="bmd-label-floating">Gambar 11</label>
+                                       <img  src="<?= base_url('assets/file/iconproduk/'.$data->gambar11) ?>" id="preview11" style="display: block; max-width: 200px;" />
+                                       <input onchange="previewImage(this, '11')" accept="image/jpeg, image/jpg, image/png" type="file" name="gambar11" id="gambar11" class="form-control" style="height: 45px;" placeholder="" aria-describedby="helpId">
+                                   </div>
+                               </div>
+                           </div>
+                           <div class="row">
+                               <div class="col-md-12">
+                                   <div class="form-group">
+                                       <label class="bmd-label-floating">Gambar 12</label>
+                                       <img  src="<?= base_url('assets/file/iconproduk/'.$data->gambar12) ?>" id="preview12" style="display: block; max-width: 200px;" />
+                                       <input onchange="previewImage(this, '12')" accept="image/jpeg, image/jpg, image/png" type="file" name="gambar12" id="gambar12" class="form-control" style="height: 45px;" placeholder="" aria-describedby="helpId">
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
                   <button type="submit" class="btn btn-info pull-right"><?php echo $this->lang->line('save'); ?></button>
-                  <a href="<?= base_url('listkategori'); ?>" class="btn btn-danger"><?php echo $this->lang->line('cancel'); ?></a>
+                  <a href="<?= base_url('listproduk'); ?>" class="btn btn-danger"><?php echo $this->lang->line('cancel'); ?></a>
 
                </form>
             </div>
@@ -96,5 +204,26 @@
       </div>
       <!-- /.container-fluid -->
    </section>
+    <br><br><br><br>
+    <script>
+        function previewImage(input, id) {
+            var preview = document.getElementById('preview' + id);
+            var file = input.files[0];
+
+            if (file) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                };
+
+                reader.readAsDataURL(file);
+            } else {
+                preview.src = '';
+                preview.style.display = 'none';
+            }
+        }
+    </script>
    <!-- /.content -->
 </div>

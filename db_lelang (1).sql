@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 29, 2024 at 11:57 AM
+-- Generation Time: Mar 01, 2024 at 11:06 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 5.6.40
 
@@ -45,6 +45,26 @@ CREATE TABLE `tbl_customer` (
 
 INSERT INTO `tbl_customer` (`id_customer`, `nik`, `nama_customer`, `jenis_kelamin`, `alamat`, `no_hp`, `id_sales`, `status`) VALUES
 (1, '443536333435', 'Asep', 'laki-laki', 'subang', 866789567, 3, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_halaman`
+--
+
+CREATE TABLE `tbl_halaman` (
+  `id` int(11) NOT NULL,
+  `nama_halaman` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_halaman`
+--
+
+INSERT INTO `tbl_halaman` (`id`, `nama_halaman`) VALUES
+(1, 'produk'),
+(2, 'akun_sales'),
+(3, 'pengajuan_harga');
 
 -- --------------------------------------------------------
 
@@ -97,6 +117,28 @@ INSERT INTO `tbl_pengajuanharga` (`id_pengajuanharga`, `tanggal_pengajuan`, `id_
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tbl_permission`
+--
+
+CREATE TABLE `tbl_permission` (
+  `id` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `id_halaman` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_permission`
+--
+
+INSERT INTO `tbl_permission` (`id`, `id_user`, `id_halaman`) VALUES
+(1, 2, 1),
+(2, 2, 2),
+(6, 2, 3),
+(7, 9, 3);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tbl_produk`
 --
 
@@ -112,6 +154,13 @@ CREATE TABLE `tbl_produk` (
   `gambar3` varchar(500) NOT NULL,
   `gambar4` varchar(500) NOT NULL,
   `gambar5` varchar(500) NOT NULL,
+  `gambar6` varchar(255) DEFAULT NULL,
+  `gambar7` varchar(255) DEFAULT NULL,
+  `gambar8` varchar(255) DEFAULT NULL,
+  `gambar9` varchar(255) DEFAULT NULL,
+  `gambar10` varchar(255) DEFAULT NULL,
+  `gambar11` varchar(255) DEFAULT NULL,
+  `gambar12` varchar(255) DEFAULT NULL,
   `create_date` datetime NOT NULL,
   `create_by` int(11) NOT NULL,
   `update_date` datetime NOT NULL,
@@ -122,8 +171,8 @@ CREATE TABLE `tbl_produk` (
 -- Dumping data for table `tbl_produk`
 --
 
-INSERT INTO `tbl_produk` (`id`, `id_kategori`, `nama_produk`, `deskripsi_produk`, `durasi_iklan`, `status_show`, `gambar1`, `gambar2`, `gambar3`, `gambar4`, `gambar5`, `create_date`, `create_by`, `update_date`, `update_by`) VALUES
-(1, 4, 'Oli', '<p>test</p>', 3, 1, '', '', '', '', '', '2024-02-28 22:35:15', 1, '0000-00-00 00:00:00', 0);
+INSERT INTO `tbl_produk` (`id`, `id_kategori`, `nama_produk`, `deskripsi_produk`, `durasi_iklan`, `status_show`, `gambar1`, `gambar2`, `gambar3`, `gambar4`, `gambar5`, `gambar6`, `gambar7`, `gambar8`, `gambar9`, `gambar10`, `gambar11`, `gambar12`, `create_date`, `create_by`, `update_date`, `update_by`) VALUES
+(9, 3, 'oli', '<p>oli</p>', 1, 1, '7021228adf09729becef9e314e496122.PNG', '7d2380a3df120d3eb8b404601e2c2b53.jpg', '51287285e30ff43eb4adcf99eeb0c646.png', 'f37e6361e15b4ad45dc0877ffa8b5cbb.png', '071bf2a67ae58168007f46ddd7678bce.PNG', 'ca4c762d1a9569ca9e33cc0fa165018a.png', '73b3ed837d5ed4aea895ce20b16aa5cf.png', 'ac2d90adbc4198c6902742938cc52ff8.png', '96b1ef72d2c7c77f9c7c7f606e0cd643.jpg', 'dc5bbf665a29121ea239ed86953dc48a.png', 'abf1ba9ea787c146bb18565797422f02.png', 'c8f548def4f1a911b7698362750f1050.PNG', '2024-03-01 23:58:47', 2, '2024-03-02 00:48:22', 2);
 
 -- --------------------------------------------------------
 
@@ -192,7 +241,8 @@ CREATE TABLE `tbl_user` (
 INSERT INTO `tbl_user` (`id_user`, `nama`, `username`, `image`, `password`, `role_id`, `sales_id`, `is_active`, `tanggal_daftar`) VALUES
 (1, 'Super Admin', 'superadmin', 'default.png', '$2a$12$Jrr3LkXySuUKIDTBhm0eKu3kKpuFgULxoDeH6GlBbSVcbTti9MODe', 1, NULL, 1, '2021-01-01'),
 (2, 'Admin', 'admin', 'default.png', '$2a$12$f6sFtY5FHZ.ftWogUTXvHe4NlPK4WC0xS.TaVQ6p5DxfeDty24BJq', 2, NULL, 1, '2024-02-28'),
-(8, 'Sample data sales 2', 'sales2', 'default.png', '$2y$10$0PgCYxgYH3x9kLNm6xFCHeoYBkadNqt7Q1DZcvcio01moCyRMld2W', 3, 5, 1, '2024-02-29');
+(8, 'Sample data sales 2', 'sales2', 'default.png', '$2y$10$0PgCYxgYH3x9kLNm6xFCHeoYBkadNqt7Q1DZcvcio01moCyRMld2W', 3, 5, 1, '2024-02-29'),
+(9, 'Admin2', 'admin2', 'default.png', '$2a$12$f6sFtY5FHZ.ftWogUTXvHe4NlPK4WC0xS.TaVQ6p5DxfeDty24BJq', 2, NULL, 1, '2024-03-02');
 
 --
 -- Indexes for dumped tables
@@ -205,6 +255,12 @@ ALTER TABLE `tbl_customer`
   ADD PRIMARY KEY (`id_customer`);
 
 --
+-- Indexes for table `tbl_halaman`
+--
+ALTER TABLE `tbl_halaman`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `tbl_kategori`
 --
 ALTER TABLE `tbl_kategori`
@@ -215,6 +271,12 @@ ALTER TABLE `tbl_kategori`
 --
 ALTER TABLE `tbl_pengajuanharga`
   ADD PRIMARY KEY (`id_pengajuanharga`);
+
+--
+-- Indexes for table `tbl_permission`
+--
+ALTER TABLE `tbl_permission`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `tbl_produk`
@@ -251,6 +313,12 @@ ALTER TABLE `tbl_customer`
   MODIFY `id_customer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `tbl_halaman`
+--
+ALTER TABLE `tbl_halaman`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `tbl_kategori`
 --
 ALTER TABLE `tbl_kategori`
@@ -263,10 +331,16 @@ ALTER TABLE `tbl_pengajuanharga`
   MODIFY `id_pengajuanharga` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `tbl_permission`
+--
+ALTER TABLE `tbl_permission`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
 -- AUTO_INCREMENT for table `tbl_produk`
 --
 ALTER TABLE `tbl_produk`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `tbl_role`
@@ -284,7 +358,7 @@ ALTER TABLE `tbl_sales`
 -- AUTO_INCREMENT for table `tbl_user`
 --
 ALTER TABLE `tbl_user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

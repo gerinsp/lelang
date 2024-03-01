@@ -160,9 +160,37 @@ function check_buttondetail($role_id, $menu_id)
     }
 }
 
-function dd($param) {
+function dd($param)
+{
     echo '<pre>';
     var_dump($param);
     echo '</pre>';
     die;
 }
+
+function user_can($halaman)
+{
+    $ci =& get_instance();
+
+    $id_user = $ci->session->userdata('id_user');
+
+    $ci->db->select('tp.id as id_permission, tp.*, th.id as id_halaman, th.*');
+    $ci->db->from('tbl_permission as tp');
+    $ci->db->where('tp.id_user', $id_user);
+    $ci->db->join('tbl_halaman as th', 'tp.id_halaman = th.id', 'left');
+
+    $query = $ci->db->get();
+
+    if ($query->num_rows() > 0) {
+        $result = $query->result();
+
+        foreach ($result as $row) {
+            if ($row->id_halaman != null && $row->nama_halaman == $halaman) {
+                return true;
+            }
+        }
+    }
+
+    return false;
+}
+

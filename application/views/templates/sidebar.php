@@ -45,8 +45,8 @@
                     <li class="nav-header">Master</li>
                     <li class="nav-item">
                         <a href="<?= base_url('listproduk') ?>" class="nav-link <?php if ($this->uri->segment(1) == "listproduk") {
-                                                                                    echo "active";
-                                                                                } ?><?php if ($this->uri->segment(1) == "tambahdataproduk") {
+                            echo "active";
+                        } ?><?php if ($this->uri->segment(1) == "tambahdataproduk") {
                             echo "active";
                         } ?><?php if ($this->uri->segment(1) == "editdataproduk") {
                             echo "active";
@@ -57,8 +57,8 @@
                     </li>
                     <li class="nav-item">
                         <a href="<?= base_url('listkategori') ?>" class="nav-link <?php if ($this->uri->segment(1) == "listkategori") {
-                                                                                        echo "active";
-                                                                                    } ?><?php if ($this->uri->segment(1) == "tambahdatakategori") {
+                            echo "active";
+                        } ?><?php if ($this->uri->segment(1) == "tambahdatakategori") {
                             echo "active";
                         } ?><?php if ($this->uri->segment(1) == "editdatakategori") {
                             echo "active";
@@ -69,8 +69,8 @@
                     </li>
                     <li class="nav-item">
                         <a href="<?= base_url('listsales') ?>" class="nav-link <?php if ($this->uri->segment(1) == "listsales") {
-                                                                                    echo "active";
-                                                                                } ?><?php if ($this->uri->segment(1) == "tambahdatasales") {
+                            echo "active";
+                        } ?><?php if ($this->uri->segment(1) == "tambahdatasales") {
                             echo "active";
                         } ?><?php if ($this->uri->segment(1) == "editdatasales") {
                             echo "active";
@@ -81,35 +81,60 @@
                             <p>Sales</p>
                         </a>
                     </li>
-
+                    <li class="nav-item">
+                        <a href="<?= base_url('permission') ?>" class="nav-link <?php if ($this->uri->segment(1) == "permission") {
+                            echo "active";
+                        } ?>">
+                            <i class=" nav-icon fas fa-fw fa-lock"></i>
+                            <p>Permission</p>
+                        </a>
+                    </li>
                 <?php } ?>
                 <?php if ($this->session->userdata('role_id') == 1 or $this->session->userdata('role_id') == 3) { ?>
                     <li class="nav-item">
                         <a href="<?= base_url('listcustomer') ?>" class="nav-link <?php if ($this->uri->segment(1) == "listcustomer") {
-                                                                                        echo "active";
-                                                                                    } ?>">
+                            echo "active";
+                        } ?>">
                             <i class=" nav-icon fas fa-fw fa-users"></i>
                             <p>Customer</p>
                         </a>
                     </li>
                 <?php } ?>
                 <?php if ($this->session->userdata('role_id') == 2) { ?>
-                    <li class="nav-item">
-                    <li class="nav-item">
-                        <a href="<?= base_url('akunsales') ?>" class="nav-link <?php if ($this->uri->segment(1) == "akunsales") {
-                                                                                    echo "active";
-                                                                                } ?>">
-                            <i class=" nav-icon fas fa-fw fa-users"></i>
-                            <p>Akun Sales</p>
-                        </a>
-                    </li>
-                    <a href="<?= base_url('pengajuan') ?>" class="nav-link <?php if ($this->uri->segment(1) == "pengajuan") {
-                                                                                echo "active";
-                                                                            } ?>">
-                        <i class="fas fa-fw fa-wallet"></i>
-                        <p>Pengajuan Harga</p>
-                    </a>
-                    </li>
+                    <?php if (user_can('produk')) { ?>
+                        <li class="nav-item">
+                            <a href="<?= base_url('listproduk') ?>" class="nav-link <?php if ($this->uri->segment(1) == "listproduk") {
+                                echo "active";
+                            } ?><?php if ($this->uri->segment(1) == "tambahdataproduk") {
+                                echo "active";
+                            } ?><?php if ($this->uri->segment(1) == "editdataproduk") {
+                                echo "active";
+                            } ?>">
+                                <i class=" nav-icon fas fa-fw fa-box"></i>
+                                <p>Produk</p>
+                            </a>
+                        </li>
+                    <?php } ?>
+                    <?php if (user_can('akun_sales')) { ?>
+                        <li class="nav-item">
+                            <a href="<?= base_url('akunsales') ?>" class="nav-link <?php if ($this->uri->segment(1) == "akunsales") {
+                                echo "active";
+                            } ?>">
+                                <i class=" nav-icon fas fa-fw fa-users"></i>
+                                <p>Akun Sales</p>
+                            </a>
+                        </li>
+                    <?php } ?>
+                    <?php if (user_can('pengajuan_harga')) { ?>
+                        <li class="nav-item">
+                            <a href="<?= base_url('pengajuan') ?>" class="nav-link <?php if ($this->uri->segment(1) == "pengajuan") {
+                                echo "active";
+                            } ?>">
+                                <i class="fas fa-fw fa-wallet"></i>
+                                <p>Pengajuan Harga</p>
+                            </a>
+                        </li>
+                    <?php } ?>
                 <?php } ?>
                 <li class="nav-header">Profil</li>
                 <li class="nav-item">
