@@ -73,6 +73,9 @@ $route['reset-password/(:any)']                = 'admin/reset_password/$1';
 $route['permission/(:any)']                    = 'permission/index/$1';
 $route['permission-update']                    = 'permission/update';
 
+//daftar member
+$route['member/daftar/(:any)']                 = 'home/daftar_member/$1';
+
 //Routes Produk
 $route['listproduk']                           = 'produk/listproduk';
 $route['tambahdataproduk']                     = 'produk/createproduk';

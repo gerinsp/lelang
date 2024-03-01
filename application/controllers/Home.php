@@ -98,4 +98,21 @@ class Home extends CI_Controller
        $this->load->view('pages/user/struktur-perusahaan', $data);
        $this->load->view('templates/user/footer', $data);
    }
+
+   function daftar_member($id_sales)
+   {
+       $table = 'user';
+       $where = array(
+           'id_user'      =>   $this->session->userdata('id_user')
+       );
+
+       $data['user'] = $this->m->Get_Where($where, $table);
+       $data['title'] = 'Struktur Perusahaan | Lelang';
+       $data['id_sales'] = $id_sales;
+
+
+       $this->load->view('templates/user/navbar', $data);
+       $this->load->view('pages/user/daftar-member', $data);
+       $this->load->view('templates/user/footer', $data);
+   }
 }
