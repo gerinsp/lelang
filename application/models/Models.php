@@ -4,6 +4,64 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Models extends CI_Model
 {
 
+   function getCustomer($postData)
+   {
+
+      $response = array();
+
+      $this->db->select('*');
+
+      if ($postData['search']) {
+
+         // Select record
+
+         $kalimat = $_POST['search'];
+         $kata_kata = explode(' ', $kalimat);
+
+         $nik = implode(" AND ", array_map(function ($kata) {
+            return "nik LIKE '%$kata%'";
+         }, $kata_kata));
+         $this->db->order_by('nama_customer');
+         $this->db->where($nik);
+         $this->db->where('id_sales', $this->session->userdata('sales_id'));
+         $records = $this->db->get('tbl_customer')->result();
+
+         foreach ($records as $row) {
+            $response[] = array("value" => $row->id_customer, "label" => $row->nik . ' - ' . $row->nama_customer, "nama" => $row->nama_customer, "nik" => $row->nik);
+         }
+      }
+
+      return $response;
+   }
+   function getProduk($postData)
+   {
+
+      $response = array();
+
+
+
+      $this->db->select('produk.id,nama_produk');
+
+      if ($postData['search']) {
+
+         // Select record
+         $kalimat = $_POST['search'];
+         $kata_kata = explode(' ', $kalimat);
+
+         $namaproduk = implode(" AND ", array_map(function ($kata) {
+            return "nama_produk LIKE '%$kata%'";
+         }, $kata_kata));
+         $this->db->order_by('nama_produk');
+         $this->db->where($namaproduk);
+         $records = $this->db->get('tbl_produk')->result();
+
+         foreach ($records as $row) {
+            $response[] = array("value" => $row->id, "label" => $row->nama_produk);
+         }
+      }
+
+      return $response;
+   }
    public function Get_All($table, $select)
    {
       $select;
