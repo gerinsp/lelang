@@ -56,12 +56,19 @@ $route['login']      = 'auth/index';
 $route['blocked']    = 'auth/blocked';
 
 //Route Landing pages
-$route['detail']                               = 'home/detail_product';
 $route['product']                              = 'home/product';
+$route['product/(:any)']                       = 'home/product/$1';
+$route['kategori/(:num)']                      = 'home/kategori/$1';
+$route['kategori/(:num)/(:any)']               = 'home/kategori/$1/$2';
 $route['profile-perusahaan']                   = 'home/profile';
 $route['struktur-perusahaan']                  = 'home/struktur_perusahaan';
 $route['info']                                 = 'home/info';
+$route['detail/(:any)']                        = 'home/detail_product/$1';
 
+$route['member/daftar/(:any)']                 = 'home/daftar_member/$1';
+$route['member/tambah']                        = 'home/tambah_member';
+
+//route admin
 $route['pengajuan']                            = 'admin/pengajuan_harga';
 $route['tambahdatapengajuanharga']             = 'admin/create_pengajuan_harga';
 $route['editdatapengajuanharga/(:any)']        = 'admin/edit_pengajuan_harga/$1';
@@ -74,9 +81,6 @@ $route['reset-password/(:any)']                = 'admin/reset_password/$1';
 
 $route['permission/(:any)']                    = 'permission/index/$1';
 $route['permission-update']                    = 'permission/update';
-
-//daftar member
-$route['member/daftar/(:any)']                 = 'home/daftar_member/$1';
 
 //Routes Produk
 $route['listproduk']                           = 'produk/listproduk';

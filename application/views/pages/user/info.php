@@ -1,7 +1,7 @@
 <main class="mb-8">
     <section class="bg-white dark:bg-gray-900">
         <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16">
-            <p class="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 lg:px-48 dark:text-gray-400">Here at Flowbite we focus on markets where technology, innovation, and capital can unlock long-term value and drive economic growth.</p>
+            <p class="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 lg:px-48 dark:text-gray-400">Berikut merupakan alamat kantor kami yang berada di jl xxx , anda bisa langsung berkunjung ke sana ataupun bisa menghubungi kami lewat email dan no telepon yang tertera di bawah.</p>
         </div>
     </section>
 

@@ -34,13 +34,13 @@
         <div id="pengurutan" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-55 dark:bg-gray-700">
             <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
                 <li>
-                    <a href="<?= base_url('product/terbaru') ?>" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Terbaru</a>
+                    <a href="<?= base_url('kategori/'.$id_kategori.'/terbaru') ?>" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Terbaru</a>
                 </li>
                 <li>
-                    <a href="<?= base_url('product/termurah') ?>" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Harga (Termurah - Termahal)</a>
+                    <a href="<?= base_url('kategori/'.$id_kategori.'/termurah') ?>" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Harga (Termurah - Termahal)</a>
                 </li>
                 <li>
-                    <a href="<?= base_url('product/termahal') ?>" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Harga (Termahal - Termurah)</a>
+                    <a href="<?= base_url('kategori/'.$id_kategori.'/termahal') ?>" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Harga (Termahal - Termurah)</a>
                 </li>
             </ul>
         </div>
@@ -85,7 +85,7 @@
 
         <?php if (count($produk_all) > count($produk)) { ?>
             <div class="flex justify-center">
-                <a href="<?= base_url('product/limit') ?>" class="p-3 text-sm font-bold md:text-base border-blue rounded-lg text-blue bg-white hover:text-white md:p-4 hover:font-bold hover-bg-blue">Lihat Lebih Banyak</a>
+                <a href="#" class="p-3 text-sm font-bold md:text-base border-blue rounded-lg text-blue bg-white hover:text-white md:p-4 hover:font-bold hover-bg-blue">Lihat Lebih Banyak</a>
             </div>
         <?php } ?>
     </div>

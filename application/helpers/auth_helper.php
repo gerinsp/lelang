@@ -21,11 +21,76 @@ function cekuser()
         //     if ($userAccess->num_rows()<1) {
         //         redirect("blocked");
         //     }
+        
 
 
+        if ($role_id == 1) {
+            switch ($menu) {
+                case 'admin':
+                    redirect('pimpinan');
+                    break;
+                case 'supplier':
+                    redirect('pimpinan');
+                    break;
+                case 'agen':
+                    redirect('pimpinan');
+                    break;
 
+                default:
+                    # code...
+                    break;
+            }
+        }
+         else if ($role_id == 2) {
+            switch ($menu) {
+                case 'pimpinan':
+                    redirect('blocked');
+                    break;
+                case 'agen':
+                    redirect('admin');
+                    break;
+                default:
+                    # code...
+                    break;
+            }
 
+        }
+        else if ($role_id == 3) {
+            switch ($menu) {
+                case 'pimpinan':
+                    redirect('blocked');
+                    break;
+                case 'admin':
+                    redirect('blocked');
+                    break;
+                case 'agen':
+                    redirect('supplier');
+                    break;
+                default:
+                    # code...
+                    break;
+            }
+
+        }
+        else if ($role_id == 4) {
+            switch ($menu) {
+                case 'pimpinan':
+                    redirect('blocked');
+                    break;
+                case 'admin':
+                    redirect('blocked');
+                    break;
+                case 'supplier':
+                    redirect('blocked');
+                    break;
+                default:
+                    # code...
+                    break;
+            }
+
+        }
     }
+
 }
 
 function check_access($role_id, $menu_id)
@@ -128,3 +193,22 @@ function user_can($halaman)
 
     return false;
 }
+
+function active($urls)
+{
+    $ci =& get_instance();
+
+    if (is_array($urls)) {
+        foreach ($urls as $url) {
+            if ($ci->uri->segment(1) == $url) {
+                echo 'text-white bg-blue-700 md:text-blue-700';
+                return;
+            }
+        }
+    } elseif (is_string($urls) && $ci->uri->segment(1) == $urls) {
+        echo 'text-white bg-blue-700 md:text-blue-700';
+        return;
+    }
+}
+
+
