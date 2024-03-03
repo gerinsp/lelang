@@ -22,13 +22,24 @@ class Admin extends CI_Controller
         $data['user'] = $this->m->Get_Where($where, $table);
         $data['title'] = 'Lelang | Pengajuan Harga';
 
-        $this->db->select('pengajuanharga.*, produk.nama_produk, customer.nama_customer, sales.nama_sales');
-        $this->db->from('pengajuanharga');
-        $this->db->join('produk', 'produk.id = pengajuanharga.id_produk', 'left');
-        $this->db->join('customer', 'customer.id_customer = pengajuanharga.id_customer', 'left');
-        $this->db->join('sales', 'sales.id_sales = pengajuanharga.id_sales', 'left');
+        if ($this->session->userdata('role_id') == 2) {
+            $this->db->select('pengajuanharga.*, produk.nama_produk, customer.nama_customer, sales.nama_sales');
+            $this->db->from('pengajuanharga');
+            $this->db->join('produk', 'produk.id = pengajuanharga.id_produk', 'left');
+            $this->db->join('customer', 'customer.id_customer = pengajuanharga.id_customer', 'left');
+            $this->db->join('sales', 'sales.id_sales = pengajuanharga.id_sales', 'left');
 
-        $data['pengajuan'] = $this->db->get()->result();
+            $data['pengajuan'] = $this->db->get()->result();
+        } else if ($this->session->userdata('role_id') == 3) {
+            $this->db->select('pengajuanharga.*, produk.nama_produk, customer.nama_customer, sales.nama_sales');
+            $this->db->from('pengajuanharga');
+            $this->db->join('produk', 'produk.id = pengajuanharga.id_produk', 'left');
+            $this->db->join('customer', 'customer.id_customer = pengajuanharga.id_customer', 'left');
+            $this->db->join('sales', 'sales.id_sales = pengajuanharga.id_sales', 'left');
+            $this->db->where('customer.id_sales', $this->session->userdata('sales_id'));
+
+            $data['pengajuan'] = $this->db->get()->result();
+        }
 
         $this->load->view('templates/head', $data);
         $this->load->view('templates/navigation', $data);
@@ -37,7 +48,8 @@ class Admin extends CI_Controller
         $this->load->view('templates/footer');
         $this->load->view('templates/script', $data);
     }
-    function pengajuan_terima($id) {
+    function pengajuan_terima($id)
+    {
         $table = 'pengajuanharga';
         $where = array(
             'id_pengajuanharga'          => $id
@@ -51,7 +63,8 @@ class Admin extends CI_Controller
         $this->session->set_flashdata('success', 'Berhasil update status pengajuan');
         redirect('pengajuan');
     }
-    function pengajuan_tolak($id) {
+    function pengajuan_tolak($id)
+    {
         $table = 'pengajuanharga';
         $where = array(
             'id_pengajuanharga'          => $id
@@ -63,6 +76,117 @@ class Admin extends CI_Controller
         $this->m->Update($where, $data, $table);
 
         $this->session->set_flashdata('success', 'Berhasil update status pengajuan');
+        redirect('pengajuan');
+    }
+    function get_customer()
+    {
+        $postData = $this->input->post();
+
+        // get data
+        $data = $this->m->getCustomer($postData);
+
+        echo json_encode($data);
+    }
+    function get_produk()
+    {
+        $postData = $this->input->post();
+
+        // get data
+        $data = $this->m->getProduk($postData);
+
+        echo json_encode($data);
+    }
+    function create_pengajuan_harga()
+    {
+        $this->form_validation->set_rules(
+            'namaproduk',
+            'namaproduk',
+            'required|trim',
+            [
+                'required' => 'Field nama produk tidak boleh kosong'
+            ]
+        );
+        if ($this->form_validation->run() == false) {
+            $role_id = $this->session->userdata('role_id');
+
+            $table = 'user';
+            $where = array(
+                'id_user'      =>   $this->session->userdata('id_user')
+            );
+
+            $data['user'] = $this->m->Get_Where($where, $table);
+            $data['title'] = 'Lelang | Tambah Data Pengajuan Harga';
+
+            $this->load->view('templates/head', $data);
+            $this->load->view('templates/navigation', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('pages/pengajuanharga/createpengajuanharga', $data);
+            $this->load->view('templates/footer');
+            $this->load->view('templates/script', $data);
+        } else {
+            date_default_timezone_set('Asia/Jakarta');
+            $now = date('Y-m-d H:i:s');
+
+            $data = array(
+                'id_customer'       =>   $this->input->post('idcustomer'),
+                'id_produk'         =>   $this->input->post('idproduk'),
+                'id_sales'          =>   $this->session->userdata('sales_id'),
+                'harga'             =>   str_replace(',', '.', str_replace('.', '', $this->input->post('harga'))),
+                'status_approve'    =>   1,
+                'tanggal_pengajuan' =>   $now
+            );
+
+            $this->m->Save($data, 'pengajuanharga');
+
+            $this->session->set_flashdata('success', 'Data pengajuan harga berhasil ditambah');
+            redirect('pengajuan');
+        }
+    }
+    function edit_pengajuan_harga($id_pengajuanharga)
+    {
+
+        $data = [
+            'title' => 'Lelang | Edit Data Pengajuan Harga'
+        ];
+        $role_id = $this->session->userdata('role_id');
+
+        $table = 'user';
+        $where = array(
+            'id_user'      =>   $this->session->userdata('id_user')
+        );
+
+        $data['user'] = $this->m->Get_Where($where, $table);
+
+        $this->db->select('pengajuanharga.*, produk.nama_produk, produk.id,customer.nik,customer.nama_customer');
+        $this->db->from('pengajuanharga');
+        $this->db->join('produk', 'produk.id = pengajuanharga.id_produk', 'left');
+        $this->db->join('customer', 'customer.id_customer = pengajuanharga.id_customer', 'left');
+        $this->db->where('pengajuanharga.id_pengajuanharga', $id_pengajuanharga);
+        $data['pengajuan'] = $this->db->get()->result();
+
+        $this->load->view('templates/head', $data);
+        $this->load->view('templates/navigation', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('pages/pengajuanharga/updatepengajuanharga', $data);
+        $this->load->view('templates/footer');
+        $this->load->view('templates/script', $data);
+    }
+    function updatedatapengajuan()
+    {
+
+        $table = 'pengajuanharga';
+        $where = array(
+            'id_pengajuanharga'          =>   $this->input->post('idpengajuanharga')
+        );
+        $data = array(
+            'id_customer'       =>   $this->input->post('idcustomer'),
+            'id_produk'         =>   $this->input->post('idproduk'),
+            'id_sales'          =>   $this->session->userdata('sales_id'),
+            'harga'             =>   str_replace(',', '.', str_replace('.', '', $this->input->post('harga'))),
+        );
+        $this->m->Update($where, $data, $table);
+
+        $this->session->set_flashdata('success', 'Data pengajuan harga berhasil diubah');
         redirect('pengajuan');
     }
     function akun_sales()
