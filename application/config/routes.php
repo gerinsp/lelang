@@ -63,6 +63,8 @@ $route['struktur-perusahaan']                  = 'home/struktur_perusahaan';
 $route['info']                                 = 'home/info';
 
 $route['pengajuan']                            = 'admin/pengajuan_harga';
+$route['tambahdatapengajuanharga']             = 'admin/create_pengajuan_harga';
+$route['editdatapengajuanharga/(:any)']        = 'admin/edit_pengajuan_harga/$1';
 $route['status-pengajuan-terima/(:any)']       = 'admin/pengajuan_terima/$1';
 $route['status-pengajuan-tolak/(:any)']        = 'admin/pengajuan_tolak/$1';
 
