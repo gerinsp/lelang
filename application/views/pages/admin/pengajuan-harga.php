@@ -47,7 +47,13 @@
                                  <th style=" padding: 0.75rem;vertical-align: top;border-top: 1px solid #e3e6f0;">Nama Sales</th>
                                  <th style=" padding: 0.75rem;vertical-align: top;border-top: 1px solid #e3e6f0;">Nama Customer</th>
                                  <th style=" padding: 0.75rem;vertical-align: top;border-top: 1px solid #e3e6f0;">Harga</th>
-                                 <th style=" padding: 0.75rem;vertical-align: top;border-top: 1px solid #e3e6f0;">Aksi</th>
+                                 <?php if ($this->session->userdata('role_id') == 1) { ?>
+                                    <th style=" padding: 0.75rem;vertical-align: top;border-top: 1px solid #e3e6f0;">Status</th>
+                                 <?php } ?>
+                                 <?php if ($this->session->userdata('role_id') != 1) { ?>
+                                    <th style=" padding: 0.75rem;vertical-align: top;border-top: 1px solid #e3e6f0;">Aksi</th>
+                                 <?php } ?>
+
                               </tr>
                            </thead>
                            <tbody>
@@ -63,6 +69,23 @@
                                     <td style="vertical-align: top;border-top: 1px solid #e3e6f0;"><?= $data->nama_customer ?></td>
                                     <td style="vertical-align: top;border-top: 1px solid #e3e6f0;"><?= 'Rp ' . number_format($data->harga, 0, ',', '.') ?></td>
                                     <td style="vertical-align: top;border-top: 1px solid #e3e6f0;">
+                                       <?php if ($this->session->userdata('role_id') == 1) { ?>
+                                          <?php if ($data->status_approve == 1) { ?>
+                                             <a class="btn btn-sm btn-warning">
+                                                <i class="fas fa-fw fa-info"></i> Pending
+                                             </a>
+                                          <?php } ?>
+                                          <?php if ($data->status_approve == 2) { ?>
+                                             <a class="btn btn-sm btn-success mr-1">
+                                                <i class="fas fa-fw fa-check"></i> Diterima
+                                             </a>
+                                          <?php } ?>
+                                          <?php if ($data->status_approve == 0) { ?>
+                                             <a class="btn btn-sm btn-danger">
+                                                <i class="fas fa-fw fa-ban"></i> Ditolak
+                                             </a>
+                                          <?php } ?>
+                                       <?php } ?>
                                        <?php if ($this->session->userdata('role_id') == 2) { ?>
                                           <?php if ($data->status_approve == 1) { ?>
                                              <a href="<?= base_url('status-pengajuan-tolak/' . $data->id_pengajuanharga); ?>" class="btn btn-sm btn-danger" role="button">
