@@ -6,12 +6,12 @@
          <?= $this->session->flashdata('message'); ?>
          <div class="row mb-2">
             <div class="col-sm-6">
-               <h1><?php echo $this->lang->line('change'); ?> Data Sales</h1>
+               <h1><?php echo $this->lang->line('change'); ?> Data Customer</h1>
             </div>
             <div class="col-sm-6">
                <ol class="breadcrumb float-sm-right">
                   <li class="breadcrumb-item"><a href="#">Home</a></li>
-                  <li class="breadcrumb-item active">Sales</li>
+                  <li class="breadcrumb-item active">Customer</li>
                </ol>
             </div>
          </div>
@@ -35,7 +35,7 @@
                         <?= form_error('nik', '<small class="text-danger">', '</small>'); ?>
                      </div>
                      <div class="col-md-6">
-                        <label class="bmd-label-floating">Nama Sales</label>
+                        <label class="bmd-label-floating">Nama Customer</label>
                         <input style="padding-bottom: 10px;text-align: left;" type="text" name="namacustomer" class="form-control" value="<?= $data->nama_customer ?>">
                         <input style="padding-bottom: 10px;text-align: left;" type="hidden" name="idcustomer" class="form-control" value="<?= $data->id_customer ?>">
                         <?= form_error('namacustomer', '<small class="text-danger">', '</small>'); ?>
