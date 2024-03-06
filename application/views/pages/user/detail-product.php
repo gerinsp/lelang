@@ -1,12 +1,12 @@
 <main class="md-mb-4">
     <div class="grid grid-cols-1 md:grid-cols-2 h-100 gap-4 md:gap-8">
         <div class="relative flex justify-center">
-            <img id="main-image" class="max-w-full h-100vh" src="<?= base_url('assets/file/iconproduk/'.$detail->gambar1) ?>">
+            <img id="main-image" class="max-w-full h-100vh" src="<?= base_url('assets/file/iconproduk/' . $detail->gambar1) ?>">
             <div class="scrollbar-hide absolute bottom-2 flex w-10-12 gap-4 overflow-scroll scroll-smooth p-8 md:bottom-10">
                 <?php for ($i = 1; $i <= 12; $i++) : ?>
-                    <?php if ($detail->{'gambar'.$i} != '') : ?>
+                    <?php if ($detail->{'gambar' . $i} != '') : ?>
                         <div class="flex aspect-square w-card-foto flex-none cursor-pointer rounded-lg border-4 border-solid border-white md:w-24">
-                            <img onclick="ubahGambar(this)" id="image<?= $i ?>" src="<?= base_url('assets/file/iconproduk/'.$detail->{'gambar'.$i}) ?>" alt="" class="h-full w-full object-cover">
+                            <img onclick="ubahGambar(this)" id="image<?= $i ?>" src="<?= base_url('assets/file/iconproduk/' . $detail->{'gambar' . $i}) ?>" alt="" class="h-full w-full object-cover">
                         </div>
                     <?php endif; ?>
                 <?php endfor; ?>
@@ -23,7 +23,7 @@
                     <li>
                         <div class="flex items-center">
                             <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4" />
                             </svg>
                             <a href="#" class="ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white">Katalog</a>
                         </div>
@@ -31,7 +31,7 @@
                     <li aria-current="page">
                         <div class="flex items-center">
                             <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4" />
                             </svg>
                             <span class="ms-1 text-sm font-medium text-gray-500 md:ms-2 dark:text-gray-400"><?= $detail->nama_produk ?></span>
                         </div>
@@ -41,12 +41,14 @@
             <div class="mt-8">
                 <h3 class="mb-5 text-2xl text-ternary-gray-200"><?= ucwords(strtolower($detail->nama_produk)) ?></h3>
             </div>
-            <div class="grid grid-cols-2 gap-4"><div><h4 class="text-xs font-bold text-ternary-gray-200">Harga</h4>
-                    <h6 class="text-lg font-bold text-blue-960 md:text-xl lg:text-2xl">Rp<?= number_format($detail->harga_tertinggi ? $detail->harga_tertinggi : 0,0,',','.') ?></h6>
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <h4 class="text-xs font-bold text-ternary-gray-200">Harga</h4>
+                    <h6 class="text-lg font-bold text-blue-960 md:text-xl lg:text-2xl">Rp<?= number_format($detail->harga_tertinggi ? $detail->harga_tertinggi : 0, 0, ',', '.') ?></h6>
                 </div>
                 <div>
                     <h4 class="text-xs font-bold text-ternary-gray-200">Penawaran Terakhir</h4>
-                    <h6 class="text-lg font-bold text-blue-960 md:text-xl lg:text-2xl">Rp<?= number_format($detail->penawaran_terakhir ? $detail->penawaran_terakhir : 0,0,',','.') ?></h6>
+                    <h6 class="text-lg font-bold text-blue-960 md:text-xl lg:text-2xl">Rp<?= number_format($detail->penawaran_terakhir ? $detail->penawaran_terakhir : 0, 0, ',', '.') ?></h6>
                 </div>
                 <div>
                     <h4 class="text-xs font-bold text-ternary-gray-200">Cara Penawaran</h4>
@@ -69,7 +71,7 @@
                 <a href="https://mail.google.com/mail/?view=cm&fs=1&to=ptxxx@gmail.com&su=Pengajuan%20Harga%20Lelang&body=Isi%20Pesan" target="_blank" class="button-primary block w-full p-2 rounded-lg text-center">
                     <div class="flex justify-center items-center gap-2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-fill" viewBox="0 0 16 16">
-                            <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414zM0 4.697v7.104l5.803-3.558zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586zm3.436-.586L16 11.801V4.697z"/>
+                            <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414zM0 4.697v7.104l5.803-3.558zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586zm3.436-.586L16 11.801V4.697z" />
                         </svg>
                         <span>IKUTI LELANG</span>
                     </div>

@@ -89,14 +89,21 @@
                             <p>Permission</p>
                         </a>
                     </li>
-                <?php } ?>
-                <?php if ($this->session->userdata('role_id') == 1) { ?>
                     <li class="nav-item">
                         <a href="<?= base_url('listcustomer') ?>" class="nav-link <?php if ($this->uri->segment(1) == "listcustomer") {
                                                                                         echo "active";
                                                                                     } ?>">
                             <i class=" nav-icon fas fa-fw fa-users"></i>
                             <p>Customer</p>
+                        </a>
+                    </li>
+                    <li class="nav-header">Transaksi</li>
+                    <li class="nav-item">
+                        <a href="<?= base_url('pengajuan') ?>" class="nav-link <?php if ($this->uri->segment(1) == "pengajuan") {
+                                                                                    echo "active";
+                                                                                } ?>">
+                            <i class="fas fa-fw fa-wallet"></i>
+                            <p>Pengajuan Harga</p>
                         </a>
                     </li>
                 <?php } ?>

@@ -44,6 +44,14 @@
                      </ul>
 
                      <button type="submit" class="btn btn-primary btn-block">Ubah Profile</button>
+                     <?php if ($this->session->userdata('role_id') == 3) { ?>
+                        <hr>
+                        <div class="input-group">
+                           <h4>Bagikan Link Referal</h4><a href="#" onclick="copylinkreferal(event)" class="copy" style="margin-bottom: 10px;width: 80px;color: #000;margin-left:10px;margin-top:5px"><i class="far fa-copy"></i> </a>
+                           <input class="form-control" type="hidden" name="linkreferal" readonly id="linkreferal" value="<?= base_url('member/daftar/' . $this->session->userdata('sales_id')) ?>">
+                        </div>
+
+                     <?php } ?>
                   </div>
                   <!-- /.card-body -->
                </div>
@@ -112,6 +120,8 @@
                      </form>
                      <!-- /.tab-content -->
                   </div><!-- /.card-body -->
+                  <br>
+
                </div>
                <!-- /.card -->
             </div>
@@ -122,3 +132,49 @@
    </section>
    <!-- /.content -->
 </div>
+<!-- jQuery -->
+<script src="<?= base_url('assets/plugins/jquery/jquery.min.js') ?>"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="<?= base_url('assets/plugins/jquery-ui/jquery-ui.min.js') ?>"></script>
+
+<script>
+   function copylinkreferal(event) {
+      // Mencegah perilaku default dari tautan
+      event.preventDefault();
+
+      // Mendapatkan nilai dari atribut data-namaproduk
+      var link = document.getElementById('linkreferal').value
+
+      // Buat elemen input sementara untuk menyalin teks ke clipboard
+      const tempInput = document.createElement("input");
+      tempInput.value = link;
+
+      document.body.appendChild(tempInput);
+
+      // Pilih teks di dalam elemen input sementara
+      tempInput.select();
+
+      // Salin teks ke clipboard
+      document.execCommand("copy");
+
+      // Hapus elemen input sementara
+      document.body.removeChild(tempInput);
+      const Toast = Swal.mixin({
+         toast: true,
+         position: 'top-end',
+         showConfirmButton: false,
+         timer: 1500,
+         timerProgressBar: true,
+         didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal
+               .resumeTimer)
+         }
+      })
+      Toast.fire({
+         icon: 'success',
+         title: 'Link telah disalin'
+      })
+      // alert("Nama produk telah disalin");
+   }
+</script>
