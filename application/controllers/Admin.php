@@ -22,7 +22,7 @@ class Admin extends CI_Controller
         $data['user'] = $this->m->Get_Where($where, $table);
         $data['title'] = 'Lelang | Pengajuan Harga';
 
-        if ($this->session->userdata('role_id') == 2) {
+        if ($this->session->userdata('role_id') != 3) {
             $this->db->select('pengajuanharga.*, produk.nama_produk, customer.nama_customer, sales.nama_sales');
             $this->db->from('pengajuanharga');
             $this->db->join('produk', 'produk.id = pengajuanharga.id_produk', 'left');

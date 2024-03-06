@@ -22,9 +22,15 @@ class Customer extends CI_Controller
       $data['user'] = $this->m->Get_Where($where, $table);
       $data['title'] = 'Lelang | List Customer';
 
-      $select = $this->db->select('tbl_customer.id_customer,tbl_customer.nama_customer,tbl_customer.jenis_kelamin,tbl_customer.alamat,tbl_customer.no_hp');
-      // $select = $this->db->join('tbl_customer', 'tbl_customer.id_customer = tbl_customer.id_customer');
-      $data['customer'] = $this->m->Get_All('customer', $select);
+      if ($this->session->userdata('role_id') == 3) {
+         $select = $this->db->select('tbl_customer.id_customer,tbl_customer.nama_customer,tbl_customer.jenis_kelamin,tbl_customer.alamat,tbl_customer.no_hp');
+         $select = $this->db->where('tbl_customer.id_sales', $this->session->userdata('sales_id'));
+         $data['customer'] = $this->m->Get_All('customer', $select);
+      } else {
+         $select = $this->db->select('tbl_customer.id_customer,tbl_customer.nama_customer,tbl_customer.jenis_kelamin,tbl_customer.alamat,tbl_customer.no_hp');
+         // $select = $this->db->join('tbl_customer', 'tbl_customer.id_customer = tbl_customer.id_customer');
+         $data['customer'] = $this->m->Get_All('customer', $select);
+      }
 
       $this->load->view('templates/head', $data);
       $this->load->view('templates/navigation', $data);

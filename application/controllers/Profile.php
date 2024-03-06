@@ -18,7 +18,7 @@ class Profile extends CI_Controller
       );
 
       $data['user'] = $this->m->Get_Where($where, $table);
-      $data['title'] = 'Reminder | Profile';
+      $data['title'] = 'Lelang | Profile';
 
       $this->load->view('templates/head', $data);
       $this->load->view('templates/navigation', $data);
@@ -71,7 +71,7 @@ class Profile extends CI_Controller
    public function changePassword()
    {
       $role_id = $this->session->userdata('role_id');
-      $data['title'] = 'Reminder | Ubah Password';
+      $data['title'] = 'Lelang | Ubah Password';
       $table = 'user';
       $where = array(
          'id_user'       =>  $this->session->userdata('id_user')
