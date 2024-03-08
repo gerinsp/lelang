@@ -23,11 +23,11 @@ class Customer extends CI_Controller
       $data['title'] = 'Lelang | List Customer';
 
       if ($this->session->userdata('role_id') == 3) {
-         $select = $this->db->select('tbl_customer.id_customer,tbl_customer.nama_customer,tbl_customer.jenis_kelamin,tbl_customer.alamat,tbl_customer.no_hp');
+         $select = $this->db->select('tbl_customer.foto_ktp,tbl_customer.foto_kk,tbl_customer.foto_diri,tbl_customer.id_customer,tbl_customer.nama_customer,tbl_customer.jenis_kelamin,tbl_customer.alamat,tbl_customer.no_hp');
          $select = $this->db->where('tbl_customer.id_sales', $this->session->userdata('sales_id'));
          $data['customer'] = $this->m->Get_All('customer', $select);
       } else {
-         $select = $this->db->select('tbl_customer.id_customer,tbl_customer.nama_customer,tbl_customer.jenis_kelamin,tbl_customer.alamat,tbl_customer.no_hp');
+         $select = $this->db->select('tbl_customer.foto_ktp,tbl_customer.foto_kk,tbl_customer.foto_diri,tbl_customer.id_customer,tbl_customer.nama_customer,tbl_customer.jenis_kelamin,tbl_customer.alamat,tbl_customer.no_hp');
          // $select = $this->db->join('tbl_customer', 'tbl_customer.id_customer = tbl_customer.id_customer');
          $data['customer'] = $this->m->Get_All('customer', $select);
       }
@@ -85,15 +85,67 @@ class Customer extends CI_Controller
          date_default_timezone_set('Asia/Jakarta');
          $now = date('Y-m-d H:i:s');
 
+         $config['upload_path']          = 'assets/file/customer';
+         $config['max_size']             = 3145728; //set max size allowed in Kilob
+         $config['allowed_types']        = 'jpg|jpeg|png';
+         $config['encrypt_name']         = true; // set max height allowed
+         $this->load->library('upload', $config);
+
+
+         $uploaded_files = array();
+
+         for ($i = 1; $i <= 3; $i++) {
+            $file_input_name = 'gambar' . $i;
+
+            if (!empty($_FILES[$file_input_name]['name'])) {
+               $size = $_FILES[$file_input_name]['size'];
+               $nama = $_FILES[$file_input_name]['name'];
+
+               $format = pathinfo($nama, PATHINFO_EXTENSION);
+               if ($size > 3145728) {
+                  $this->session->set_flashdata('error', 'Gambar ' . $file_input_name . ' terlalu besar');
+                  redirect('tambahdatasales');
+               } elseif ($format != "jpg" and $format != "png" and $format != "jpeg" and $format != "JPG" and $format != "PNG" and $format != "JPEG") {
+                  $this->session->set_flashdata('error', 'Format gambar ' . $file_input_name . '  tidak sesuai');
+                  redirect('tambahdatasales');
+               }
+
+               if (!$this->upload->do_upload($file_input_name)) {
+                  $error = $this->upload->display_errors();
+                  echo $error;
+               }
+
+               $data = $this->upload->data();
+
+               // Lakukan proses penyimpanan file dengan nama baru di sini
+               $new_path = './assets/file/customer/' . $nama;
+               rename($data['full_path'], $new_path);
+
+               $uploaded_files['foto_ktp'] = $data['file_name'];
+               $uploaded_files['foto_kk'] = $data['file_name'];
+               $uploaded_files['foto_diri'] = $data['file_name'];
+            } else {
+               $uploaded_files['foto_ktp'] = "";
+               $uploaded_files['foto_kk'] = "";
+               $uploaded_files['foto_diri'] = "";
+            }
+         }
+         $ktp = $_FILES['gambar1']['name'];
+         $kk = $_FILES['gambar2']['name'];
+         $diri = $_FILES['gambar3']['name'];
+
+
          $data = array(
             'nik'               =>   $this->input->post('nik'),
             'nama_customer'     =>   $this->input->post('namacustomer'),
             'jenis_kelamin'     =>   $this->input->post('jeniskelamin'),
             'no_hp'             =>   $this->input->post('nohp'),
             'alamat'            =>   $this->input->post('alamat'),
-            'id_sales'          =>   $this->session->userdata('sales_id')
+            'id_sales'          =>   $this->session->userdata('sales_id'),
+            'foto_ktp'          =>   $ktp,
+            'foto_kk'           =>   $kk,
+            'foto_diri'         =>   $diri,
          );
-
          $this->m->Save($data, 'customer');
 
          $this->session->set_flashdata('success', 'Data customer berhasil ditambah');
@@ -134,12 +186,60 @@ class Customer extends CI_Controller
       $where = array(
          'id_customer'          =>   $this->input->post('idcustomer')
       );
+      $config['upload_path']          = 'assets/file/customer';
+      $config['max_size']             = 3145728; //set max size allowed in Kilob
+      $config['allowed_types']        = 'jpg|jpeg|png';
+      $config['encrypt_name']         = true; // set max height allowed
+      $this->load->library('upload', $config);
+
+
+      $uploaded_files = array();
+
+      for ($i = 1; $i <= 3; $i++) {
+         $file_input_name = 'gambar' . $i;
+
+         if (!empty($_FILES[$file_input_name]['name'])) {
+            $size = $_FILES[$file_input_name]['size'];
+            $nama = $_FILES[$file_input_name]['name'];
+            // var_dump($nama);
+            // die;
+            $format = pathinfo($nama, PATHINFO_EXTENSION);
+            if ($size > 3145728) {
+               $this->session->set_flashdata('error', 'Gambar ' . $file_input_name . ' terlalu besar');
+               redirect('tambahdataproduk');
+            } elseif ($format != "jpg" and $format != "png" and $format != "jpeg" and $format != "JPG" and $format != "PNG" and $format != "JPEG") {
+               $this->session->set_flashdata('error', 'Format gambar ' . $file_input_name . '  tidak sesuai');
+               redirect('tambahdataproduk');
+            }
+
+            if (!$this->upload->do_upload($file_input_name)) {
+               $error = $this->upload->display_errors();
+               echo $error;
+            }
+
+            $data = $this->upload->data();
+
+            // Lakukan proses penyimpanan file dengan nama baru di sini
+            $new_path = './assets/file/customer/' . $nama;
+            rename($data['full_path'], $new_path);
+
+            // $uploaded_files['foto_ktp'] =  "sd";
+            // $uploaded_files['foto_kk'] =  $nama;
+            // $uploaded_files['foto_diri'] = $data['file_name'];
+         }
+      }
+      $ktp = $_FILES['gambar1']['name'];
+      $kk = $_FILES['gambar2']['name'];
+      $diri = $_FILES['gambar3']['name'];
       $data = array(
          'nik'               =>   $this->input->post('nik'),
          'nama_customer'     =>   $this->input->post('namacustomer'),
          'jenis_kelamin'     =>   $this->input->post('jeniskelamin'),
          'no_hp'             =>   $this->input->post('nohp'),
          'alamat'            =>   $this->input->post('alamat'),
+         'foto_ktp'          =>   $ktp,
+         'foto_kk'           =>   $kk,
+         'foto_diri'         =>   $diri,
       );
       $this->m->Update($where, $data, $table);
 
