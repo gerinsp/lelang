@@ -55,6 +55,39 @@
                            <?= form_error('nohp', '<small class="text-danger">', '</small>'); ?>
                         </div>
                      </div>
+                     <div class="col-md-4">
+                        <div class="row">
+                           <div class="col-md-12">
+                              <div class="form-group">
+                                 <label class="bmd-label-floating">Foto KTP</label>
+                                 <img id="preview1" style="display: none; max-width: 200px;" />
+                                 <input onchange="previewImage(this, '1')" required accept="image/jpeg, image/jpg, image/png" type="file" name="gambar1" id="gambar1" class="form-control" style="height: 45px;" placeholder="" aria-describedby="helpId">
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col-md-4">
+                        <div class="row">
+                           <div class="col-md-12">
+                              <div class="form-group">
+                                 <label class="bmd-label-floating">Foto KK</label>
+                                 <img id="preview2" style="display: none; max-width: 200px;" />
+                                 <input onchange="previewImage(this, '2')" required accept="image/jpeg, image/jpg, image/png" type="file" name="gambar2" id="gambar2" class="form-control" style="height: 45px;" placeholder="" aria-describedby="helpId">
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col-md-4">
+                        <div class="row">
+                           <div class="col-md-12">
+                              <div class="form-group">
+                                 <label class="bmd-label-floating">Foto Diri</label>
+                                 <img id="preview3" style="display: none; max-width: 200px;" />
+                                 <input onchange="previewImage(this, '3')" required accept="image/jpeg, image/jpg, image/png" type="file" name="gambar3" id="gambar3" class="form-control" style="height: 45px;" placeholder="" aria-describedby="helpId">
+                              </div>
+                           </div>
+                        </div>
+                     </div>
                   </div>
                   <div class="row">
                      <div class="col-md-12">
@@ -106,5 +139,24 @@
 
          }
       });
+   }
+
+   function previewImage(input, id) {
+      var preview = document.getElementById('preview' + id);
+      var file = input.files[0];
+
+      if (file) {
+         var reader = new FileReader();
+
+         reader.onload = function(e) {
+            preview.src = e.target.result;
+            preview.style.display = 'block';
+         };
+
+         reader.readAsDataURL(file);
+      } else {
+         preview.src = '';
+         preview.style.display = 'none';
+      }
    }
 </script>
