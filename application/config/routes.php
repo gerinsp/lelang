@@ -101,6 +101,7 @@ $route['editdatakategori/(:any)']              = 'kategori/editkategori/$1';
 $route['listsales']                            = 'sales/listsales';
 $route['tambahdatasales']                      = 'sales/createsales';
 $route['editdatasales/(:any)']                 = 'sales/editsales/$1';
+$route['customersales/(:any)']                 = 'sales/customersales/$1';
 
 //Routes Profile
 $route['profile']                              = 'profile/profile';
