@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 06, 2024 at 03:33 AM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 7.4.29
+-- Waktu pembuatan: 08 Mar 2024 pada 15.36
+-- Versi server: 10.4.24-MariaDB
+-- Versi PHP: 7.4.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_customer`
+-- Struktur dari tabel `tbl_customer`
 --
 
 CREATE TABLE `tbl_customer` (
@@ -35,23 +35,28 @@ CREATE TABLE `tbl_customer` (
   `alamat` varchar(500) NOT NULL,
   `no_hp` varchar(20) NOT NULL,
   `id_sales` int(11) DEFAULT NULL,
+  `foto_ktp` varchar(100) NOT NULL,
+  `foto_kk` varchar(100) NOT NULL,
+  `foto_diri` varchar(100) NOT NULL,
   `status` int(11) NOT NULL COMMENT 'Pendanda untuk melihat cara daftarnya'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tbl_customer`
+-- Dumping data untuk tabel `tbl_customer`
 --
 
-INSERT INTO `tbl_customer` (`id_customer`, `nik`, `nama_customer`, `jenis_kelamin`, `alamat`, `no_hp`, `id_sales`, `status`) VALUES
-(1, '443536333435', 'Asep', 'laki-laki', 'subang', '866789567', 3, 1),
-(4, '366565653665', 'Gerin Sena Pratama', 'laki-laki', 'Dusun Cikembang\r\nDesa Bangunjaya, kec subang', '2147483647', 1, 2),
-(5, '8901234', 'Angga Saja', 'Laki-Laki', 'Ciamis', '085759854144', 1, 0),
-(6, '58878417', 'Kepin', 'laki-laki', 'Ciamis', '085759803544', 1, 2);
+INSERT INTO `tbl_customer` (`id_customer`, `nik`, `nama_customer`, `jenis_kelamin`, `alamat`, `no_hp`, `id_sales`, `foto_ktp`, `foto_kk`, `foto_diri`, `status`) VALUES
+(1, '443536333435', 'Asep', 'laki-laki', 'subang', '866789567', 3, '', '', '', 1),
+(4, '366565653665', 'Gerin Sena Pratamasd', '', 'Dusun Cikembang\r\nDesa Bangunjaya, kec subang', '2147483647', 1, 'PLL-LCDINT1602-01.jpg', 'PLL-JAMDIG4R1.5KITNS-00.jpg', 'PLL-FAJACK-01-00.jpg', 2),
+(5, '8901234', 'Angga Saja', 'Laki-Laki', 'Ciamis', '085759854144', 1, '', '', '', 0),
+(6, '58878417', 'Kepin', 'laki-laki', 'Ciamis', '085759803544', 1, '', '', '', 2),
+(7, '1234', 'paseo', 'Perempuan', 'sds', '08574156565', 1, '', '', '', 0),
+(10, '323213', 'Samplesd', 'Laki-Laki', '', '233', 1, 'PLL-JAMDIG4R1.5-00.jpg', 'PLL-JQMP5008-00.jpg', 'PLL-HPF810-00.jpg', 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_halaman`
+-- Struktur dari tabel `tbl_halaman`
 --
 
 CREATE TABLE `tbl_halaman` (
@@ -60,7 +65,7 @@ CREATE TABLE `tbl_halaman` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbl_halaman`
+-- Dumping data untuk tabel `tbl_halaman`
 --
 
 INSERT INTO `tbl_halaman` (`id`, `nama_halaman`) VALUES
@@ -71,7 +76,7 @@ INSERT INTO `tbl_halaman` (`id`, `nama_halaman`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_kategori`
+-- Struktur dari tabel `tbl_kategori`
 --
 
 CREATE TABLE `tbl_kategori` (
@@ -86,7 +91,7 @@ CREATE TABLE `tbl_kategori` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tbl_kategori`
+-- Dumping data untuk tabel `tbl_kategori`
 --
 
 INSERT INTO `tbl_kategori` (`id_kategori`, `nama_kategori`, `status_show`, `icon_kategori`, `create_date`, `create_by`, `update_date`, `update_by`) VALUES
@@ -96,7 +101,7 @@ INSERT INTO `tbl_kategori` (`id_kategori`, `nama_kategori`, `status_show`, `icon
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_pengajuanharga`
+-- Struktur dari tabel `tbl_pengajuanharga`
 --
 
 CREATE TABLE `tbl_pengajuanharga` (
@@ -110,7 +115,7 @@ CREATE TABLE `tbl_pengajuanharga` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tbl_pengajuanharga`
+-- Dumping data untuk tabel `tbl_pengajuanharga`
 --
 
 INSERT INTO `tbl_pengajuanharga` (`id_pengajuanharga`, `tanggal_pengajuan`, `id_produk`, `id_sales`, `id_customer`, `harga`, `status_approve`) VALUES
@@ -123,7 +128,7 @@ INSERT INTO `tbl_pengajuanharga` (`id_pengajuanharga`, `tanggal_pengajuan`, `id_
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_permission`
+-- Struktur dari tabel `tbl_permission`
 --
 
 CREATE TABLE `tbl_permission` (
@@ -133,7 +138,7 @@ CREATE TABLE `tbl_permission` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbl_permission`
+-- Dumping data untuk tabel `tbl_permission`
 --
 
 INSERT INTO `tbl_permission` (`id`, `id_user`, `id_halaman`) VALUES
@@ -145,7 +150,7 @@ INSERT INTO `tbl_permission` (`id`, `id_user`, `id_halaman`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_produk`
+-- Struktur dari tabel `tbl_produk`
 --
 
 CREATE TABLE `tbl_produk` (
@@ -175,19 +180,19 @@ CREATE TABLE `tbl_produk` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tbl_produk`
+-- Dumping data untuk tabel `tbl_produk`
 --
 
 INSERT INTO `tbl_produk` (`id`, `id_kategori`, `nama_produk`, `hargaawal`, `deskripsi_produk`, `durasi_iklan`, `status_show`, `gambar1`, `gambar2`, `gambar3`, `gambar4`, `gambar5`, `gambar6`, `gambar7`, `gambar8`, `gambar9`, `gambar10`, `gambar11`, `gambar12`, `create_date`, `create_by`, `update_date`, `update_by`) VALUES
 (1, 3, 'oli', 0, '<p>oli</p>', 2, 1, '7021228adf09729becef9e314e496122.PNG', '7d2380a3df120d3eb8b404601e2c2b53.jpg', '51287285e30ff43eb4adcf99eeb0c646.png', 'f37e6361e15b4ad45dc0877ffa8b5cbb.png', '071bf2a67ae58168007f46ddd7678bce.PNG', 'ca4c762d1a9569ca9e33cc0fa165018a.png', '73b3ed837d5ed4aea895ce20b16aa5cf.png', 'ac2d90adbc4198c6902742938cc52ff8.png', '96b1ef72d2c7c77f9c7c7f606e0cd643.jpg', 'dc5bbf665a29121ea239ed86953dc48a.png', 'abf1ba9ea787c146bb18565797422f02.png', 'c8f548def4f1a911b7698362750f1050.PNG', '2024-03-01 23:58:47', 2, '2024-03-02 01:48:22', 2),
-(10, 3, 'Rumah', 0, '<p>rumah</p>', 2, 1, '7021228adf09729becef9e314e496122.PNG', '7d2380a3df120d3eb8b404601e2c2b53.jpg', '51287285e30ff43eb4adcf99eeb0c646.png', 'f37e6361e15b4ad45dc0877ffa8b5cbb.png', '071bf2a67ae58168007f46ddd7678bce.PNG', 'ca4c762d1a9569ca9e33cc0fa165018a.png', '73b3ed837d5ed4aea895ce20b16aa5cf.png', 'ac2d90adbc4198c6902742938cc52ff8.png', '96b1ef72d2c7c77f9c7c7f606e0cd643.jpg', 'dc5bbf665a29121ea239ed86953dc48a.png', 'abf1ba9ea787c146bb18565797422f02.png', 'c8f548def4f1a911b7698362750f1050.PNG', '2024-03-01 23:58:47', 2, '2024-02-28 01:48:22', 2),
+(10, 3, 'Rumah', 0, '<p>rumah</p>', 2, 1, '2ddc350e9edaf8d9ada8b58d6d451ab6.jpg', '7d2380a3df120d3eb8b404601e2c2b53.jpg', '51287285e30ff43eb4adcf99eeb0c646.png', 'f37e6361e15b4ad45dc0877ffa8b5cbb.png', 'df80707fc60b1e9aef9273c9b237f291.jpg', 'ca4c762d1a9569ca9e33cc0fa165018a.png', '73b3ed837d5ed4aea895ce20b16aa5cf.png', 'ac2d90adbc4198c6902742938cc52ff8.png', '96b1ef72d2c7c77f9c7c7f606e0cd643.jpg', 'dc5bbf665a29121ea239ed86953dc48a.png', 'abf1ba9ea787c146bb18565797422f02.png', 'c8f548def4f1a911b7698362750f1050.PNG', '2024-03-01 23:58:47', 2, '2024-03-08 20:48:27', 1),
 (11, 3, 'Rumah', 0, '<p>rumah</p>', 2, 1, '7021228adf09729becef9e314e496122.PNG', '7d2380a3df120d3eb8b404601e2c2b53.jpg', '51287285e30ff43eb4adcf99eeb0c646.png', 'f37e6361e15b4ad45dc0877ffa8b5cbb.png', '071bf2a67ae58168007f46ddd7678bce.PNG', 'ca4c762d1a9569ca9e33cc0fa165018a.png', '73b3ed837d5ed4aea895ce20b16aa5cf.png', 'ac2d90adbc4198c6902742938cc52ff8.png', '96b1ef72d2c7c77f9c7c7f606e0cd643.jpg', 'dc5bbf665a29121ea239ed86953dc48a.png', 'abf1ba9ea787c146bb18565797422f02.png', 'c8f548def4f1a911b7698362750f1050.PNG', '2024-03-04 23:58:47', 2, '2024-02-29 01:48:22', 2),
 (12, 3, 'Contoh', 0, '<p>deskripsi contoh produk</p>', 3, 1, '5a5e79556f1d93e7a539a840d634a3f5.JPG', '', '', '', '', '', '', '', '', '', '', '', '2024-03-03 20:45:51', 2, '2024-03-03 20:46:25', 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_role`
+-- Struktur dari tabel `tbl_role`
 --
 
 CREATE TABLE `tbl_role` (
@@ -196,7 +201,7 @@ CREATE TABLE `tbl_role` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tbl_role`
+-- Dumping data untuk tabel `tbl_role`
 --
 
 INSERT INTO `tbl_role` (`id`, `role`) VALUES
@@ -207,7 +212,7 @@ INSERT INTO `tbl_role` (`id`, `role`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_sales`
+-- Struktur dari tabel `tbl_sales`
 --
 
 CREATE TABLE `tbl_sales` (
@@ -215,21 +220,24 @@ CREATE TABLE `tbl_sales` (
   `nama_sales` varchar(250) NOT NULL,
   `jenis_kelamin` varchar(500) NOT NULL,
   `alamat` varchar(500) NOT NULL,
-  `no_hp` varchar(20) NOT NULL
+  `no_hp` varchar(20) NOT NULL,
+  `foto_ktp` varchar(100) NOT NULL,
+  `foto_kk` varchar(100) NOT NULL,
+  `foto_diri` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tbl_sales`
+-- Dumping data untuk tabel `tbl_sales`
 --
 
-INSERT INTO `tbl_sales` (`id_sales`, `nama_sales`, `jenis_kelamin`, `alamat`, `no_hp`) VALUES
-(1, 'Sales', 'Laki-Laki', 'Bandung', '085759803544'),
-(5, 'Sample data sales 2', 'Laki-Laki', 'Bandung', '085759803544');
+INSERT INTO `tbl_sales` (`id_sales`, `nama_sales`, `jenis_kelamin`, `alamat`, `no_hp`, `foto_ktp`, `foto_kk`, `foto_diri`) VALUES
+(1, 'Sales', 'Laki-Laki', 'Bandung', '085759803544', 'PLL-JAMDIG4R1.5-00.jpg', 'PLL-MAJACK-01-00.jpg', 'PLL-HPF810-00.jpg'),
+(5, 'Sample data sales 2', 'Laki-Laki', 'Bandung', '085759803544', '', '', '');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_user`
+-- Struktur dari tabel `tbl_user`
 --
 
 CREATE TABLE `tbl_user` (
@@ -245,7 +253,7 @@ CREATE TABLE `tbl_user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbl_user`
+-- Dumping data untuk tabel `tbl_user`
 --
 
 INSERT INTO `tbl_user` (`id_user`, `nama`, `username`, `image`, `password`, `role_id`, `sales_id`, `is_active`, `tanggal_daftar`) VALUES
@@ -260,113 +268,113 @@ INSERT INTO `tbl_user` (`id_user`, `nama`, `username`, `image`, `password`, `rol
 --
 
 --
--- Indexes for table `tbl_customer`
+-- Indeks untuk tabel `tbl_customer`
 --
 ALTER TABLE `tbl_customer`
   ADD PRIMARY KEY (`id_customer`);
 
 --
--- Indexes for table `tbl_halaman`
+-- Indeks untuk tabel `tbl_halaman`
 --
 ALTER TABLE `tbl_halaman`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `tbl_kategori`
+-- Indeks untuk tabel `tbl_kategori`
 --
 ALTER TABLE `tbl_kategori`
   ADD PRIMARY KEY (`id_kategori`);
 
 --
--- Indexes for table `tbl_pengajuanharga`
+-- Indeks untuk tabel `tbl_pengajuanharga`
 --
 ALTER TABLE `tbl_pengajuanharga`
   ADD PRIMARY KEY (`id_pengajuanharga`);
 
 --
--- Indexes for table `tbl_permission`
+-- Indeks untuk tabel `tbl_permission`
 --
 ALTER TABLE `tbl_permission`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `tbl_produk`
+-- Indeks untuk tabel `tbl_produk`
 --
 ALTER TABLE `tbl_produk`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `tbl_role`
+-- Indeks untuk tabel `tbl_role`
 --
 ALTER TABLE `tbl_role`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `tbl_sales`
+-- Indeks untuk tabel `tbl_sales`
 --
 ALTER TABLE `tbl_sales`
   ADD PRIMARY KEY (`id_sales`);
 
 --
--- Indexes for table `tbl_user`
+-- Indeks untuk tabel `tbl_user`
 --
 ALTER TABLE `tbl_user`
   ADD PRIMARY KEY (`id_user`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `tbl_customer`
+-- AUTO_INCREMENT untuk tabel `tbl_customer`
 --
 ALTER TABLE `tbl_customer`
-  MODIFY `id_customer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_customer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT for table `tbl_halaman`
+-- AUTO_INCREMENT untuk tabel `tbl_halaman`
 --
 ALTER TABLE `tbl_halaman`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `tbl_kategori`
+-- AUTO_INCREMENT untuk tabel `tbl_kategori`
 --
 ALTER TABLE `tbl_kategori`
   MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `tbl_pengajuanharga`
+-- AUTO_INCREMENT untuk tabel `tbl_pengajuanharga`
 --
 ALTER TABLE `tbl_pengajuanharga`
   MODIFY `id_pengajuanharga` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `tbl_permission`
+-- AUTO_INCREMENT untuk tabel `tbl_permission`
 --
 ALTER TABLE `tbl_permission`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT for table `tbl_produk`
+-- AUTO_INCREMENT untuk tabel `tbl_produk`
 --
 ALTER TABLE `tbl_produk`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT for table `tbl_role`
+-- AUTO_INCREMENT untuk tabel `tbl_role`
 --
 ALTER TABLE `tbl_role`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `tbl_sales`
+-- AUTO_INCREMENT untuk tabel `tbl_sales`
 --
 ALTER TABLE `tbl_sales`
-  MODIFY `id_sales` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_sales` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT for table `tbl_user`
+-- AUTO_INCREMENT untuk tabel `tbl_user`
 --
 ALTER TABLE `tbl_user`
   MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
