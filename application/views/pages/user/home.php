@@ -134,7 +134,7 @@
                             <div class="mt-4 mb-1 grid grid-cols-auto text-lite font-normal">
                                 <div class="flex justify-between">
                                     <span class="text-gray-500">Harga Awal</span>
-                                    <span class="text-red-500 font-bold">Rp <?= number_format(isset($value['harga_awal']) ? $value['harga_awal'] : 0,0,',','.') ?></span>
+                                    <span class="text-red-500 font-bold">Rp <?= number_format(isset($value['hargaawal']) ? $value['hargaawal'] : 0,0,',','.') ?></span>
                                 </div>
                                 <div class="flex justify-between">
                                     <span class="text-gray-500">Harga Tertinggi</span>
@@ -157,15 +157,14 @@
                     </div>
                 </a>
             <?php } ?>
-            <?php if (count($live_produk) == 0) { ?>
-                <div class="my-6 flex items-center justify-center flex-col gap-2">
-                    <img src="<?= base_url('assets/img/data-kosong.png') ?>" width="200px" alt="">
-                    <span>Data produk kosong</span>
-                </div>
-
-            <?php } ?>
         </div>
+        <?php if (count($live_produk) == 0) { ?>
+            <div class="my-6 flex items-center justify-center flex-col gap-2">
+                <img src="<?= base_url('assets/img/data-kosong.png') ?>" width="200px" alt="">
+                <span>Data produk kosong</span>
+            </div>
 
+        <?php } ?>
         <h1 class="text-blue-960 font-bold text-category mt-10">Katalog Lelang</h1>
         <div class="my-3 grid grid-cols-2 place-items-center gap-3 md:grid-cols-3 md:gap-2 lg:grid-cols-4 lg:gap-4">
 

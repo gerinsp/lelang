@@ -66,8 +66,7 @@ class Home extends CI_Controller
 
        $this->db->select('
             p.*,
-            MAX(ph.harga) as harga_tertinggi,
-            (SELECT harga FROM tbl_pengajuanharga WHERE id_produk = p.id AND status_approve = 2 ORDER BY tanggal_pengajuan DESC LIMIT 1) as penawaran_terakhir
+            GROUP_CONCAT(ph.harga ORDER BY ph.harga DESC) as harga_tertinggi
        ')
            ->from('produk as p')
            ->join('tbl_pengajuanharga ph', 'p.id = ph.id_produk AND ph.status_approve = 2', 'left')
@@ -75,6 +74,8 @@ class Home extends CI_Controller
            ->where('p.id', $id)
            ->group_by('p.id');
        $data['detail'] = $this->db->get()->row();
+       $harga_tertinggi_array = explode(',', $data['detail']->harga_tertinggi);
+       $data['harga_tertinggi'] = array_slice($harga_tertinggi_array, 0, 3);
 //       dd($data['detail']);
 
        $this->load->view('templates/user/navbar', $data);
@@ -292,7 +293,7 @@ class Home extends CI_Controller
        $sales = $this->m->Get_Where(['id_sales' => $id_sales], 'sales');
 
        $data['user'] = $this->m->Get_Where($where, $table);
-       $data['title'] = 'Struktur Perusahaan | Lelang';
+       $data['title'] = 'Daftar Member | Lelang';
        $data['id_sales'] = $id_sales;
 
        if ($sales) {
@@ -312,6 +313,55 @@ class Home extends CI_Controller
        date_default_timezone_set('Asia/Jakarta');
        $now = date('Y-m-d H:i:s');
 
+       $config['upload_path']          = 'assets/file/customer';
+       $config['max_size']             = 3145728; //set max size allowed in Kilob
+       $config['allowed_types']        = '*';
+       $config['encrypt_name']         = true; // set max height allowed
+       $this->load->library('upload', $config);
+
+
+       $uploaded_files = array();
+
+       for ($i = 1; $i <= 3; $i++) {
+           $file_input_name = 'gambar' . $i;
+
+           if (!empty($_FILES[$file_input_name]['name'])) {
+               $size = $_FILES[$file_input_name]['size'];
+               $nama = $_FILES[$file_input_name]['name'];
+
+               $format = pathinfo($nama, PATHINFO_EXTENSION);
+               if ($size > 3145728) {
+                   $this->session->set_flashdata('error', 'Gambar ' . $file_input_name . ' terlalu besar');
+                   redirect('tambahdatasales');
+               } elseif ($format != "jpg" and $format != "png" and $format != "jpeg" and $format != "JPG" and $format != "PNG" and $format != "JPEG") {
+                   $this->session->set_flashdata('error', 'Format gambar ' . $file_input_name . '  tidak sesuai');
+                   redirect('tambahdatasales');
+               }
+
+               if (!$this->upload->do_upload($file_input_name)) {
+                   $error = $this->upload->display_errors();
+                   echo $error;
+               }
+
+               $data = $this->upload->data();
+
+               // Lakukan proses penyimpanan file dengan nama baru di sini
+               $new_path = './assets/file/customer/' . $nama;
+               rename($data['full_path'], $new_path);
+
+               $uploaded_files['foto_ktp'] = $data['file_name'];
+               $uploaded_files['foto_kk'] = $data['file_name'];
+               $uploaded_files['foto_diri'] = $data['file_name'];
+           } else {
+               $uploaded_files['foto_ktp'] = "";
+               $uploaded_files['foto_kk'] = "";
+               $uploaded_files['foto_diri'] = "";
+           }
+       }
+       $ktp = $_FILES['gambar1']['name'];
+       $diri = $_FILES['gambar2']['name'];
+       $kk = $_FILES['gambar3']['name'];
+
        $data = array(
            'nik'               => $this->input->post('nik'),
            'nama_customer'     => $this->input->post('nama_customer'),
@@ -319,6 +369,9 @@ class Home extends CI_Controller
            'no_hp'             => $this->input->post('no_hp'),
            'alamat'            => $this->input->post('alamat'),
            'id_sales'          => $this->input->post('id_sales'),
+           'foto_ktp'          => $ktp,
+           'foto_kk'           => $kk,
+           'foto_diri'         => $diri,
            'status'            => 2
        );
        $this->m->Save($data, 'customer');

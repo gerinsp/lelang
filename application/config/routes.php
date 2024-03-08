@@ -52,8 +52,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
 $route['default_controller'] = 'home';
 
 
-$route['login']      = 'auth/index';
-$route['blocked']    = 'auth/blocked';
+$route['login']            = 'auth/login';
+$route['login/admin']      = 'auth/login_admin';
+$route['login/sales']      = 'auth/login_sales';
+$route['blocked']          = 'auth/blocked';
 
 //Route Landing pages
 $route['product']                              = 'home/product';

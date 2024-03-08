@@ -43,12 +43,27 @@
             </div>
             <div class="grid grid-cols-2 gap-4">
                 <div>
-                    <h4 class="text-xs font-bold text-ternary-gray-200">Harga</h4>
-                    <h6 class="text-lg font-bold text-blue-960 md:text-xl lg:text-2xl">Rp<?= number_format($detail->harga_tertinggi ? $detail->harga_tertinggi : 0, 0, ',', '.') ?></h6>
+                    <h4 class="text-xs font-bold text-ternary-gray-200">Harga Awal</h4>
+                    <h6 class="text-lg font-bold text-blue-960 md:text-xl lg:text-2xl">Rp<?= number_format($detail->hargaawal ? $detail->hargaawal : 0, 0, ',', '.') ?></h6>
                 </div>
                 <div>
-                    <h4 class="text-xs font-bold text-ternary-gray-200">Penawaran Terakhir</h4>
-                    <h6 class="text-lg font-bold text-blue-960 md:text-xl lg:text-2xl">Rp<?= number_format($detail->penawaran_terakhir ? $detail->penawaran_terakhir : 0, 0, ',', '.') ?></h6>
+                    <h4 class="text-xs font-bold text-ternary-gray-200 mb-2">Penawaran Terakhir</h4>
+                    <div class="w-3-5 max-w-md p-4 border-gray-200 rounded-lg bg-gray-50 sm:p-4 dark:bg-gray-800 dark:border-gray-700">
+                        <div class="flow-root">
+                            <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
+                                <?php foreach ($harga_tertinggi as $value) { ?>
+                                <li class="py-1 sm:py-2">
+                                    <div class="flex items-center">
+                                        <div class="inline-flex items-center text-sm font-semibold text-blue-960 dark:text-white">
+                                            Rp<?= number_format($value ? $value : 0, 0, ',', '.') ?>
+                                        </div>
+                                    </div>
+                                </li>
+                                <?php } ?>
+                            </ul>
+                        </div>
+                    </div>
+
                 </div>
                 <div>
                     <h4 class="text-xs font-bold text-ternary-gray-200">Cara Penawaran</h4>

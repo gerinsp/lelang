@@ -9,9 +9,24 @@ class Auth extends CI_Controller
       $this->load->library('form_validation');
       $this->load->model('Models', 'm');
    }
-   public function index()
-   {
 
+   public function login()
+   {
+     $this->index('login', 'login');
+   }
+
+   public function login_admin()
+   {
+       $this->index('login-admin', 'login/admin');
+   }
+
+    public function login_sales()
+    {
+        $this->index('login-sales', 'login/sales');
+    }
+
+   public function index($view, $url)
+   {
       $this->form_validation->set_rules(
          'username',
          'Username',
@@ -28,20 +43,18 @@ class Auth extends CI_Controller
             'required' => 'Password Tidak Boleh Kosong'
          ]
       );
-
       if ($this->form_validation->run() == false) {
          $data['title'] = "Lelang | Login ";
          $this->load->view('auth/header', $data);
-         $this->load->view('auth/login');
+         $this->load->view('auth/'.$view);
          $this->load->view('auth/footer');
       } else {
-         $this->_login();
+         $this->_login($url);
       }
    }
 
-   private function _login()
+   private function _login($url)
    {
-
       $user = [
          $username   =   $this->input->post('username'),
          $password   =   $this->input->post('password')
@@ -81,15 +94,15 @@ class Auth extends CI_Controller
                redirect('dashboard');
             } else {
                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Password anda salah <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span></button></div> ');
-               redirect('login');
+               redirect($url);
             }
          } else {
             $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Akun Tidak Aktif<button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span></button></div> ');
-            redirect('login');
+            redirect($url);
          }
       } else {
          $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Username Tidak Terdaftar<button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span></button></div> ');
-         redirect('login');
+         redirect($url);
       }
    }
    public function registration()
@@ -206,13 +219,19 @@ class Auth extends CI_Controller
 
    public function logout()
    {
-
+      $url_logout = 'login';
+      if ($this->session->userdata('role_id') == 2) {
+           $url_logout = 'login/admin';
+      }
+      if ($this->session->userdata('role_id') == 3) {
+          $url_logout = 'login/sales';
+      }
       session_start();
       session_destroy();
       $this->session->unset_userdata('username');
       $this->session->unset_userdata('role_id');
       $this->session->set_flashdata('success', 'Anda berhasil logout');
-      redirect('login');
+      redirect($url_logout);
    }
    public function blocked()
    {
