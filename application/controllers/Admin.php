@@ -22,8 +22,23 @@ class Admin extends CI_Controller
         $data['user'] = $this->m->Get_Where($where, $table);
         $data['title'] = 'Lelang | Pengajuan Harga';
 
+        if ($this->session->userdata('role_id') == 3) {
+            $this->db->select('*');
+            $this->db->where('id_sales', $this->session->userdata('sales_id'));
+            $this->db->from('customer');
+            $data['customer'] = $this->db->get()->result();
+        } else if ($this->session->userdata('role_id') != 3) {
+            $this->db->select('*');
+            $this->db->from('customer');
+            $data['customer'] = $this->db->get()->result();
+        }
+
+        $this->db->select('*');
+        $this->db->from('sales');
+        $data['sales'] = $this->db->get()->result();
+
         if ($this->session->userdata('role_id') != 3) {
-            $this->db->select('pengajuanharga.*, produk.nama_produk, customer.nama_customer, sales.nama_sales');
+            $this->db->select('pengajuanharga.*, produk.nama_produk, customer.nama_customer, customer.jenis_kelamin as jeniskelamincustomer, customer.alamat as alamatcustomer, customer.no_hp as nohpcustomer, customer.nik as nikcustomer, sales.nama_sales');
             $this->db->from('pengajuanharga');
             $this->db->join('produk', 'produk.id = pengajuanharga.id_produk', 'left');
             $this->db->join('customer', 'customer.id_customer = pengajuanharga.id_customer', 'left');
@@ -31,7 +46,7 @@ class Admin extends CI_Controller
 
             $data['pengajuan'] = $this->db->get()->result();
         } else if ($this->session->userdata('role_id') == 3) {
-            $this->db->select('pengajuanharga.*, produk.nama_produk, customer.nama_customer, sales.nama_sales');
+            $this->db->select('pengajuanharga.*, produk.nama_produk, customer.nama_customer, customer.jenis_kelamin as jeniskelamincustomer, customer.alamat as alamatcustomer, customer.no_hp as nohpcustomer, customer.nik as nikcustomer, sales.nama_sales');
             $this->db->from('pengajuanharga');
             $this->db->join('produk', 'produk.id = pengajuanharga.id_produk', 'left');
             $this->db->join('customer', 'customer.id_customer = pengajuanharga.id_customer', 'left');
@@ -47,6 +62,70 @@ class Admin extends CI_Controller
         $this->load->view('pages/admin/pengajuan-harga', $data);
         $this->load->view('templates/footer');
         $this->load->view('templates/script', $data);
+    }
+    function filterpengajuanharga()
+    {
+        $table = 'user';
+        $where = array(
+            'id_user'      =>   $this->session->userdata('id_user')
+        );
+
+        $data['user'] = $this->m->Get_Where($where, $table);
+        $data['title'] = 'Lelang | Pengajuan Harga';
+
+        $this->db->select('*');
+        $this->db->from('customer');
+        $data['customer'] = $this->db->get()->result();
+
+        $this->db->select('*');
+        $this->db->from('sales');
+        $data['sales'] = $this->db->get()->result();
+
+        if ($this->session->userdata('role_id') != 3) {
+            $sales = $this->input->post("sales");
+            $customer = $this->input->post("customer");
+            $from = $this->input->post("from");
+            $to = $this->input->post("to");
+
+            if (!empty($sales)) {
+                $this->db->where('tbl_pengajuanharga.id_sales', $sales);
+            }
+            if (!empty($customer)) {
+                $this->db->where('tbl_pengajuanharga.id_customer', $customer);
+            }
+            if (!empty($from) && !empty($to)) {
+                $this->db->where('DATE(tanggal_pengajuan) BETWEEN "' . $from . '" AND "' . $to . '"');
+            }
+
+            $this->db->select('pengajuanharga.*, produk.nama_produk, customer.nama_customer, customer.jenis_kelamin as jeniskelamincustomer, customer.alamat as alamatcustomer, customer.no_hp as nohpcustomer, customer.nik as nikcustomer, sales.nama_sales');
+            $this->db->from('pengajuanharga');
+            $this->db->join('produk', 'produk.id = pengajuanharga.id_produk', 'left');
+            $this->db->join('customer', 'customer.id_customer = pengajuanharga.id_customer', 'left');
+            $this->db->join('sales', 'sales.id_sales = pengajuanharga.id_sales', 'left');
+
+            $data['pengajuan'] = $this->db->get()->result();
+        } else if ($this->session->userdata('role_id') == 3) {
+            $customer = $this->input->post("customer");
+            $from = $this->input->post("from");
+            $to = $this->input->post("to");
+
+            if (!empty($customer)) {
+                $this->db->where('tbl_pengajuanharga.id_customer', $customer);
+            }
+            if (!empty($from) && !empty($to)) {
+                $this->db->where('DATE(tanggal_pengajuan) BETWEEN "' . $from . '" AND "' . $to . '"');
+            }
+            $this->db->select('pengajuanharga.*, produk.nama_produk, customer.nama_customer, customer.jenis_kelamin as jeniskelamincustomer, customer.alamat as alamatcustomer, customer.no_hp as nohpcustomer, customer.nik as nikcustomer, sales.nama_sales');
+            $this->db->from('pengajuanharga');
+            $this->db->join('produk', 'produk.id = pengajuanharga.id_produk', 'left');
+            $this->db->join('customer', 'customer.id_customer = pengajuanharga.id_customer', 'left');
+            $this->db->join('sales', 'sales.id_sales = pengajuanharga.id_sales', 'left');
+            $this->db->where('customer.id_sales', $this->session->userdata('sales_id'));
+
+            $data['pengajuan'] = $this->db->get()->result();
+        }
+
+        $this->load->view('pages/admin/filter_pengajuan-harga', $data);
     }
     function pengajuan_terima($id)
     {
