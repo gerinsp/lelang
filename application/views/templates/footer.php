@@ -22,6 +22,47 @@
       </div>
    </div>
 </div>
+<div class="modal fade" id="modaldetailcustomer" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+   <div class="modal-dialog" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Detail Customer</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+               <span aria-hidden="true">×</span>
+            </button>
+         </div>
+         <div class="modal-body">
+            <div class="row">
+               <div class="col-md-6">
+                  <label for="">NIK</label>
+                  <input class="form-control" type="text" name="nik" id="nikcustomer" readonly>
+               </div>
+               <div class="col-md-6">
+                  <label for="">Nama</label>
+                  <input class="form-control" type="text" name="nama" id="namacustomer" readonly>
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-md-6">
+                  <label for="">Jenis Kelamin</label>
+                  <input class="form-control" type="text" name="jeniskelamin" id="jeniskelamincustomer" readonly>
+               </div>
+               <div class="col-md-6">
+                  <label for="">No HP</label>
+                  <input class="form-control" type="text" name="nohp" id="nohpcustomer" readonly>
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-md-12">
+                  <label for="">Alamat</label>
+                  <textarea class="form-control" readonly name="alamatcustomer" id="alamatcustomer" cols="30" rows="5"></textarea>
+               </div>
+
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
 
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="logoutLabel" aria-hidden="true">
    <div class="modal-dialog" role="document">
