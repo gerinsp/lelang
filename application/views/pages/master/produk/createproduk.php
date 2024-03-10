@@ -71,6 +71,12 @@
                         </div>
                         <div class="row" style="margin-bottom: 20px;">
                             <div class="col-md-6">
+                                <label>Harga Awal </label>
+                                <div class="form-group">
+                                    <input style="padding-bottom: 10px;max-width: 845px;" name="infopenyelenggara" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
                                 <label>Info Penyelenggara </label>
                                 <div class="form-group">
                                     <input style="padding-bottom: 10px;max-width: 845px;" rows="8" name="infopenyelenggara" class="form-control"></input>

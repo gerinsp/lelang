@@ -120,6 +120,7 @@ class Produk extends CI_Controller
             'durasi_iklan'          =>   $this->input->post('durasiiklan'),
             'id_kategori'           =>   $this->input->post('kategori'),
             'info_penyelenggara'    =>   $this->input->post('infopenyelenggara'),
+            'hargaawal'             =>   $this->input->post('hargawal'),
             'create_by'             =>   $this->session->userdata('id_user'),
             'create_date'           =>   $now,
          );
@@ -149,7 +150,7 @@ class Produk extends CI_Controller
 
       $data['user'] = $this->m->Get_Where($where, $table);
 
-      $select = $this->db->select('produk.id,nama_produk,deskripsi_produk,durasi_iklan,tbl_produk.status_show as statustampil, produk.info_penyelenggara,
+      $select = $this->db->select('produk.hargaawal, produk.id,nama_produk,deskripsi_produk,durasi_iklan,tbl_produk.status_show as statustampil, produk.info_penyelenggara,
       gambar1, gambar2, gambar3, gambar4, gambar5, gambar6, gambar7, gambar8, gambar9, gambar10, gambar11, gambar12,, tbl_produk.status_show, tbl_produk.id_kategori, tbl_kategori.nama_kategori');
       $select = $this->db->join('tbl_kategori', 'tbl_kategori.id_kategori = tbl_produk.id_kategori');
       $select = $this->db->where('tbl_produk.id', $id);
@@ -224,6 +225,7 @@ class Produk extends CI_Controller
          'durasi_iklan'          =>   $this->input->post('durasiiklan'),
          'id_kategori'           =>   $this->input->post('kategori'),
          'info_penyelenggara'    =>   $this->input->post('infopenyelenggara'),
+         'hargaawal'             =>   $this->input->post('hargaawal'),
          'update_by'             =>   $this->session->userdata('id_user'),
          'update_date'           =>   $now,
       );
