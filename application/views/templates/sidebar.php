@@ -97,6 +97,18 @@
                             <p>Customer</p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="<?= base_url('akunadmin') ?>" class="nav-link <?php if ($this->uri->segment(1) == "akunadmin") {
+                                                                                    echo "active";
+                                                                                } ?><?php if ($this->uri->segment(1) == "tambahakunadmin") {
+                                                                                        echo "active";
+                                                                                    } ?><?php if ($this->uri->segment(1) == "editakunadmin") {
+                                                                                            echo "active";
+                                                                                        } ?>">
+                            <i class=" nav-icon fas fa-fw fa-users"></i>
+                            <p>Akun Admin</p>
+                        </a>
+                    </li>
                     <li class="nav-header">Transaksi</li>
                     <li class="nav-item">
                         <a href="<?= base_url('pengajuan') ?>" class="nav-link <?php if ($this->uri->segment(1) == "pengajuan") {

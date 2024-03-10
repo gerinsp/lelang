@@ -951,6 +951,15 @@ function tampildetailcustomer(elem, e) {
   $("#nohpcustomer").attr("value", nohpcustomer);
   $("#alamatcustomer").val(alamatcustomer);
 }
+function tampileditadmin(elem, e) {
+  e.preventDefault();
+  const iduser = $(elem).data("iduser");
+  const nama = $(elem).data("nama");
+  const username = $(elem).data("username");
+  $("#iduseredit").attr("value", iduser);
+  $("#namaakunadminedit").attr("value", nama);
+  $("#usernameadminedit").attr("value", username);
+}
 function openEditPembelianModal(elem) {
   const idheaderpembelian = $(elem).data("idheaderpembelian");
   $("#idheaderpembelian").attr("value", idheaderpembelian);

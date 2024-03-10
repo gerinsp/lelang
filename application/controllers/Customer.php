@@ -271,11 +271,6 @@ class Customer extends CI_Controller
          );
          $this->m->Update($where, $data, $table);
       }
-
-
-
-
-
       $this->session->set_flashdata('success', 'Data customer berhasil dihapus');
       redirect('listcustomer');
    }

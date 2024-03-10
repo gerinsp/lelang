@@ -43,7 +43,7 @@
             </div>
             <div class="grid grid-cols-2 gap-4">
                 <div>
-                    <h4 class="text-xs font-bold text-ternary-gray-200">Harga Awal</h4>
+                    <h4 class="text-xs font-bold text-ternary-gray-200">Harga</h4>
                     <h6 class="text-lg font-bold text-blue-960 md:text-xl lg:text-2xl">Rp<?= number_format($detail->hargaawal ? $detail->hargaawal : 0, 0, ',', '.') ?></h6>
                 </div>
                 <div>
@@ -52,13 +52,13 @@
                         <div class="flow-root">
                             <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
                                 <?php foreach ($harga_tertinggi as $value) { ?>
-                                <li class="py-1 sm:py-2">
-                                    <div class="flex items-center">
-                                        <div class="inline-flex items-center text-sm font-semibold text-blue-960 dark:text-white">
-                                            Rp<?= number_format($value ? $value : 0, 0, ',', '.') ?>
+                                    <li class="py-1 sm:py-2">
+                                        <div class="flex items-center">
+                                            <div class="inline-flex items-center text-sm font-semibold text-blue-960 dark:text-white">
+                                                Rp<?= number_format($value ? $value : 0, 0, ',', '.') ?>
+                                            </div>
                                         </div>
-                                    </div>
-                                </li>
+                                    </li>
                                 <?php } ?>
                             </ul>
                         </div>
@@ -84,7 +84,7 @@
             </div>
             <div class="mt-8 md-w-50 mb-4"> <!-- Sesuaikan dengan lebar yang diinginkan, contoh: w-1/2 -->
                 <a href="https://mail.google.com/mail/?view=cm&fs=1&to=ptxxx@gmail.com&su=Saya%20ingin%20membeli%20produk%20<?= $detail->nama_produk ?>&body=NIK%20%3A%0ANama%20%3A%0ANo%20Hp%20%3A%0AAlamat%20%3A%0A%28Isi%20pesan%29" target="_blank" class="button-primary block w-full p-2 rounded-lg text-center">
-                <div class="flex justify-center items-center gap-2">
+                    <div class="flex justify-center items-center gap-2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-fill" viewBox="0 0 16 16">
                             <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414zM0 4.697v7.104l5.803-3.558zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586zm3.436-.586L16 11.801V4.697z" />
                         </svg>

@@ -63,7 +63,67 @@
       </div>
    </div>
 </div>
+<div class="modal fade" id="modalakunadmin" tabindex="-1" role="dialog" aria-labelledby="logoutLabel" aria-hidden="true">
+   <div class="modal-dialog" role="document">
+      <div class="modal-content">
+         <form action="<?= base_url('admin/buat_akunadmin') ?>" method="post">
+            <div class="modal-header">
+               <h5 class="modal-title" id="logoutLabel">Tambah Akun Admin</h5>
+               <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+               </button>
+            </div>
+            <div class="modal-body">
+               <div class="row">
+                  <div class="col-md-6">
+                     <label for="">Nama</label>
+                     <input type="text" name="namaakunadmin" class="form-control">
+                  </div>
+                  <div class="col-md-6">
+                     <label for="">Username</label>
+                     <input type="text" name="username" class="form-control">
+                  </div>
+               </div>
+            </div>
+            <div class="modal-footer">
 
+               <button type="submit" class="btn btn-primary"> Simpan </button> <button class="btn btn-danger" type="button" data-dismiss="modal">Batal</button>
+            </div>
+         </form>
+      </div>
+   </div>
+</div>
+<div class="modal fade" id="modaleditakunadmin" tabindex="-1" role="dialog" aria-labelledby="logoutLabel" aria-hidden="true">
+   <div class="modal-dialog" role="document">
+      <div class="modal-content">
+         <form action="<?= base_url('admin/update_akunadmin') ?>" method="post">
+            <div class="modal-header">
+               <h5 class="modal-title" id="logoutLabel">Ubah Akun Admin</h5>
+               <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+               </button>
+            </div>
+            <div class="modal-body">
+               <div class="row">
+                  <div class="col-md-6">
+                     <label for="">Nama</label>
+                     <input type="text" name="namaakunadminedit" id="namaakunadminedit" class="form-control">
+                     <input type="hidden" name="iduseredit" id="iduseredit" class="form-control">
+                  </div>
+                  <div class="col-md-6">
+                     <label for="">Username</label>
+                     <input type="text" name="usernameadminedit" id="usernameadminedit" class="form-control">
+                  </div>
+               </div>
+            </div>
+            <div class="modal-footer">
+
+               <button type="submit" class="btn btn-primary"> Simpan </button> <button class="btn btn-danger" type="button" data-dismiss="modal">Batal</button>
+            </div>
+         </form>
+      </div>
+   </div>
+</div>
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="logoutLabel" aria-hidden="true">
    <div class="modal-dialog" role="document">
       <div class="modal-content">

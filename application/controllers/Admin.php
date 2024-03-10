@@ -268,6 +268,28 @@ class Admin extends CI_Controller
         $this->session->set_flashdata('success', 'Data pengajuan harga berhasil diubah');
         redirect('pengajuan');
     }
+    function akun_admin()
+    {
+        $table = 'user';
+        $where = array(
+            'id_user'      =>   $this->session->userdata('id_user')
+        );
+
+        $data['user'] = $this->m->Get_Where($where, $table);
+        $data['title'] = 'Lelang | Akun Admin';
+
+        $this->db->select('*');
+        $this->db->where('role_id', '2');
+        $this->db->from('user');
+        $data['admin'] = $this->db->get()->result();
+
+        $this->load->view('templates/head', $data);
+        $this->load->view('templates/navigation', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('pages/admin/akun-admin', $data);
+        $this->load->view('templates/footer');
+        $this->load->view('templates/script', $data);
+    }
     function akun_sales()
     {
         $table = 'user';
@@ -325,6 +347,57 @@ class Admin extends CI_Controller
         $this->output->set_content_type('application/json')->set_output(json_encode($response));
     }
 
+    function buat_akunadmin()
+    {
+        $nama = $this->input->post('namaakunadmin');
+        $username = $this->input->post('username');
+
+        $data = [
+            'username' => $username,
+            'nama'     => $nama,
+            'password' => password_hash("12345", PASSWORD_DEFAULT),
+            'role_id' => 2,
+            'image'   => "default.png",
+            'is_active' => 1,
+            'tanggal_daftar' => date('Y-m-d')
+        ];
+
+        $this->db->insert('user', $data);
+
+        $this->session->set_flashdata('success', 'Berhasil membuat akun admin');
+        redirect('akunadmin');
+    }
+    function update_akunadmin()
+    {
+        $nama = $this->input->post('namaakunadminedit');
+        $username = $this->input->post('usernameadminedit');
+
+        $where = [
+            'id_user' => $this->input->post('iduseredit')
+        ];
+        $data = [
+            'username' => $username,
+            'nama'     => $nama,
+
+        ];
+        $this->m->Update($where, $data, 'user');
+
+        $this->session->set_flashdata('success', 'Berhasil mengubah akun admin');
+        redirect('akunadmin');
+    }
+    function delete_akunadmin()
+    {
+        $id_user =  $this->input->post('id');
+
+        $table = 'user';
+        $where = array(
+            'id_user'          =>  $id_user
+        );
+        $this->m->Delete($where, $table);
+
+        $this->session->set_flashdata('success', 'Berhasil menghapus akun admin');
+        redirect('akunadmin');
+    }
     function reset_password($id)
     {
         $this->db->where('id_user', $id)->update('user', [

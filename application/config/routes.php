@@ -81,6 +81,8 @@ $route['akunsales']                            = 'admin/akun_sales';
 $route['buat-akun']                            = 'admin/buat_akun';
 $route['reset-password/(:any)']                = 'admin/reset_password/$1';
 
+$route['akunadmin']                            = 'admin/akun_admin';
+
 $route['permission/(:any)']                    = 'permission/index/$1';
 $route['permission-update']                    = 'permission/update';
 
