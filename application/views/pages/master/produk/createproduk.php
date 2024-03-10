@@ -70,6 +70,14 @@
                             <?php } ?>
                         </div>
                         <div class="row" style="margin-bottom: 20px;">
+                            <div class="col-md-6">
+                                <label>Info Penyelenggara </label>
+                                <div class="form-group">
+                                    <input style="padding-bottom: 10px;max-width: 845px;" rows="8" name="infopenyelenggara" class="form-control"></input>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-bottom: 20px;">
                             <div class="col-md-12">
                                 <label>Deskripsi Produk </label>
                                 <div class="form-group">
