@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 08 Mar 2024 pada 15.36
+-- Waktu pembuatan: 10 Mar 2024 pada 09.13
 -- Versi server: 10.4.24-MariaDB
 -- Versi PHP: 7.4.29
 
@@ -159,6 +159,7 @@ CREATE TABLE `tbl_produk` (
   `nama_produk` varchar(250) NOT NULL,
   `hargaawal` int(11) NOT NULL,
   `deskripsi_produk` varchar(5000) NOT NULL,
+  `info_penyelenggara` varchar(5000) NOT NULL,
   `durasi_iklan` int(11) NOT NULL,
   `status_show` int(11) NOT NULL,
   `gambar1` varchar(500) NOT NULL,
@@ -183,11 +184,12 @@ CREATE TABLE `tbl_produk` (
 -- Dumping data untuk tabel `tbl_produk`
 --
 
-INSERT INTO `tbl_produk` (`id`, `id_kategori`, `nama_produk`, `hargaawal`, `deskripsi_produk`, `durasi_iklan`, `status_show`, `gambar1`, `gambar2`, `gambar3`, `gambar4`, `gambar5`, `gambar6`, `gambar7`, `gambar8`, `gambar9`, `gambar10`, `gambar11`, `gambar12`, `create_date`, `create_by`, `update_date`, `update_by`) VALUES
-(1, 3, 'oli', 0, '<p>oli</p>', 2, 1, '7021228adf09729becef9e314e496122.PNG', '7d2380a3df120d3eb8b404601e2c2b53.jpg', '51287285e30ff43eb4adcf99eeb0c646.png', 'f37e6361e15b4ad45dc0877ffa8b5cbb.png', '071bf2a67ae58168007f46ddd7678bce.PNG', 'ca4c762d1a9569ca9e33cc0fa165018a.png', '73b3ed837d5ed4aea895ce20b16aa5cf.png', 'ac2d90adbc4198c6902742938cc52ff8.png', '96b1ef72d2c7c77f9c7c7f606e0cd643.jpg', 'dc5bbf665a29121ea239ed86953dc48a.png', 'abf1ba9ea787c146bb18565797422f02.png', 'c8f548def4f1a911b7698362750f1050.PNG', '2024-03-01 23:58:47', 2, '2024-03-02 01:48:22', 2),
-(10, 3, 'Rumah', 0, '<p>rumah</p>', 2, 1, '2ddc350e9edaf8d9ada8b58d6d451ab6.jpg', '7d2380a3df120d3eb8b404601e2c2b53.jpg', '51287285e30ff43eb4adcf99eeb0c646.png', 'f37e6361e15b4ad45dc0877ffa8b5cbb.png', 'df80707fc60b1e9aef9273c9b237f291.jpg', 'ca4c762d1a9569ca9e33cc0fa165018a.png', '73b3ed837d5ed4aea895ce20b16aa5cf.png', 'ac2d90adbc4198c6902742938cc52ff8.png', '96b1ef72d2c7c77f9c7c7f606e0cd643.jpg', 'dc5bbf665a29121ea239ed86953dc48a.png', 'abf1ba9ea787c146bb18565797422f02.png', 'c8f548def4f1a911b7698362750f1050.PNG', '2024-03-01 23:58:47', 2, '2024-03-08 20:48:27', 1),
-(11, 3, 'Rumah', 0, '<p>rumah</p>', 2, 1, '7021228adf09729becef9e314e496122.PNG', '7d2380a3df120d3eb8b404601e2c2b53.jpg', '51287285e30ff43eb4adcf99eeb0c646.png', 'f37e6361e15b4ad45dc0877ffa8b5cbb.png', '071bf2a67ae58168007f46ddd7678bce.PNG', 'ca4c762d1a9569ca9e33cc0fa165018a.png', '73b3ed837d5ed4aea895ce20b16aa5cf.png', 'ac2d90adbc4198c6902742938cc52ff8.png', '96b1ef72d2c7c77f9c7c7f606e0cd643.jpg', 'dc5bbf665a29121ea239ed86953dc48a.png', 'abf1ba9ea787c146bb18565797422f02.png', 'c8f548def4f1a911b7698362750f1050.PNG', '2024-03-04 23:58:47', 2, '2024-02-29 01:48:22', 2),
-(12, 3, 'Contoh', 0, '<p>deskripsi contoh produk</p>', 3, 1, '5a5e79556f1d93e7a539a840d634a3f5.JPG', '', '', '', '', '', '', '', '', '', '', '', '2024-03-03 20:45:51', 2, '2024-03-03 20:46:25', 1);
+INSERT INTO `tbl_produk` (`id`, `id_kategori`, `nama_produk`, `hargaawal`, `deskripsi_produk`, `info_penyelenggara`, `durasi_iklan`, `status_show`, `gambar1`, `gambar2`, `gambar3`, `gambar4`, `gambar5`, `gambar6`, `gambar7`, `gambar8`, `gambar9`, `gambar10`, `gambar11`, `gambar12`, `create_date`, `create_by`, `update_date`, `update_by`) VALUES
+(1, 3, 'oli', 0, '<p>oli</p>', '', 2, 1, '7021228adf09729becef9e314e496122.PNG', '7d2380a3df120d3eb8b404601e2c2b53.jpg', '51287285e30ff43eb4adcf99eeb0c646.png', 'f37e6361e15b4ad45dc0877ffa8b5cbb.png', '071bf2a67ae58168007f46ddd7678bce.PNG', 'ca4c762d1a9569ca9e33cc0fa165018a.png', '73b3ed837d5ed4aea895ce20b16aa5cf.png', 'ac2d90adbc4198c6902742938cc52ff8.png', '96b1ef72d2c7c77f9c7c7f606e0cd643.jpg', 'dc5bbf665a29121ea239ed86953dc48a.png', 'abf1ba9ea787c146bb18565797422f02.png', 'c8f548def4f1a911b7698362750f1050.PNG', '2024-03-01 23:58:47', 2, '2024-03-02 01:48:22', 2),
+(10, 3, 'Rumah', 0, '<p>rumah</p>', '', 2, 1, '2ddc350e9edaf8d9ada8b58d6d451ab6.jpg', '7d2380a3df120d3eb8b404601e2c2b53.jpg', '51287285e30ff43eb4adcf99eeb0c646.png', 'f37e6361e15b4ad45dc0877ffa8b5cbb.png', 'df80707fc60b1e9aef9273c9b237f291.jpg', 'ca4c762d1a9569ca9e33cc0fa165018a.png', '73b3ed837d5ed4aea895ce20b16aa5cf.png', 'ac2d90adbc4198c6902742938cc52ff8.png', '96b1ef72d2c7c77f9c7c7f606e0cd643.jpg', 'dc5bbf665a29121ea239ed86953dc48a.png', 'abf1ba9ea787c146bb18565797422f02.png', 'c8f548def4f1a911b7698362750f1050.PNG', '2024-03-01 23:58:47', 2, '2024-03-08 20:48:27', 1),
+(11, 3, 'Rumah', 0, '<p>rumah</p>', '', 2, 1, '7021228adf09729becef9e314e496122.PNG', '7d2380a3df120d3eb8b404601e2c2b53.jpg', '51287285e30ff43eb4adcf99eeb0c646.png', 'f37e6361e15b4ad45dc0877ffa8b5cbb.png', '071bf2a67ae58168007f46ddd7678bce.PNG', 'ca4c762d1a9569ca9e33cc0fa165018a.png', '73b3ed837d5ed4aea895ce20b16aa5cf.png', 'ac2d90adbc4198c6902742938cc52ff8.png', '96b1ef72d2c7c77f9c7c7f606e0cd643.jpg', 'dc5bbf665a29121ea239ed86953dc48a.png', 'abf1ba9ea787c146bb18565797422f02.png', 'c8f548def4f1a911b7698362750f1050.PNG', '2024-03-04 23:58:47', 2, '2024-02-29 01:48:22', 2),
+(12, 3, 'Contoh', 0, '<p>deskripsi contoh produk</p>', '', 3, 1, '5a5e79556f1d93e7a539a840d634a3f5.JPG', '', '', '', '', '', '', '', '', '', '', '', '2024-03-03 20:45:51', 2, '2024-03-03 20:46:25', 1),
+(13, 4, 'test ds', 0, '<p>sds</p>', 'Test ya saja', 232, 0, '473ab25182d7d5169a0b48fb7ef6e73f.jpeg', '', '', '', '', '', '', '', '', '', '', '', '2024-03-10 15:07:14', 1, '2024-03-10 15:08:07', 1);
 
 -- --------------------------------------------------------
 
@@ -359,7 +361,7 @@ ALTER TABLE `tbl_permission`
 -- AUTO_INCREMENT untuk tabel `tbl_produk`
 --
 ALTER TABLE `tbl_produk`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_role`
