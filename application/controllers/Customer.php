@@ -7,10 +7,46 @@ class Customer extends CI_Controller
    {
       parent::__construct();
       $this->load->model('Models', 'm');
+      $this->load->helper(array('file', 'download', 'url'));
 
       date_default_timezone_set('Asia/Jakarta');
       cekuser();
    }
+
+
+    public function download_images($id) {
+        $sales = $this->db->select('nama_customer, foto_kk, foto_ktp, foto_diri')
+            ->from('customer')
+            ->where('id_customer', $id)
+            ->get()
+            ->row();
+
+        if (!$sales) {
+            show_404();
+            return;
+        }
+
+        $path = './assets/file/customer/';
+
+        $files = [
+            'foto_kk'   => $sales->foto_kk,
+            'foto_ktp'  => $sales->foto_ktp,
+            'foto_diri' => $sales->foto_diri,
+        ];
+
+        $this->load->library('zip');
+
+        foreach ($files as $key => $file) {
+            if ($file && file_exists($path . $file)) {
+                $file_path = $path . $file;
+                $this->zip->read_file($file_path, $file);
+            }
+        }
+
+        $zip_filename = "foto {$sales->nama_customer}.zip";
+
+        $this->zip->download($zip_filename);
+    }
 
    function listcustomer()
    {

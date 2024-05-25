@@ -36,11 +36,11 @@
                     <h2 class="mb-6 text-sm font-semibold text-white uppercase dark:text-white">Info</h2>
                     <ul class="text-gray-300 dark:text-gray-400 font-medium">
                         <li>
-                            <a href="<?= base_url('/profile-perusahaan') ?>" class="hover:underline">Profil</a>
+                            <a href="<?= base_url('/tentang-kami') ?>" class="hover:underline">Tentang Kami</a>
                         </li>
-                        <li>
-                            <a href="<?= base_url('/struktur-perusahaan') ?>" class="hover:underline">Struktur Perusahaan</a>
-                        </li>
+<!--                        <li>-->
+<!--                            <a href="--><?php //= base_url('/struktur-perusahaan') ?><!--" class="hover:underline">Struktur Perusahaan</a>-->
+<!--                        </li>-->
                         <li>
                             <a href="<?= base_url('/info') ?>" class="hover:underline">Info</a>
                         </li>

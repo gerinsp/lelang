@@ -7,12 +7,48 @@ class Sales extends CI_Controller
    {
       parent::__construct();
       $this->load->model('Models', 'm');
+      $this->load->helper(array('file', 'download', 'url'));
 
       date_default_timezone_set('Asia/Jakarta');
       cekuser();
    }
 
-   function listsales()
+    public function download_images($id) {
+        $sales = $this->db->select('nama_sales, foto_kk, foto_ktp, foto_diri')
+            ->from('sales')
+            ->where('id_sales', $id)
+            ->get()
+            ->row();
+
+        if (!$sales) {
+            show_404();
+            return;
+        }
+
+        $path = './assets/file/sales/';
+
+        $files = [
+            'foto_kk'   => $sales->foto_kk,
+            'foto_ktp'  => $sales->foto_ktp,
+            'foto_diri' => $sales->foto_diri,
+        ];
+
+        $this->load->library('zip');
+
+        foreach ($files as $key => $file) {
+            if ($file && file_exists($path . $file)) {
+                $file_path = $path . $file;
+                $this->zip->read_file($file_path, $file);
+            }
+        }
+
+        $zip_filename = "foto {$sales->nama_sales}.zip";
+
+        $this->zip->download($zip_filename);
+    }
+
+
+    function listsales()
    {
       $table = 'user';
       $where = array(

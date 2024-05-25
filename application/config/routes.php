@@ -62,7 +62,7 @@ $route['product']                              = 'home/product';
 $route['product/(:any)']                       = 'home/product/$1';
 $route['kategori/(:num)']                      = 'home/kategori/$1';
 $route['kategori/(:num)/(:any)']               = 'home/kategori/$1/$2';
-$route['profile-perusahaan']                   = 'home/profile';
+$route['tentang-kami']                         = 'home/profile';
 $route['struktur-perusahaan']                  = 'home/struktur_perusahaan';
 $route['info']                                 = 'home/info';
 $route['detail/(:any)']                        = 'home/detail_product/$1';
@@ -95,6 +95,7 @@ $route['editdataproduk/(:any)']                = 'produk/editproduk/$1';
 $route['listcustomer']                         = 'customer/listcustomer';
 $route['tambahdatacustomer']                   = 'customer/createcustomer';
 $route['editdatacustomer/(:any)']              = 'customer/editcustomer/$1';
+$route['download-images-cust/(:any)']          = 'customer/download_images/$1';
 
 //Routes Kategori
 $route['listkategori']                         = 'kategori/listkategori';
@@ -106,6 +107,8 @@ $route['listsales']                            = 'sales/listsales';
 $route['tambahdatasales']                      = 'sales/createsales';
 $route['editdatasales/(:any)']                 = 'sales/editsales/$1';
 $route['customersales/(:any)']                 = 'sales/customersales/$1';
+$route['download-images-sales/(:any)']         = 'sales/download_images/$1';
+
 
 //Routes Profile
 $route['profile']                              = 'profile/profile';

@@ -36,11 +36,11 @@
                         <a href="<?= base_url('/product') ?>" class="block py-2 px-3 <?php active(['product', 'kategori', 'detail']); ?> rounded md:hover:bg-transparent md:bg-transparent md:p-0 md:hover:text-blue-700 dark:text-white md:dark:text-blue-500">Produk</a>
                     </li>
                     <li>
-                        <a href="<?= base_url('/profile-perusahaan') ?>" class="block py-2 px-3 <?php active('profile-perusahaan'); ?> rounded md:hover:bg-transparent md:bg-transparent md:p-0 md:hover:text-blue-700 dark:text-white md:dark:text-blue-500">Profil</a>
+                        <a href="<?= base_url('/tentang-kami') ?>" class="block py-2 px-3 <?php active('tentang-kami'); ?> rounded md:hover:bg-transparent md:bg-transparent md:p-0 md:hover:text-blue-700 dark:text-white md:dark:text-blue-500">Tentang Kami</a>
                     </li>
-                    <li>
-                        <a href="<?= base_url('/struktur-perusahaan') ?>" class="block py-2 px-3 <?php active('struktur-perusahaan'); ?> rounded md:hover:bg-transparent md:bg-transparent md:p-0 md:hover:text-blue-700 dark:text-white md:dark:text-blue-500">Struktur Perusahaan</a>
-                    </li>
+<!--                    <li>-->
+<!--                        <a href="--><?php //= base_url('/struktur-perusahaan') ?><!--" class="block py-2 px-3 --><?php //active('struktur-perusahaan'); ?><!-- rounded md:hover:bg-transparent md:bg-transparent md:p-0 md:hover:text-blue-700 dark:text-white md:dark:text-blue-500">Struktur Perusahaan</a>-->
+<!--                    </li>-->
                     <li>
                         <a href="<?= base_url('/info') ?>" class="block py-2 px-3 <?php active('info'); ?> rounded md:hover:bg-transparent md:bg-transparent md:p-0 md:hover:text-blue-700 dark:text-white md:dark:text-blue-500">Info</a>
                     </li>

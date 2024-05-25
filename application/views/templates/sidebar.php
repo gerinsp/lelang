@@ -44,6 +44,18 @@
                 <?php if ($this->session->userdata('role_id') == 1) { ?>
                     <li class="nav-header">Master</li>
                     <li class="nav-item">
+                        <a href="<?= base_url('listproduk') ?>" class="nav-link <?php if ($this->uri->segment(1) == "banner") {
+                            echo "active";
+                        } ?><?php if ($this->uri->segment(1) == "tambahbanner") {
+                            echo "active";
+                        } ?><?php if ($this->uri->segment(1) == "editbanner") {
+                            echo "active";
+                        } ?>">
+                            <i class="nav-icon fas fa-chalkboard"></i>
+                            <p>Banner</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a href="<?= base_url('listproduk') ?>" class="nav-link <?php if ($this->uri->segment(1) == "listproduk") {
                                                                                     echo "active";
                                                                                 } ?><?php if ($this->uri->segment(1) == "tambahdataproduk") {
