@@ -1,3 +1,16 @@
+<script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+            navigator.serviceWorker.register('<?php echo base_url('assets'); ?>/service-worker.js').then(function(registration) {
+                console.log('ServiceWorker registration successful with scope: ', registration.scope);
+            }, function(err) {
+                console.log('ServiceWorker registration failed: ', err);
+            });
+        });
+    }
+</script>
+
+
 <!-- jQuery -->
 <script src="<?= base_url('assets/plugins/jquery/jquery.min.js') ?>"></script>
 <!-- jQuery UI 1.11.4 -->

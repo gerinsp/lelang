@@ -103,6 +103,14 @@ class Permission extends CI_Controller
             }
         }
 
+        //history
+        $nama_user = $this->session->userdata('nama');
+        $this->m->Save([
+            'id_menu' => 7,
+            'nama' => $nama_user,
+            'keterangan' => $nama_user.' mengupdate permission'
+        ], 'history');
+
         $response = array(
             'status' => 'OK',
             'message' => 'Berhasil mengubah permission'

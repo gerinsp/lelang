@@ -42,9 +42,9 @@
                     </a>
                 </li>
                 <?php if ($this->session->userdata('role_id') == 1) { ?>
-                    <li class="nav-header">Master</li>
+                    <li class="nav-header">Landing Page</li>
                     <li class="nav-item">
-                        <a href="<?= base_url('listproduk') ?>" class="nav-link <?php if ($this->uri->segment(1) == "banner") {
+                        <a href="<?= base_url('banner') ?>" class="nav-link <?php if ($this->uri->segment(1) == "banner") {
                             echo "active";
                         } ?><?php if ($this->uri->segment(1) == "tambahbanner") {
                             echo "active";
@@ -55,6 +55,31 @@
                             <p>Banner</p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="<?= base_url('data-info') ?>" class="nav-link <?php if ($this->uri->segment(1) == "data-info") {
+                            echo "active";
+                        } ?><?php if ($this->uri->segment(1) == "tambahinfo") {
+                            echo "active";
+                        } ?><?php if ($this->uri->segment(1) == "editinfo") {
+                            echo "active";
+                        } ?>">
+                            <i class="nav-icon fas fa-bullhorn"></i>
+                            <p>Info</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="<?= base_url('tentangkami') ?>" class="nav-link <?php if ($this->uri->segment(1) == "tentangkami") {
+                            echo "active";
+                        } ?><?php if ($this->uri->segment(1) == "tambahtentangkami") {
+                            echo "active";
+                        } ?><?php if ($this->uri->segment(1) == "editprofil") {
+                            echo "active";
+                        } ?>">
+                            <i class="nav-icon fa fa-exclamation-circle"></i>
+                            <p>Tentang Kami</p>
+                        </a>
+                    </li>
+                    <li class="nav-header">Master</li>
                     <li class="nav-item">
                         <a href="<?= base_url('listproduk') ?>" class="nav-link <?php if ($this->uri->segment(1) == "listproduk") {
                                                                                     echo "active";
@@ -107,6 +132,14 @@
                                                                                     } ?>">
                             <i class=" nav-icon fas fa-fw fa-users"></i>
                             <p>Customer</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="<?= base_url('history') ?>" class="nav-link <?php if ($this->uri->segment(1) == "history") {
+                            echo "active";
+                        } ?>">
+                            <i class=" nav-icon fas fa-history"></i>
+                            <p>History</p>
                         </a>
                     </li>
                     <li class="nav-item">

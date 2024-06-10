@@ -1,7 +1,7 @@
 <main class="mb-8">
     <section class="bg-white dark:bg-gray-900">
         <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16">
-            <p class="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 lg:px-48 dark:text-gray-400">Berikut merupakan alamat kantor kami yang berada di jl xxx , anda bisa langsung berkunjung ke sana ataupun bisa menghubungi kami lewat email dan no telepon yang tertera di bawah.</p>
+            <p class="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 lg:px-48 dark:text-gray-400">Berikut merupakan alamat kantor kami yang berada di <?= $info->alamat ?>, anda bisa langsung berkunjung ke sana ataupun bisa menghubungi kami lewat email dan no telepon yang tertera di bawah.</p>
         </div>
     </section>
 
@@ -14,7 +14,7 @@
                 <a href="#">
                     <h5 class="mb-2 text-2xl text-center font-semibold tracking-tight text-gray-900 dark:text-white">Location</h5>
                 </a>
-                <p class="mb-3 font-normal text-gray-500 dark:text-gray-400">Jl. Surapati 113-121, Cihaur Geulis, Kec. Cibeunying Kaler, Kota Bandung, Jawa Barat 40122</p>
+                <p class="mb-3 font-normal text-gray-500 dark:text-gray-400"><?= $info->alamat ?></p>
             </div>
 
         </div>
@@ -26,7 +26,7 @@
                 <a href="#">
                     <h5 class="mb-2 text-2xl text-center font-semibold tracking-tight text-gray-900 dark:text-white">Email</h5>
                 </a>
-                <p class="mb-3 font-normal text-gray-500 dark:text-gray-400">ptxxx@gmail.com</p><br>
+                <p class="mb-3 font-normal text-gray-500 dark:text-gray-400"><?= $info->email ?>></p><br>
             </div>
         </div>
         <div class="">
@@ -37,11 +37,12 @@
                 <a href="#">
                     <h5 class="mb-2 text-2xl text-center font-semibold tracking-tight text-gray-900 dark:text-white">Telepon</h5>
                 </a>
-                <p class="mb-3 font-normal text-gray-500 dark:text-gray-400">0219288398xxx</p><br>
+                <p class="mb-3 font-normal text-gray-500 dark:text-gray-400"><?= $info->telepon ?></p><br>
             </div>
         </div>
     </div>
     <div class="mx-20">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7770.717437806462!2d107.61772794019615!3d-6.903383170005045!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68e6398252477f%3A0x146a1f93d3e815b2!2sBandung%2C%20Kota%20Bandung%2C%20Jawa%20Barat!5e0!3m2!1sid!2sid!4v1708812767651!5m2!1sid!2sid" width="100%" height="400" style="border:0;border-radius: 0.5rem;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <?= $info->maps ?>
+<!--        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7770.717437806462!2d107.61772794019615!3d-6.903383170005045!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68e6398252477f%3A0x146a1f93d3e815b2!2sBandung%2C%20Kota%20Bandung%2C%20Jawa%20Barat!5e0!3m2!1sid!2sid!4v1708812767651!5m2!1sid!2sid" width="100%" height="400" style="border:0;border-radius: 0.5rem;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>-->
     </div>
 </main>

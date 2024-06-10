@@ -91,6 +91,20 @@ $route['listproduk']                           = 'produk/listproduk';
 $route['tambahdataproduk']                     = 'produk/createproduk';
 $route['editdataproduk/(:any)']                = 'produk/editproduk/$1';
 
+//Route Banner
+$route['banner']                               = 'banner/banner';
+
+//history
+$route['history']                              = 'history/history';
+
+//Route info
+$route['data-info']                            = 'info/info';
+$route['tambahinfo']                           = 'info/create';
+
+//route tentang-kami
+$route['tentangkami']                         = 'tentangkami/tentang_kami';
+$route['tambahtentangkami']                    = 'tentangkami/create';
+
 //Routes Customer
 $route['listcustomer']                         = 'customer/listcustomer';
 $route['tambahdatacustomer']                   = 'customer/createcustomer';

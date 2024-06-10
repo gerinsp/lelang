@@ -59,6 +59,39 @@
                         </div>
                      </div>
                   </div>
+                   <div id="dynamic-form">
+                       <?php foreach ($input_produk as $index => $input) { ?>
+                           <div class="row mb-3">
+                               <div class="col-md-5">
+                                   <div class="form-group">
+                                       <label class="bmd-label-floating">Nama Input</label>
+                                       <input type="text" class="form-control" name="nama_input[]" value="<?= $input['nama_input'] ?>">
+                                   </div>
+                               </div>
+                               <div class="col-md-5">
+                                   <div class="form-group">
+                                       <label class="bmd-label-floating">Tipe Data</label>
+                                       <select name="tipe_data[]" class="form-control">
+                                           <option value="text" <?= $input['tipe_data'] == 'text' ? 'selected' : '' ?>>Text</option>
+                                           <option value="date" <?= $input['tipe_data'] == 'date' ? 'selected' : '' ?>>Date</option>
+                                           <option value="number" <?= $input['tipe_data'] == 'number' ? 'selected' : '' ?>>Number</option>
+                                       </select>
+                                   </div>
+                               </div>
+                               <div class="col-md-2" style="margin-top: 35px;">
+                                   <?php if ($index == 0) { ?>
+                                       <a class="btn btn-primary" onclick="addInputField(event)">
+                                           <i class="fas fa-plus"></i>
+                                       </a>
+                                   <?php } else { ?>
+                                       <a class="btn btn-danger" onclick="removeInputField(event)">
+                                           <i class="fas fa-minus"></i>
+                                       </a>
+                                   <?php } ?>
+                               </div>
+                           </div>
+                       <?php } ?>
+                   </div>
                   <button type="submit" class="btn btn-info pull-right"><?php echo $this->lang->line('save'); ?></button>
                   <a href="<?= base_url('listkategori'); ?>" class="btn btn-danger"><?php echo $this->lang->line('cancel'); ?></a>
 
@@ -71,3 +104,44 @@
    </section>
    <!-- /.content -->
 </div>
+
+
+<script>
+    function addInputField(event) {
+        event.preventDefault();
+        const form = document.getElementById('dynamic-form');
+        const newField = document.createElement('div');
+        newField.classList.add('row');
+        newField.innerHTML = `
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label class="bmd-label-floating">Nama Input</label>
+                        <input type="text" class="form-control" name="nama_input[]">
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label class="bmd-label-floating">Tipe Data</label>
+                        <select name="tipe_data[]" class="form-control">
+                            <option value="text">Text</option>
+                            <option value="date">Date</option>
+                            <option value="number">Number</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-2" style="margin-top: 35px;">
+                    <a class="btn btn-danger" onclick="removeInputField(event)">
+                        <i class="fas fa-minus"></i>
+                    </a>
+                </div>
+            `;
+        form.appendChild(newField);
+    }
+
+    function removeInputField(event) {
+        event.preventDefault();
+        const button = event.currentTarget;
+        const row = button.closest('.row');
+        row.remove();
+    }
+</script>

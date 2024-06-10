@@ -158,9 +158,19 @@ class Sales extends CI_Controller
             'foto_ktp'          =>   $ktp,
             'foto_kk'           =>   $kk,
             'foto_diri'         =>   $diri,
+            'create_by'         =>   $this->session->userdata('nama')
          );
 
          $this->m->Save($data, 'sales');
+
+          //history
+          $nama_user = $this->session->userdata('nama');
+          $this->m->Save([
+              'id_menu' => 6,
+              'nama' => $nama_user,
+              'keterangan' => $nama_user.' menambah data sales'
+          ], 'history');
+
          $this->session->set_flashdata('success', 'Data sales berhasil ditambah');
          redirect('listsales');
       }
@@ -252,9 +262,19 @@ class Sales extends CI_Controller
          'foto_ktp'          =>   $ktp,
          'foto_kk'           =>   $kk,
          'foto_diri'         =>   $diri,
+          'update_by'        =>   $this->session->userdata('nama'),
+          'update_date'      =>   date('Y-m-d H:i:s')
       );
 
       $this->m->Update($where, $data, $table);
+
+       //history
+       $nama_user = $this->session->userdata('nama');
+       $this->m->Save([
+           'id_menu' => 6,
+           'nama' => $nama_user,
+           'keterangan' => $nama_user.' mengedit data sales'
+       ], 'history');
 
       $this->session->set_flashdata('success', 'Data sales berhasil diubah');
       redirect('listsales');
@@ -267,6 +287,15 @@ class Sales extends CI_Controller
          'id_sales'          =>  $this->input->post('id')
       );
       $this->m->Delete($where, $table);
+
+       //history
+       $nama_user = $this->session->userdata('nama');
+       $this->m->Save([
+           'id_menu' => 6,
+           'nama' => $nama_user,
+           'keterangan' => $nama_user.' menghapus data sales'
+       ], 'history');
+
       $this->session->set_flashdata('success', 'Data sales berhasil dihapus');
       redirect('listsales');
    }

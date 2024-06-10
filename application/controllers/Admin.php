@@ -139,6 +139,14 @@ class Admin extends CI_Controller
         );
         $this->m->Update($where, $data, $table);
 
+        //history
+        $nama_user = $this->session->userdata('nama');
+        $this->m->Save([
+            'id_menu' => 10,
+            'nama' => $nama_user,
+            'keterangan' => $nama_user.' menerima pengajuan harga'
+        ], 'history');
+
         $this->session->set_flashdata('success', 'Berhasil update status pengajuan');
         redirect('pengajuan');
     }
@@ -153,6 +161,14 @@ class Admin extends CI_Controller
             'status_approve' => 0
         );
         $this->m->Update($where, $data, $table);
+
+        //history
+        $nama_user = $this->session->userdata('nama');
+        $this->m->Save([
+            'id_menu' => 10,
+            'nama' => $nama_user,
+            'keterangan' => $nama_user.' menolak pengajuan harga'
+        ], 'history');
 
         $this->session->set_flashdata('success', 'Berhasil update status pengajuan');
         redirect('pengajuan');
@@ -217,6 +233,14 @@ class Admin extends CI_Controller
 
             $this->m->Save($data, 'pengajuanharga');
 
+            //history
+            $nama_user = $this->session->userdata('nama');
+            $this->m->Save([
+                'id_menu' => 10,
+                'nama' => $nama_user,
+                'keterangan' => $nama_user.' menginput data pengajuan harga'
+            ], 'history');
+
             $this->session->set_flashdata('success', 'Data pengajuan harga berhasil ditambah');
             redirect('pengajuan');
         }
@@ -264,6 +288,14 @@ class Admin extends CI_Controller
             'harga'             =>   str_replace(',', '.', str_replace('.', '', $this->input->post('harga'))),
         );
         $this->m->Update($where, $data, $table);
+
+        //history
+        $nama_user = $this->session->userdata('nama');
+        $this->m->Save([
+            'id_menu' => 10,
+            'nama' => $nama_user,
+            'keterangan' => $nama_user.' mengupdate data pengajuan harga'
+        ], 'history');
 
         $this->session->set_flashdata('success', 'Data pengajuan harga berhasil diubah');
         redirect('pengajuan');
@@ -344,6 +376,14 @@ class Admin extends CI_Controller
             'message' => $message
         );
 
+        //history
+        $nama_user = $this->session->userdata('nama');
+        $this->m->Save([
+            'id_menu' => 12,
+            'nama' => $nama_user,
+            'keterangan' => $nama_user.' menambah data akun sales'
+        ], 'history');
+
         $this->output->set_content_type('application/json')->set_output(json_encode($response));
     }
 
@@ -364,6 +404,14 @@ class Admin extends CI_Controller
 
         $this->db->insert('user', $data);
 
+        //history
+        $nama_user = $this->session->userdata('nama');
+        $this->m->Save([
+            'id_menu' => 9,
+            'nama' => $nama_user,
+            'keterangan' => $nama_user.' menambah data akun admin'
+        ], 'history');
+
         $this->session->set_flashdata('success', 'Berhasil membuat akun admin');
         redirect('akunadmin');
     }
@@ -382,6 +430,14 @@ class Admin extends CI_Controller
         ];
         $this->m->Update($where, $data, 'user');
 
+        //history
+        $nama_user = $this->session->userdata('nama');
+        $this->m->Save([
+            'id_menu' => 9,
+            'nama' => $nama_user,
+            'keterangan' => $nama_user.' mengupdate data akun admin'
+        ], 'history');
+
         $this->session->set_flashdata('success', 'Berhasil mengubah akun admin');
         redirect('akunadmin');
     }
@@ -395,6 +451,14 @@ class Admin extends CI_Controller
         );
         $this->m->Delete($where, $table);
 
+        //history
+        $nama_user = $this->session->userdata('nama');
+        $this->m->Save([
+            'id_menu' => 9,
+            'nama' => $nama_user,
+            'keterangan' => $nama_user.' menghapus data akun admin'
+        ], 'history');
+
         $this->session->set_flashdata('success', 'Berhasil menghapus akun admin');
         redirect('akunadmin');
     }
@@ -403,6 +467,14 @@ class Admin extends CI_Controller
         $this->db->where('id_user', $id)->update('user', [
             'password' => password_hash('sales', PASSWORD_DEFAULT)
         ]);
+
+        //history
+        $nama_user = $this->session->userdata('nama');
+        $this->m->Save([
+            'id_menu' => 12,
+            'nama' => $nama_user,
+            'keterangan' => $nama_user.' melakukan reset password pada akun sales'
+        ], 'history');
 
         $this->session->set_flashdata('success', 'Berhasil reset password');
         redirect('akunsales');

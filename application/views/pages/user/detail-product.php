@@ -102,6 +102,9 @@
                     <li class="me-2" role="presentation">
                         <button class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="dashboard-tab" data-tabs-target="#dashboard" type="button" role="tab" aria-controls="dashboard" aria-selected="false">Info Penyelenggara</button>
                     </li>
+                    <li class="me-2" role="presentation">
+                        <button class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="dashboard-tab" data-tabs-target="#detail" type="button" role="tab" aria-controls="dashboard" aria-selected="false">Detail Product</button>
+                    </li>
                 </ul>
             </div>
             <div id="default-tab-content">
@@ -111,7 +114,13 @@
                 <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
                     <p class="text-sm text-gray-500 dark:text-gray-400"><?= $detail->info_penyelenggara ?></p>
                 </div>
-
+                <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="detail" role="tabpanel" aria-labelledby="dashboard-tab">
+                    <?php if ($detail_produk != '') { ?>
+                        <?php foreach ($detail_produk as $key => $value) { ?>
+                            <p class="text-sm text-gray-500 dark:text-gray-400"><?= $key ?> : <?= $value ?></p>
+                        <?php } ?>
+                    <?php } ?>
+                </div>
             </div>
 
         </div>

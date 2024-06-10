@@ -36,7 +36,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="bmd-label-floating">Kategori</label>
-                                    <select name="kategori" required onchange="setInput(this)" class="form-control select2">
+                                    <select name="kategori" required class="form-control select2">
                                         <option value="<?= $data->id_kategori ?>"><?= $data->nama_kategori ?></option>
                                         <?php foreach ($kategori as $datakategori) { ?>
                                             <option value="<?= $datakategori->id_kategori ?>"><?= $datakategori->nama_kategori ?></option>
@@ -83,8 +83,6 @@
                                     <input style="padding-bottom: 10px;max-width: 845px;" name="infopenyelenggara" class="form-control" value="<?= $data->info_penyelenggara ?>">
                                 </div>
                             </div>
-                        </div>
-                        <div id="dinamic-form" class="row" style="margin-bottom: 20px;">
                         </div>
                         <div class="row" style="margin-bottom: 20px;">
                             <div class="col-md-12">
@@ -240,70 +238,6 @@
                 preview.style.display = 'none';
             }
         }
-    </script>
-
-    <script>
-        function setInput(elem) {
-            $('#dinamic-form').html('')
-            const id_kategori = elem.value
-            $.ajax({
-                url: '<?= base_url('produk/getkategori') ?>',
-                method: 'post',
-                data: {
-                    id_kategori: id_kategori
-                },
-                success: function(res) {
-                    if(res.status == 'ok') {
-                        const input = res.kategori
-
-                        Object.values(input).forEach(function (value) {
-                            $('#dinamic-form').append(`
-                                <div class="col-md-6">
-                                     <label>${value.nama_input}</label>
-                                        <div class="form-group">
-                                         <input type="${value.tipe_data}" style="padding-bottom: 10px;max-width: 845px;" name="${value.nama_input}" class="form-control"></input>
-                                     </div>
-                                 </div>
-                            `)
-                        })
-                    }
-                }
-            })
-        }
-
-        function getItemInput(id_kategori) {
-            fetch('<?= base_url('produk/getkategorivalue') ?>', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                body: new URLSearchParams({
-                    id_kategori: id_kategori
-                })
-            })
-                .then(response => response.json())
-                .then(res => {
-                    if (res.status === 'ok') {
-                        const input = res.data;
-
-                        input.forEach(value => {
-                            const formElement = `
-                            <div class="col-md-6">
-                                <label>${value.nama_input}</label>
-                                <div class="form-group">
-                                    <input type="${value.tipe_data}" style="padding-bottom: 10px;max-width: 845px;" name="${value.nama_input}" value="${value.nilai_input}" class="form-control"></input>
-                                </div>
-                            </div>
-                        `;
-                            document.getElementById('dinamic-form').insertAdjacentHTML('beforeend', formElement);
-                        });
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
-        }
-        getItemInput('<?= $data->id_kategori ?>')
     </script>
     <!-- /.content -->
 </div>

@@ -59,11 +59,13 @@ class Customer extends CI_Controller
       $data['title'] = 'Lelang | List Customer';
 
       if ($this->session->userdata('role_id') == 3) {
-         $select = $this->db->select('tbl_customer.foto_ktp,tbl_customer.foto_kk,tbl_customer.foto_diri,tbl_customer.id_customer,tbl_customer.nama_customer,tbl_customer.jenis_kelamin,tbl_customer.alamat,tbl_customer.no_hp');
+         $select = $this->db->select('tbl_customer.foto_ktp,tbl_customer.foto_kk,tbl_customer.foto_diri,tbl_customer.id_customer,tbl_customer.nama_customer,tbl_customer.jenis_kelamin,tbl_customer.alamat,tbl_customer.no_hp,
+                                      tbl_customer.create_date, tbl_customer.update_date, tbl_customer.create_by, tbl_customer.update_by');
          $select = $this->db->where('tbl_customer.id_sales', $this->session->userdata('sales_id'));
          $data['customer'] = $this->m->Get_All('customer', $select);
       } else {
-         $select = $this->db->select('tbl_customer.foto_ktp,tbl_customer.foto_kk,tbl_customer.foto_diri,tbl_customer.id_customer,tbl_customer.nama_customer,tbl_customer.jenis_kelamin,tbl_customer.alamat,tbl_customer.no_hp');
+         $select = $this->db->select('tbl_customer.foto_ktp,tbl_customer.foto_kk,tbl_customer.foto_diri,tbl_customer.id_customer,tbl_customer.nama_customer,tbl_customer.jenis_kelamin,tbl_customer.alamat,tbl_customer.no_hp,
+                                    tbl_customer.create_date, tbl_customer.update_date, tbl_customer.create_by, tbl_customer.update_by');
          // $select = $this->db->join('tbl_customer', 'tbl_customer.id_customer = tbl_customer.id_customer');
          $data['customer'] = $this->m->Get_All('customer', $select);
       }
@@ -140,10 +142,10 @@ class Customer extends CI_Controller
                $format = pathinfo($nama, PATHINFO_EXTENSION);
                if ($size > 3145728) {
                   $this->session->set_flashdata('error', 'Gambar ' . $file_input_name . ' terlalu besar');
-                  redirect('tambahdatasales');
+                  redirect('tambahdatacustomer');
                } elseif ($format != "jpg" and $format != "png" and $format != "jpeg" and $format != "JPG" and $format != "PNG" and $format != "JPEG") {
                   $this->session->set_flashdata('error', 'Format gambar ' . $file_input_name . '  tidak sesuai');
-                  redirect('tambahdatasales');
+                  redirect('tambahdatacustomer');
                }
 
                if (!$this->upload->do_upload($file_input_name)) {
@@ -181,8 +183,17 @@ class Customer extends CI_Controller
             'foto_ktp'          =>   $ktp,
             'foto_kk'           =>   $kk,
             'foto_diri'         =>   $diri,
+             'create_by'        =>   $this->session->userdata('nama')
          );
          $this->m->Save($data, 'customer');
+
+          //history
+          $nama_user = $this->session->userdata('nama');
+          $this->m->Save([
+              'id_menu' => 8,
+              'nama' => $nama_user,
+              'keterangan' => $nama_user.' menambah data customer'
+          ], 'history');
 
          $this->session->set_flashdata('success', 'Data customer berhasil ditambah');
          redirect('listcustomer');
@@ -228,6 +239,7 @@ class Customer extends CI_Controller
       $config['encrypt_name']         = true; // set max height allowed
       $this->load->library('upload', $config);
 
+      $id_cust = $this->input->post('idcustomer');
 
       $uploaded_files = array();
 
@@ -242,10 +254,10 @@ class Customer extends CI_Controller
             $format = pathinfo($nama, PATHINFO_EXTENSION);
             if ($size > 3145728) {
                $this->session->set_flashdata('error', 'Gambar ' . $file_input_name . ' terlalu besar');
-               redirect('tambahdataproduk');
+               redirect('editdatacustomer/'.$id_cust);
             } elseif ($format != "jpg" and $format != "png" and $format != "jpeg" and $format != "JPG" and $format != "PNG" and $format != "JPEG") {
                $this->session->set_flashdata('error', 'Format gambar ' . $file_input_name . '  tidak sesuai');
-               redirect('tambahdataproduk');
+               redirect('editdatacustomer/'.$id_cust);
             }
 
             if (!$this->upload->do_upload($file_input_name)) {
@@ -276,8 +288,18 @@ class Customer extends CI_Controller
          'foto_ktp'          =>   $ktp,
          'foto_kk'           =>   $kk,
          'foto_diri'         =>   $diri,
-      );
+          'update_date'      =>   date('Y-m-d H:i:s'),
+          'update_by'        =>   $this->session->userdata('nama')
+       );
       $this->m->Update($where, $data, $table);
+
+       //history
+       $nama_user = $this->session->userdata('nama');
+       $this->m->Save([
+           'id_menu' => 8,
+           'nama' => $nama_user,
+           'keterangan' => $nama_user.' mengupdate data customer'
+       ], 'history');
 
       $this->session->set_flashdata('success', 'Data customer berhasil diubah');
       redirect('listcustomer');
@@ -307,6 +329,15 @@ class Customer extends CI_Controller
          );
          $this->m->Update($where, $data, $table);
       }
+
+       //history
+       $nama_user = $this->session->userdata('nama');
+       $this->m->Save([
+           'id_menu' => 8,
+           'nama' => $nama_user,
+           'keterangan' => $nama_user.' menghapus data customer'
+       ], 'history');
+
       $this->session->set_flashdata('success', 'Data customer berhasil dihapus');
       redirect('listcustomer');
    }

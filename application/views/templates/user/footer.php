@@ -1,3 +1,62 @@
+<div style="z-index: 999" data-dial-init class="fixed bottom-6 start-6 group">
+    <div id="speed-dial-menu-bottom-left" class="flex flex-col items-center hidden mb-4 space-y-2">
+
+
+        <div class="max-width p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+
+            <div class="flex items-start gap-2.5">
+                <img class="w-8 h-8 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-3.jpg" alt="Jese image">
+                <div class="flex flex-col gap-1 w-full max-w-[320px]">
+                    <div class="flex items-center space-x-2 rtl:space-x-reverse">
+                        <span class="text-sm font-semibold text-gray-900 dark:text-white">Admin</span>
+                        <span class="text-sm font-normal text-gray-500 dark:text-gray-400"><?php
+                                date_default_timezone_set('Asia/Jakarta');
+                               echo date('H:i')
+                            ?></span>
+                    </div>
+                    <div class="flex flex-col leading-1.5 p-4 border-gray-200 bg-gray-100 rounded-e-xl rounded-es-xl dark:bg-gray-700">
+                        <p class="text-sm font-normal text-gray-900 dark:text-white"> Hallo selamat malam, ada yang bisa kami bantu?</p>
+                    </div>
+                    <span class="text-sm font-normal text-gray-500 dark:text-gray-400">Delivered</span>
+                </div>
+            </div>
+
+
+
+            <div class="flex justify-center mt-4">
+                <div class="flex items-center me-4">
+                    <input checked id="admin" type="radio" value="" name="contact" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                    <label for="admin" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Admin</label>
+                </div>
+                <div class="flex items-center me-4">
+                    <input id="cs" type="radio" value="" name="contact" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                    <label for="cs" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">CS</label>
+                </div>
+            </div>
+
+
+
+            <div class="mt-4">
+                <label for="chat" class="sr-only">Your message</label>
+                <div class="flex items-center px-0 py-2 rounded-lg bg-gray-50 dark:bg-gray-700">
+                    <textarea id="pesan-wa" rows="2" class="focus block mx-4 p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Your message...">Saya ingin bertanya seputar lelang</textarea>
+                    <button id="btn-wa" class="inline-flex justify-center p-2 text-blue-600 rounded-full cursor-pointer hover:bg-blue-100 dark:text-blue-500 dark:hover:bg-gray-600">
+                        <svg class="w-5 h-5 rotate-90 rtl:-rotate-90" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                            <path d="m17.914 18.594-8-18a1 1 0 0 0-1.828 0l-8 18a1 1 0 0 0 1.157 1.376L8 18.281V9a1 1 0 0 1 2 0v9.281l6.758 1.689a1 1 0 0 0 1.156-1.376Z"/>
+                        </svg>
+                        <span class="sr-only">Send message</span>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <button type="button" data-dial-toggle="speed-dial-menu-bottom-left" aria-controls="speed-dial-menu-bottom-left" aria-expanded="false" class="flex items-center justify-center text-white bg-blue-700 rounded-full w-14 h-14 hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 focus:outline-none dark:focus:ring-blue-800">
+        <img src="https://teraluxliving.com/assets/images/icons/whatsapp.svg" class="rounded-full">
+    </button>
+</div>
+
 <footer class="bg-blue-960 dark:bg-gray-900">
     <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
         <div class="md:flex md:justify-between">
@@ -90,6 +149,32 @@
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+
+<script>
+    const btnWA = document.getElementById('btn-wa')
+    const pesan = document.getElementById('pesan-wa')
+    const cs = document.getElementById('cs')
+    const admin = document.getElementById('admin')
+
+    btnWA.addEventListener('click', function () {
+        const pesanValue = pesan.value;
+        const csNumber = '627182736617';
+        const adminNumber = '623438748837';
+
+        let phoneNumber;
+        if (admin.checked) {
+            phoneNumber = adminNumber
+        }
+        if (cs.checked) {
+            phoneNumber = csNumber
+        }
+
+        const message = encodeURIComponent(pesanValue);
+        const whatsappURL = `https://wa.me/${phoneNumber}?text=${message}`;
+
+        window.open(whatsappURL, '_blank');
+    });
+</script>
 
 </body>
 

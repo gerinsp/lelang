@@ -6,7 +6,7 @@
             <?= $this->session->flashdata('message'); ?>
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Edit Data Produk</h1>
+                    <h1><?php echo $this->lang->line('add'); ?> Data Produk</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -25,72 +25,69 @@
             <div class="shadow card">
                 <!-- /.card-header -->
                 <div class="card-body">
-                    <form action="<?php echo base_url() . 'produk/updateproduk'; ?> " enctype="multipart/form-data" method="post" accept-charset="utf-8" aria-hidden="true">
-                        <?php foreach ($produk as $data)   ?>
+                    <form action="<?php echo base_url() . 'tambahdataproduk'; ?> " enctype="multipart/form-data" method="post" accept-charset="utf-8" aria-hidden="true">
+
                         <div class="row">
                             <div class="col-md-6">
-                                <label class="bmd-label-floating">Nama Produk</label>
-                                <input style="padding-bottom: 10px;text-align: left;" required type="text" name="namaproduk" class="form-control" value="<?= $data->nama_produk ?>">
-                                <input style="padding-bottom: 10px;text-align: left;" required type="hidden" name="idproduk" class="form-control" value="<?= $data->id ?>">
+                                <div class="form-group">
+                                    <label class="bmd-label-floating">Nama Produk</label>
+                                    <input style="padding-bottom: 10px;text-align: left;" type="text" name="namaproduk" class="form-control" value="<?= set_value('namaproduk') ?>">
+                                    <?= form_error('namaproduk', '<small class="text-danger">', '</small>'); ?>
+                                </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="bmd-label-floating">Kategori</label>
-                                    <select name="kategori" required onchange="setInput(this)" class="form-control select2">
-                                        <option value="<?= $data->id_kategori ?>"><?= $data->nama_kategori ?></option>
+                                    <select name="kategori" required class="form-control select2">
+                                        <option value="">Pilih Kategori</option>
                                         <?php foreach ($kategori as $datakategori) { ?>
                                             <option value="<?= $datakategori->id_kategori ?>"><?= $datakategori->nama_kategori ?></option>
                                         <?php } ?>
                                     </select>
                                 </div>
                             </div>
-
                         </div>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="bmd-label-floating">Durasi Iklan (Hari)</label>
-                                    <input name="durasiiklan" value="<?= $data->durasi_iklan ?>" type="number" required class="form-control">
+                                    <input name="durasiiklan" type="number" required class="form-control">
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="bmd-label-floating">Status Aktif</label>
-                                    <select name="statusshow" class="form-control">
-
-                                        <?php if ($data->status_show == 1) {  ?>
-                                            <option value="<?= $data->status_show ?>">Aktif</option>
-                                            <option value="0">Tidak Aktif</option>
-                                        <?php } ?>
-                                        <?php if ($data->status_show == 0) {  ?>
-                                            <option value="<?= $data->status_show ?>">Tidak Aktif</option>
+                            <?php if ($this->session->userdata('role_id') == 1) { ?>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating">Status Aktif</label>
+                                        <select name="statusshow" class="form-control">
                                             <option value="1">Aktif</option>
-                                        <?php } ?>
-                                    </select>
+                                            <option value="0">Tidak Aktif</option>
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
+                            <?php } ?>
+                            <?php if ($this->session->userdata('role_id') == 2) { ?>
+                                <input type="hidden" name="statusshow" value="0">
+                            <?php } ?>
                         </div>
                         <div class="row" style="margin-bottom: 20px;">
                             <div class="col-md-6">
                                 <label>Harga Awal </label>
                                 <div class="form-group">
-                                    <input style="padding-bottom: 10px;max-width: 845px;" name="hargaawal" class="form-control" value="<?= $data->hargaawal ?>">
+                                    <input style="padding-bottom: 10px;max-width: 845px;" name="infopenyelenggara" class="form-control">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <label>Info Penyelenggara </label>
                                 <div class="form-group">
-                                    <input style="padding-bottom: 10px;max-width: 845px;" name="infopenyelenggara" class="form-control" value="<?= $data->info_penyelenggara ?>">
+                                    <input style="padding-bottom: 10px;max-width: 845px;" rows="8" name="infopenyelenggara" class="form-control"></input>
                                 </div>
                             </div>
-                        </div>
-                        <div id="dinamic-form" class="row" style="margin-bottom: 20px;">
                         </div>
                         <div class="row" style="margin-bottom: 20px;">
                             <div class="col-md-12">
                                 <label>Deskripsi Produk </label>
                                 <div class="form-group">
-                                    <textarea style="padding-bottom: 10px;max-width: 845px;" rows="8" id="summernote" name="deskripsiproduk" class="form-control"><?= $data->deskripsi_produk ?></textarea>
+                                    <textarea style="padding-bottom: 10px;max-width: 845px;" rows="8" id="summernote" name="deskripsiproduk" class="form-control"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -100,8 +97,8 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="bmd-label-floating">Gambar 1</label>
-                                            <img src="<?= base_url('assets/file/iconproduk/' . $data->gambar1) ?>" id="preview1" style="display: block; max-width: 200px;" />
-                                            <input onchange="previewImage(this, '1')" accept="image/jpeg, image/jpg, image/png" type="file" name="gambar1" id="gambar1" class="form-control" style="height: 45px;" placeholder="" aria-describedby="helpId">
+                                            <img id="preview1" style="display: none; max-width: 200px;" />
+                                            <input onchange="previewImage(this, '1')" required accept="image/jpeg, image/jpg, image/png" type="file" name="gambar1" id="gambar1" class="form-control" style="height: 45px;" placeholder="" aria-describedby="helpId">
                                         </div>
                                     </div>
                                 </div>
@@ -109,7 +106,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="bmd-label-floating">Gambar 2</label>
-                                            <img src="<?= base_url('assets/file/iconproduk/' . $data->gambar2) ?>" id="preview2" style="display: block; max-width: 200px;" />
+                                            <img id="preview2" style="display: none; max-width: 200px;" />
                                             <input onchange="previewImage(this, '2')" accept="image/jpeg, image/jpg, image/png" type="file" name="gambar2" id="gambar2" class="form-control" style="height: 45px;" placeholder="" aria-describedby="helpId">
                                         </div>
                                     </div>
@@ -118,7 +115,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="bmd-label-floating">Gambar 3</label>
-                                            <img src="<?= base_url('assets/file/iconproduk/' . $data->gambar3) ?>" id="preview3" style="display: block; max-width: 200px;" />
+                                            <img id="preview3" style="display: none; max-width: 200px;" />
                                             <input onchange="previewImage(this, '3')" accept="image/jpeg, image/jpg, image/png" type="file" name="gambar3" id="gambar3" class="form-control" style="height: 45px;" placeholder="" aria-describedby="helpId">
                                         </div>
                                     </div>
@@ -127,7 +124,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="bmd-label-floating">Gambar 4</label>
-                                            <img src="<?= base_url('assets/file/iconproduk/' . $data->gambar4) ?>" id="preview4" style="display: block; max-width: 200px;" />
+                                            <img id="preview4" style="display: none; max-width: 200px;" />
                                             <input onchange="previewImage(this, '4')" accept="image/jpeg, image/jpg, image/png" type="file" name="gambar4" id="gambar4" class="form-control" style="height: 45px;" placeholder="" aria-describedby="helpId">
                                         </div>
                                     </div>
@@ -138,7 +135,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="bmd-label-floating">Gambar 5</label>
-                                            <img src="<?= base_url('assets/file/iconproduk/' . $data->gambar5) ?>" id="preview5" style="display: block; max-width: 200px;" />
+                                            <img id="preview5" style="display: none; max-width: 200px;" />
                                             <input onchange="previewImage(this, '5')" accept="image/jpeg, image/jpg, image/png" type="file" name="gambar5" id="gambar5" class="form-control" style="height: 45px;" placeholder="" aria-describedby="helpId">
                                         </div>
                                     </div>
@@ -147,7 +144,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="bmd-label-floating">Gambar 6</label>
-                                            <img src="<?= base_url('assets/file/iconproduk/' . $data->gambar6) ?>" id="preview6" style="display: block; max-width: 200px;" />
+                                            <img id="preview6" style="display: none; max-width: 200px;" />
                                             <input onchange="previewImage(this, '6')" accept="image/jpeg, image/jpg, image/png" type="file" name="gambar6" id="gambar6" class="form-control" style="height: 45px;" placeholder="" aria-describedby="helpId">
                                         </div>
                                     </div>
@@ -156,7 +153,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="bmd-label-floating">Gambar 7</label>
-                                            <img src="<?= base_url('assets/file/iconproduk/' . $data->gambar7) ?>" id="preview7" style="display: block; max-width: 200px;" />
+                                            <img id="preview7" style="display: none; max-width: 200px;" />
                                             <input onchange="previewImage(this, '7')" accept="image/jpeg, image/jpg, image/png" type="file" name="gambar7" id="gambar7" class="form-control" style="height: 45px;" placeholder="" aria-describedby="helpId">
                                         </div>
                                     </div>
@@ -165,7 +162,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="bmd-label-floating">Gambar 8</label>
-                                            <img src="<?= base_url('assets/file/iconproduk/' . $data->gambar8) ?>" id="preview8" style="display: block; max-width: 200px;" />
+                                            <img id="preview8" style="display: none; max-width: 200px;" />
                                             <input onchange="previewImage(this, '8')" accept="image/jpeg, image/jpg, image/png" type="file" name="gambar8" id="gambar8" class="form-control" style="height: 45px;" placeholder="" aria-describedby="helpId">
                                         </div>
                                     </div>
@@ -176,7 +173,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="bmd-label-floating">Gambar 9</label>
-                                            <img src="<?= base_url('assets/file/iconproduk/' . $data->gambar9) ?>" id="preview9" style="display: block; max-width: 200px;" />
+                                            <img id="preview9" style="display: none; max-width: 200px;" />
                                             <input onchange="previewImage(this, '9')" accept="image/jpeg, image/jpg, image/png" type="file" name="gambar9" id="gambar9" class="form-control" style="height: 45px;" placeholder="" aria-describedby="helpId">
                                         </div>
                                     </div>
@@ -185,7 +182,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="bmd-label-floating">Gambar 10</label>
-                                            <img src="<?= base_url('assets/file/iconproduk/' . $data->gambar10) ?>" id="preview10" style="display: block; max-width: 200px;" />
+                                            <img id="preview10" style="display: none; max-width: 200px;" />
                                             <input onchange="previewImage(this, '10')" accept="image/jpeg, image/jpg, image/png" type="file" name="gambar10" id="gambar10" class="form-control" style="height: 45px;" placeholder="" aria-describedby="helpId">
                                         </div>
                                     </div>
@@ -194,7 +191,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="bmd-label-floating">Gambar 11</label>
-                                            <img src="<?= base_url('assets/file/iconproduk/' . $data->gambar11) ?>" id="preview11" style="display: block; max-width: 200px;" />
+                                            <img id="preview11" style="display: none; max-width: 200px;" />
                                             <input onchange="previewImage(this, '11')" accept="image/jpeg, image/jpg, image/png" type="file" name="gambar11" id="gambar11" class="form-control" style="height: 45px;" placeholder="" aria-describedby="helpId">
                                         </div>
                                     </div>
@@ -203,7 +200,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="bmd-label-floating">Gambar 12</label>
-                                            <img src="<?= base_url('assets/file/iconproduk/' . $data->gambar12) ?>" id="preview12" style="display: block; max-width: 200px;" />
+                                            <img id="preview12" style="display: none; max-width: 200px;" />
                                             <input onchange="previewImage(this, '12')" accept="image/jpeg, image/jpg, image/png" type="file" name="gambar12" id="gambar12" class="form-control" style="height: 45px;" placeholder="" aria-describedby="helpId">
                                         </div>
                                     </div>
@@ -221,6 +218,7 @@
         <!-- /.container-fluid -->
     </section>
     <br><br><br><br>
+    <!-- /.content -->
     <script>
         function previewImage(input, id) {
             var preview = document.getElementById('preview' + id);
@@ -241,69 +239,4 @@
             }
         }
     </script>
-
-    <script>
-        function setInput(elem) {
-            $('#dinamic-form').html('')
-            const id_kategori = elem.value
-            $.ajax({
-                url: '<?= base_url('produk/getkategori') ?>',
-                method: 'post',
-                data: {
-                    id_kategori: id_kategori
-                },
-                success: function(res) {
-                    if(res.status == 'ok') {
-                        const input = res.kategori
-
-                        Object.values(input).forEach(function (value) {
-                            $('#dinamic-form').append(`
-                                <div class="col-md-6">
-                                     <label>${value.nama_input}</label>
-                                        <div class="form-group">
-                                         <input type="${value.tipe_data}" style="padding-bottom: 10px;max-width: 845px;" name="${value.nama_input}" class="form-control"></input>
-                                     </div>
-                                 </div>
-                            `)
-                        })
-                    }
-                }
-            })
-        }
-
-        function getItemInput(id_kategori) {
-            fetch('<?= base_url('produk/getkategorivalue') ?>', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                body: new URLSearchParams({
-                    id_kategori: id_kategori
-                })
-            })
-                .then(response => response.json())
-                .then(res => {
-                    if (res.status === 'ok') {
-                        const input = res.data;
-
-                        input.forEach(value => {
-                            const formElement = `
-                            <div class="col-md-6">
-                                <label>${value.nama_input}</label>
-                                <div class="form-group">
-                                    <input type="${value.tipe_data}" style="padding-bottom: 10px;max-width: 845px;" name="${value.nama_input}" value="${value.nilai_input}" class="form-control"></input>
-                                </div>
-                            </div>
-                        `;
-                            document.getElementById('dinamic-form').insertAdjacentHTML('beforeend', formElement);
-                        });
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
-        }
-        getItemInput('<?= $data->id_kategori ?>')
-    </script>
-    <!-- /.content -->
 </div>

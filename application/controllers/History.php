@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Kategori extends CI_Controller
+class History extends CI_Controller
 {
    public function __construct()
    {
@@ -12,23 +12,33 @@ class Kategori extends CI_Controller
       cekuser();
    }
 
-   function listkategori()
+   function history()
    {
       $table = 'user';
       $where = array(
          'id_user'      =>   $this->session->userdata('id_user')
       );
 
+      $id_menu = $this->input->get('id_menu');
+
       $data['user'] = $this->m->Get_Where($where, $table);
       $data['title'] = 'Lelang | List Kategori';
 
       $select = $this->db->select('*');
-      $data['kategori'] = $this->m->Get_All('kategori', $select);
+      if ($id_menu && $id_menu != '') {
+          $select = $this->db->where('id_menu', $id_menu);
+      }
+      $data['history'] = $this->m->Get_All('history', $select);
+
+      $data['id_menu'] = $id_menu;
+
+       $select = $this->db->select('*');
+       $data['menu'] = $this->m->Get_All('menu', $select);
 
       $this->load->view('templates/head', $data);
       $this->load->view('templates/navigation', $data);
       $this->load->view('templates/sidebar', $data);
-      $this->load->view('pages/master/kategori/listkategori', $data);
+      $this->load->view('pages/master/history/history', $data);
       $this->load->view('templates/footer');
       $this->load->view('templates/script', $data);
    }
@@ -102,38 +112,15 @@ class Kategori extends CI_Controller
             $iconkategori = "Tidak Ada File";
          }
 
-          $nama_input = $this->input->post('nama_input');
-          $tipe_data = $this->input->post('tipe_data');
-
-          $combined_data = [];
-
-          if (is_array($nama_input) && is_array($tipe_data) && count($nama_input) === count($tipe_data)) {
-              for ($i = 0; $i < count($nama_input); $i++) {
-                  $combined_data[] = [
-                      'nama_input' => $nama_input[$i],
-                      'tipe_data' => $tipe_data[$i]
-                  ];
-              }
-          }
-
          $data = array(
             'nama_kategori'     =>   $this->input->post('namakategori'),
             'status_show'       =>   $this->input->post('statusshow'),
             'icon_kategori'     =>   $iconkategori,
             'create_by'         =>   $this->session->userdata('id_user'),
             'create_date'       =>   $now,
-             'input_produk'     =>   json_encode($combined_data)
          );
 
          $this->m->Save($data, 'kategori');
-
-          //history
-          $nama_user = $this->session->userdata('nama');
-          $this->m->Save([
-              'id_menu' => 5,
-              'nama' => $nama_user,
-              'keterangan' => $nama_user.' menambah data kategori produk'
-          ], 'history');
 
          $this->session->set_flashdata('success', 'Data kategori berhasil ditambah');
          redirect('listkategori');
@@ -158,9 +145,6 @@ class Kategori extends CI_Controller
       $select = $this->db->where('id_kategori', $id_kategori);
       $data['kategori'] = $this->m->Get_All('kategori', $select);
 
-      $input_produk = json_decode($data['kategori'][0]->input_produk, true);
-      $data['input_produk'] = $input_produk;
-
       $this->load->view('templates/head', $data);
       $this->load->view('templates/navigation', $data);
       $this->load->view('templates/sidebar', $data);
@@ -179,26 +163,11 @@ class Kategori extends CI_Controller
          'id_kategori'          =>   $this->input->post('idkategori')
       );
 
-       $nama_input = $this->input->post('nama_input');
-       $tipe_data = $this->input->post('tipe_data');
-
-       $combined_data = [];
-
-       if (is_array($nama_input) && is_array($tipe_data) && count($nama_input) === count($tipe_data)) {
-           for ($i = 0; $i < count($nama_input); $i++) {
-               $combined_data[] = [
-                   'nama_input' => $nama_input[$i],
-                   'tipe_data' => $tipe_data[$i]
-               ];
-           }
-       }
-
       $data = array(
          'nama_kategori'     =>   $this->input->post('namakategori'),
          'status_show'       =>   $this->input->post('statusshow'),
          'update_by'         =>   $this->session->userdata('id_user'),
          'update_date'       =>   $now,
-          'input_produk'     =>   json_encode($combined_data)
       );
       $upload_image = $_FILES['image']['name'];
       if ($upload_image) {
@@ -222,14 +191,6 @@ class Kategori extends CI_Controller
          }
       }
       $this->m->Update($where, $data, $table);
-
-       //history
-       $nama_user = $this->session->userdata('nama');
-       $this->m->Save([
-           'id_menu' => 5,
-           'nama' => $nama_user,
-           'keterangan' => $nama_user.' mengupdate data kategori produk'
-       ], 'history');
 
       $this->session->set_flashdata('success', 'Data kategori berhasil diubah');
       redirect('listkategori');
@@ -260,13 +221,9 @@ class Kategori extends CI_Controller
          $this->m->Update($where, $data, $table);
       }
 
-       //history
-       $nama_user = $this->session->userdata('nama');
-       $this->m->Save([
-           'id_menu' => 5,
-           'nama' => $nama_user,
-           'keterangan' => $nama_user.' menghapus data kategori produk'
-       ], 'history');
+
+
+
 
       $this->session->set_flashdata('success', 'Data kategori berhasil dihapus');
       redirect('listkategori');

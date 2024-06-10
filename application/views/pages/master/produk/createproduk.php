@@ -38,7 +38,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="bmd-label-floating">Kategori</label>
-                                    <select name="kategori" required class="form-control select2">
+                                    <select name="kategori" onchange="setInput(this)" required class="form-control select2">
                                         <option value="">Pilih Kategori</option>
                                         <?php foreach ($kategori as $datakategori) { ?>
                                             <option value="<?= $datakategori->id_kategori ?>"><?= $datakategori->nama_kategori ?></option>
@@ -69,11 +69,11 @@
                                 <input type="hidden" name="statusshow" value="0">
                             <?php } ?>
                         </div>
-                        <div class="row" style="margin-bottom: 20px;">
+                        <div class="row">
                             <div class="col-md-6">
                                 <label>Harga Awal </label>
                                 <div class="form-group">
-                                    <input style="padding-bottom: 10px;max-width: 845px;" name="infopenyelenggara" class="form-control">
+                                    <input style="padding-bottom: 10px;max-width: 845px;" name="hargaawal" class="form-control">
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -82,6 +82,8 @@
                                     <input style="padding-bottom: 10px;max-width: 845px;" rows="8" name="infopenyelenggara" class="form-control"></input>
                                 </div>
                             </div>
+                        </div>
+                        <div id="dinamic-form" class="row" style="margin-bottom: 20px;">
                         </div>
                         <div class="row" style="margin-bottom: 20px;">
                             <div class="col-md-12">
@@ -98,7 +100,7 @@
                                         <div class="form-group">
                                             <label class="bmd-label-floating">Gambar 1</label>
                                             <img id="preview1" style="display: none; max-width: 200px;" />
-                                            <input onchange="previewImage(this, '1')" required accept="image/jpeg, image/jpg, image/png" type="file" name="gambar1" id="gambar1" class="form-control" style="height: 45px;" placeholder="" aria-describedby="helpId">
+                                            <input onchange="previewImage(this, '1')" accept="image/jpeg, image/jpg, image/png" type="file" name="gambar1" id="gambar1" class="form-control" style="height: 45px;" placeholder="" aria-describedby="helpId">
                                         </div>
                                     </div>
                                 </div>
@@ -237,6 +239,36 @@
                 preview.src = '';
                 preview.style.display = 'none';
             }
+        }
+    </script>
+
+    <script>
+        function setInput(elem) {
+            $('#dinamic-form').html('')
+            const id_kategori = elem.value
+            $.ajax({
+                url: '<?= base_url('produk/getkategori') ?>',
+                method: 'post',
+                data: {
+                    id_kategori: id_kategori
+                },
+                success: function(res) {
+                    if(res.status == 'ok') {
+                        const input = res.kategori
+
+                        Object.values(input).forEach(function (value) {
+                            $('#dinamic-form').append(`
+                                <div class="col-md-6">
+                                     <label>${value.nama_input}</label>
+                                        <div class="form-group">
+                                         <input type="${value.tipe_data}" style="padding-bottom: 10px;max-width: 845px;" name="${value.nama_input}" class="form-control"></input>
+                                     </div>
+                                 </div>
+                            `)
+                        })
+                    }
+                }
+            })
         }
     </script>
 </div>

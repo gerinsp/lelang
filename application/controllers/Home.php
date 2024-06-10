@@ -48,6 +48,8 @@ class Home extends CI_Controller
            ->group_by('p.id')
            ->limit(8);
        $data['katalog'] = $this->db->get()->result_array();
+
+       $data['banner'] = $this->db->select('*')->get('banner')->result_array();
 //      dd($data['katalog']);
 
       $this->load->view('templates/user/navbar', $data);
@@ -77,6 +79,11 @@ class Home extends CI_Controller
        $harga_tertinggi_array = explode(',', $data['detail']->harga_tertinggi);
        $data['harga_tertinggi'] = array_slice($harga_tertinggi_array, 0, 3);
 //       dd($data['detail']);
+
+       $detail = $this->db->select('detail_produk')->where('id', $id)->get('produk')->result_array();
+       $detail = isset($detail[0]['detail_produk']) ? json_decode($detail[0]['detail_produk']) : '';
+
+       $data['detail_produk'] = $detail;
 
        $this->load->view('templates/user/navbar', $data);
        $this->load->view('pages/user/detail-product', $data);
@@ -247,6 +254,7 @@ class Home extends CI_Controller
        $data['user'] = $this->m->Get_Where($where, $table);
        $data['title'] = 'Profile | Lelang';
 
+       $data['tentangkami'] = $this->db->select('*')->get('tentangkami')->row();
 
        $this->load->view('templates/user/navbar', $data);
        $this->load->view('pages/user/profile', $data);
@@ -262,6 +270,7 @@ class Home extends CI_Controller
        $data['user'] = $this->m->Get_Where($where, $table);
        $data['title'] = 'Info | Lelang';
 
+       $data['info'] = $this->db->select('*')->from('info')->get()->row();
 
        $this->load->view('templates/user/navbar', $data);
        $this->load->view('pages/user/info', $data);

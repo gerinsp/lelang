@@ -197,8 +197,14 @@
     margin-left: 18px;
     margin-right: 18px;
 }
+.max-width {
+    max-width: 17rem;
+}
 
 @media (min-width: 768px) {
+    .max-width {
+        max-width: 24rem;
+    }
     .w-3-5 {
         width: 70%;
     }

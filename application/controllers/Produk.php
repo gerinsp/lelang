@@ -113,23 +113,52 @@ class Produk extends CI_Controller
             }
          }
 
-         $data = array(
+          $kategori = $this->db->select('input_produk')
+              ->where('id_kategori', $this->input->post('kategori'))
+              ->from('kategori')->get()
+              ->row_array();
+
+         $input_produk = json_decode($kategori['input_produk']);
+
+         $data_input = [];
+         if ($input_produk) {
+             foreach ($input_produk as $val) {
+                 $input = $this->input->post($val->nama_input);
+                 if ($input) {
+                     $data_input[$val->nama_input] = $input;
+                 }
+             }
+         }
+
+          $data = array(
             'nama_produk'           =>   $this->input->post('namaproduk'),
             'deskripsi_produk'      =>   $this->input->post('deskripsiproduk'),
             'status_show'           =>   $this->input->post('statusshow'),
             'durasi_iklan'          =>   $this->input->post('durasiiklan'),
             'id_kategori'           =>   $this->input->post('kategori'),
             'info_penyelenggara'    =>   $this->input->post('infopenyelenggara'),
-            'hargaawal'             =>   $this->input->post('hargawal'),
+            'hargaawal'             =>   $this->input->post('hargaawal'),
             'create_by'             =>   $this->session->userdata('id_user'),
             'create_date'           =>   $now,
          );
+
+          if (count($data_input) > 0) {
+              $data['detail_produk'] = json_encode($data_input);
+          }
 
          foreach ($uploaded_files as $key => $value) {
             $data[$key] = $value;
          }
 
          $this->m->Save($data, 'produk');
+
+          //history
+          $nama_user = $this->session->userdata('nama');
+          $this->m->Save([
+              'id_menu' => 4,
+              'nama' => $nama_user,
+              'keterangan' => $nama_user.' menambah data produk'
+          ], 'history');
 
          $this->session->set_flashdata('success', 'Data produk berhasil ditambah');
          redirect('listproduk');
@@ -218,6 +247,24 @@ class Produk extends CI_Controller
             $uploaded_files['gambar' . $i] = $data['file_name'];
          }
       }
+
+       $kategori = $this->db->select('input_produk')
+           ->where('id_kategori', $this->input->post('kategori'))
+           ->from('kategori')->get()
+           ->row_array();
+
+       $input_produk = json_decode($kategori['input_produk']);
+
+       $data_input = [];
+       if ($input_produk) {
+           foreach ($input_produk as $val) {
+               $input = $this->input->post($val->nama_input);
+               if ($input) {
+                   $data_input[$val->nama_input] = $input;
+               }
+           }
+       }
+
       $data = array(
          'nama_produk'           =>   $this->input->post('namaproduk'),
          'status_show'           =>   $this->input->post('statusshow'),
@@ -229,11 +276,24 @@ class Produk extends CI_Controller
          'update_by'             =>   $this->session->userdata('id_user'),
          'update_date'           =>   $now,
       );
+
+       if (count($data_input) > 0) {
+           $data['detail_produk'] = json_encode($data_input);
+       }
+
       foreach ($uploaded_files as $key => $value) {
          $data[$key] = $value;
       }
 
       $this->m->Update($where, $data, $table);
+
+       //history
+       $nama_user = $this->session->userdata('nama');
+       $this->m->Save([
+           'id_menu' => 4,
+           'nama' => $nama_user,
+           'keterangan' => $nama_user.' mengupdate data produk'
+       ], 'history');
 
       $this->session->set_flashdata('success', 'Data produk berhasil diubah');
       redirect('listproduk');
@@ -248,7 +308,70 @@ class Produk extends CI_Controller
       );
       $this->m->Delete($where, $table);
 
+       //history
+       $nama_user = $this->session->userdata('nama');
+       $this->m->Save([
+           'id_menu' => 4,
+           'nama' => $nama_user,
+           'keterangan' => $nama_user.' menghapus data produk'
+       ], 'history');
+
       $this->session->set_flashdata('success', 'Data produk berhasil dihapus');
       redirect('listproduk');
    }
+
+   function getkategori()
+   {
+       $id_kategori = $this->input->post('id_kategori');
+
+       $kategori = $this->db->select('input_produk')
+                ->where('id_kategori', $id_kategori)
+                ->from('kategori')->get()
+                ->result_array();
+
+       $input_produk = isset($kategori[0]['input_produk']) ? json_decode($kategori[0]['input_produk']) : '';
+
+       $response = [
+           'status' => 'ok',
+           'kategori' => $input_produk
+       ];
+       $this->output->set_content_type('application/json')->set_output(json_encode($response));
+   }
+
+    function getkategorivalue()
+    {
+        $id_kategori = $this->input->post('id_kategori');
+
+        $kategori = $this->db->select('input_produk')
+            ->where('id_kategori', $id_kategori)
+            ->from('kategori')->get()
+            ->result_array();
+        $produk = $this->db->select('detail_produk')
+            ->where('id_kategori', $id_kategori)
+            ->from('produk')->get()
+            ->result_array();
+
+        $detail_produk = isset($produk[0]['detail_produk']) ? json_decode($produk[0]['detail_produk']) : '';
+        $input_produk = isset($kategori[0]['input_produk']) ? json_decode($kategori[0]['input_produk']) : '';
+
+        $result = array();
+
+        if ($input_produk != '') {
+            foreach ($input_produk as $obj) {
+                if (property_exists($detail_produk, $obj->nama_input)) {
+                    $result[] = (object) array(
+                        'nama_input' => $obj->nama_input,
+                        'tipe_data' => $obj->tipe_data,
+                        'nilai_input' => $detail_produk->{$obj->nama_input}
+                    );
+                }
+            }
+        }
+
+        $response = [
+            'status' => 'ok',
+            'data' => $result
+        ];
+        $this->output->set_content_type('application/json')->set_output(json_encode($response));
+    }
 }
