@@ -309,7 +309,7 @@ class Sales extends CI_Controller
       $data['user'] = $this->m->Get_Where($where, $table);
       $data['title'] = 'Lelang | List Customer';
 
-      $select = $this->db->select('tbl_customer.id_customer,tbl_customer.nama_customer,tbl_customer.jenis_kelamin,tbl_customer.alamat,tbl_customer.no_hp');
+      $select = $this->db->select('tbl_customer.id_customer,tbl_customer.nama_customer,tbl_customer.jenis_kelamin,tbl_customer.alamat,tbl_customer.no_hp,tbl_customer.create_date, tbl_customer.update_date, tbl_customer.create_by, tbl_customer.update_by, tbl_customer.foto_ktp,tbl_customer.foto_kk,tbl_customer.foto_diri');
       $select = $this->db->where('tbl_customer.id_sales', $id_sales);
       $data['customer'] = $this->m->Get_All('customer', $select);
 

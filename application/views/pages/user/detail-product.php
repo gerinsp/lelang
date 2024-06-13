@@ -65,22 +65,6 @@
                     </div>
 
                 </div>
-                <div>
-                    <h4 class="text-xs font-bold text-ternary-gray-200">Cara Penawaran</h4>
-                    <h6 class="text-base font-light text-ternary-gray-200">OPENBIDDING</h6>
-                </div>
-                <div>
-                    <h4 class="text-xs font-bold text-ternary-gray-200">Penyelenggara</h4>
-                    <h6 class="text-base font-light text-ternary-gray-200">PT Lelang Indonesia</h6>
-                </div>
-                <div>
-                    <h4 class="text-xs font-bold text-ternary-gray-200">Status Product</h4>
-                    <h6 class="text-base font-light text-ternary-gray-200">Available</h6>
-                </div>
-                <div>
-                    <h4 class="text-xs font-bold text-ternary-gray-200">Kode Product</h4>
-                    <h6 class="text-base font-light text-ternary-gray-200">PRD<?= $detail->id ?></h6>
-                </div>
             </div>
             <div class="mt-8 md-w-50 mb-4"> <!-- Sesuaikan dengan lebar yang diinginkan, contoh: w-1/2 -->
                 <a href="https://mail.google.com/mail/?view=cm&fs=1&to=ptxxx@gmail.com&su=Saya%20ingin%20membeli%20produk%20<?= $detail->nama_produk ?>&body=NIK%20%3A%0ANama%20%3A%0ANo%20Hp%20%3A%0AAlamat%20%3A%0A%28Isi%20pesan%29" target="_blank" class="button-primary block w-full p-2 rounded-lg text-center">
@@ -105,6 +89,9 @@
                     <li class="me-2" role="presentation">
                         <button class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="dashboard-tab" data-tabs-target="#detail" type="button" role="tab" aria-controls="dashboard" aria-selected="false">Detail Product</button>
                     </li>
+                    <li class="me-2" role="presentation">
+                        <button class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="dashboard-tab" data-tabs-target="#detail-lelang" type="button" role="tab" aria-controls="dashboard" aria-selected="false">Detail Lelang</button>
+                    </li>
                 </ul>
             </div>
             <div id="default-tab-content">
@@ -117,10 +104,38 @@
                 <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="detail" role="tabpanel" aria-labelledby="dashboard-tab">
                     <?php if ($detail_produk != '') { ?>
                         <?php foreach ($detail_produk as $key => $value) { ?>
-                            <p class="text-sm text-gray-500 dark:text-gray-400"><?= $key ?> : <?= $value ?></p>
+                            <?php
+                            $key_formatted = ucwords(str_replace('_', ' ', $key));
+                            ?>
+                            <p class="text-sm text-gray-500 dark:text-gray-400"><?= $key_formatted ?> : <?= $value ?></p>
                         <?php } ?>
                     <?php } ?>
+
                 </div>
+                <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800 mb-0" id="detail-lelang" role="tabpanel" aria-labelledby="dashboard-tab">
+                    <table class="table-auto">
+                        <tbody>
+                        <tr class="m-0">
+                            <td class="px-4 py-2"><span class="text-sm text-gray-500 dark:text-gray-400">Cara Penawaran</span></td>
+                            <td class="px-4 py-2"><span class="text-sm text-gray-500 dark:text-gray-400">: OPENBIDDING</span></td>
+                        </tr>
+                        <tr class="m-0">
+                            <td class="px-4 py-2"><span class="text-sm text-gray-500 dark:text-gray-400">Penyelenggara</span></td>
+                            <td class="px-4 py-2"><span class="text-sm text-gray-500 dark:text-gray-400">: PT Lelang Indonesia</span></td>
+                        </tr>
+                        <tr class="m-0">
+                            <td class="px-4 py-2"><span class="text-sm text-gray-500 dark:text-gray-400">Status Product</span></td>
+                            <td class="px-4 py-2"><span class="text-sm text-gray-500 dark:text-gray-400">: Available</span></td>
+                        </tr>
+                        <tr class="m-0">
+                            <td class="px-4 py-2"><span class="text-sm text-gray-500 dark:text-gray-400">Kode Product</span></td>
+                            <td class="px-4 py-2"><span class="text-sm text-gray-500 dark:text-gray-400">: PRD<?= $detail->id ?></span></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+
             </div>
 
         </div>
