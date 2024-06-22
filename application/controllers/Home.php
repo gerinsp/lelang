@@ -76,7 +76,9 @@ class Home extends CI_Controller
            ->where('p.id', $id)
            ->group_by('p.id');
        $data['detail'] = $this->db->get()->row();
-       $harga_tertinggi_array = explode(',', $data['detail']->harga_tertinggi);
+       $hargaTertinggi = isset($data['detail']->harga_tertinggi) ? $data['detail']->harga_tertinggi : '';
+       $explodedValues = explode(',', $hargaTertinggi);
+
        $data['harga_tertinggi'] = array_slice($harga_tertinggi_array, 0, 3);
 //       dd($data['detail']);
 
