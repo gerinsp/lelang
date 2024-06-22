@@ -79,7 +79,7 @@ class Home extends CI_Controller
        $hargaTertinggi = isset($data['detail']->harga_tertinggi) ? $data['detail']->harga_tertinggi : '';
        $explodedValues = explode(',', $hargaTertinggi);
 
-       $data['harga_tertinggi'] = array_slice($harga_tertinggi_array, 0, 3);
+       $data['harga_tertinggi'] = array_slice($explodedValues, 0, 3);
 //       dd($data['detail']);
 
        $detail = $this->db->select('detail_produk')->where('id', $id)->get('produk')->result_array();
